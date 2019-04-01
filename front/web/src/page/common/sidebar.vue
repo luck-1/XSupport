@@ -1,43 +1,56 @@
 <template>
   <div class="sidebar">
-    <el-menu default-active="2" class="sidebar-menu" :collapse="collapse">
-      <el-submenu index="1">
-        <template slot="title">
-          <i class="el-icon-location"></i>
-          <span slot="title">导航一</span>
+    <el-menu :default-active="defaultActive"
+             class="sidebar-menu"
+             background-color="#777"
+             text-color="#fff"
+             :collapse="collapse">
+      <template v-for="item in menu">
+        <template v-if="item.subs">
+          <el-submenu :index="item.path">
+            <template slot="title">
+              <i :class="item.icon" /><span slot="title">{{item.title}}</span>
+            </template>
+            <el-menu-item v-for="(subItem,subIndex) in item.subs" :key="subIndex" :index="subItem.path">
+              <i :class="item.icon" /><span slot="title">{{ subItem.title }}</span>
+            </el-menu-item>
+          </el-submenu>
         </template>
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-          <el-menu-item index="1-3">选项3</el-menu-item>
-      </el-submenu>
-      <el-menu-item index="2">
-        <i class="el-icon-menu"></i>
-        <span slot="title">导航二</span>
-      </el-menu-item>
-      <el-menu-item index="3">
-        <i class="el-icon-document"></i>
-        <span slot="title">导航三</span>
-      </el-menu-item>
-      <el-menu-item index="4">
-        <i class="el-icon-setting"></i>
-        <span slot="title">导航四</span>
-      </el-menu-item>
+        <template v-else>
+          <el-menu-item :index="item.path" :key="item.path">
+            <i :class="item.icon"/><span slot="title">{{ item.title }}</span>
+          </el-menu-item>
+        </template>
+      </template>
     </el-menu>
   </div>
 </template>
 
 <script>
   import bus from './bus'
+
   export default {
     data() {
       return {
-        collapse: false
+        defaultActive: "2",
+        collapse: false,
+        menu: [{
+          title: "导航一",
+          icon: "el-icon-location",
+          path: "1",
+          subs: [
+            {title: "导航一", icon: "el-icon-location", path: "1-1"},
+            {title: "导航一", icon: "el-icon-location", path: "1-2"},
+            {title: "导航一", icon: "el-icon-location", path: "1-3"}
+          ]
+        },
+          {title: "导航一", icon: "el-icon-location", path: "2"}
+        ]
       }
     },
-    methods: {
-    },
+    methods: {},
     created() {
-      bus.$on('collapse',headerCollapse => {
+      bus.$on('collapse', headerCollapse => {
         this.collapse = headerCollapse;
       })
     }
@@ -46,24 +59,18 @@
 
 <style scoped>
   .sidebar {
-    background-color: #808080;
     height: 100vh;
     overflow-y: auto;
     position: absolute;
-    left: 0;
     top: 50px;
-    bottom: 0;
-    color: #fff;
   }
+
   .sidebar-menu:not(.el-menu--collapse) {
     width: 200px;
-    background-color: #777;
   }
-  .sidebar > ul{
+
+  .sidebar > ul {
     height: 100%;
     overflow: auto;
-  }
-  a {
-    color: #fff;
   }
 </style>
