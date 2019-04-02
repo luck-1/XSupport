@@ -5,7 +5,7 @@
              background-color="#777"
              text-color="#fff"
              :collapse="collapse">
-      <template v-for="item in menu">
+      <template v-for="item in menus">
         <template v-if="item.subs">
           <el-submenu :index="item.path">
             <template slot="title">
@@ -34,7 +34,7 @@
       return {
         defaultActive: "2",
         collapse: false,
-        menu: [{
+        menus: [{
           title: "导航一",
           icon: "el-icon-location",
           path: "1",
@@ -69,7 +69,7 @@
     width: 200px;
   }
 
-  .sidebar > ul {
+  .sidebar-menu {
     height: 100%;
     overflow: auto;
   }
