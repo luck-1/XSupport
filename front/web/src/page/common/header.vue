@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="home-header">
     <div class="header-btn" @click="collapseChage">
       <i class="el-icon-menu"></i>
     </div>
@@ -30,23 +30,22 @@
     methods: {
       collapseChage() {
         this.collapse = !this.collapse
-        bus.$emit("collapse",this.collapse)
+        bus.$emit("collapse", this.collapse)
       }
     }
   }
 </script>
 
 <style scoped>
-  .header {
+  .home-header {
     position: relative;
     background-color: #333333;
-    box-sizing: border-box;
     color: #fff;
+    width: 100vw;
     height: 50px;
-    width: 100%;
     font-size: 21px;
     line-height: 50px;
-    margin: 0px;
+    padding: 0;
   }
 
   .header-btn {
@@ -64,7 +63,7 @@
     padding-right: 50px;
   }
 
-  .header-right-user-link {
+  .header-right-user {
     color: #fff;
     cursor: pointer;
   }

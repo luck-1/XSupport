@@ -1,32 +1,56 @@
 <template>
-  <el-container class="all">
-    <el-header class="home-header">
-      <v-header/>
-    </el-header>
-    <el-aside>
-      <v-sidebar/>
-    </el-aside>
-    <el-main>
-<!--      <vTag/>-->
-    </el-main>
-    <el-footer></el-footer>
-  </el-container>
+  <div class="home">
+    <v-header/>
+    <v-sidebar/>
+    <div class="content-box" :class="{'content-collapse': collapse}">
+      <v-tag/>
+      <div class="content">
+      </div>
+    </div>
+  </div>
+
 </template>
 
 <script>
   import vHeader from './header'
   import vSidebar from './sidebar'
   import vTag from './tag'
+  import bus from './bus'
 
   export default {
     name: "home",
-    components: {vHeader, vSidebar, vTag}
+    data() {
+      return {
+        collapse: null
+      }
+    },
+    components: {vHeader, vSidebar, vTag},
+    created() {
+      bus.$on("collapse", headerCollapse => {
+        this.collapse = headerCollapse;
+      })
+    }
   }
 </script>
 
 <style scoped>
-  .home-header {
-    margin: 0;
-    padding: 0;
+  .content-box {
+    position: absolute;
+    left: 200px;
+    right: 0;
+    top: 50px;
+    bottom: 0;
+  }
+
+  .content {
+    position: relative;
+    padding: 40px 10px 10px 10px;
+    width: auto;
+    background-color: aquamarine;
+    overflow: auto;
+  }
+
+  .content-collapse {
+    left: 65px;
   }
 </style>

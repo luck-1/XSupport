@@ -1,5 +1,4 @@
 <template>
-  <div class="sidebar">
     <el-menu :default-active="defaultActive"
              class="sidebar-menu"
              background-color="#777"
@@ -9,10 +8,10 @@
         <template v-if="item.subs">
           <el-submenu :index="item.path">
             <template slot="title">
-              <i :class="item.icon" /><span slot="title">{{item.title}}</span>
+              <i :class="item.icon"/><span slot="title">{{item.title}}</span>
             </template>
             <el-menu-item v-for="(subItem,subIndex) in item.subs" :key="subIndex" :index="subItem.path">
-              <i :class="item.icon" /><span slot="title">{{ subItem.title }}</span>
+              <i :class="item.icon"/><span slot="title">{{ subItem.title }}</span>
             </el-menu-item>
           </el-submenu>
         </template>
@@ -23,7 +22,6 @@
         </template>
       </template>
     </el-menu>
-  </div>
 </template>
 
 <script>
@@ -58,13 +56,6 @@
 </script>
 
 <style scoped>
-  .sidebar {
-    height: 100vh;
-    overflow-y: auto;
-    position: absolute;
-    top: 50px;
-  }
-
   .sidebar-menu:not(.el-menu--collapse) {
     width: 200px;
   }
