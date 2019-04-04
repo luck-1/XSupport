@@ -2,7 +2,7 @@
   <div class="home">
     <v-header/>
     <v-sidebar/>
-    <div class="content-box" :class="{'content-collapse': collapse}">
+    <div class="content-box" :style="{left: (collapse ? 65 : 200) + 'px'}" >
       <v-tag/>
       <div class="content">
       </div>
@@ -36,10 +36,8 @@
 <style scoped>
   .content-box {
     position: absolute;
-    left: 200px;
-    right: 0;
     top: 50px;
-    bottom: 0;
+    right: 0;
   }
 
   .content {
@@ -48,9 +46,5 @@
     width: auto;
     background-color: aquamarine;
     overflow: auto;
-  }
-
-  .content-collapse {
-    left: 65px;
   }
 </style>
