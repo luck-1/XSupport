@@ -1,61 +1,72 @@
 <template>
-  <div class="tag">
-    <el-tag v-for="item in tagList" closable
-            class="tag-list"
-            :type="isActive ? 'info' : 'info'"
-            :key="item.title">
-      {{item.title}}
+  <div class="common-tag" v-if="this.tagList.length > 0" :style="{left: (collapse ? 65 : 200) + 'px'}">
+    <el-tag v-for="(tag,index) in tagList"
+            :key="index" closable
+            :type="tag.path === $route.fullPath ? 'success' : 'info'"
+            class="tag-li"
+            @close="closeOne(index)"
+            @click="$router.push(tag.path)">
+      {{tag.title}}
     </el-tag>
-    <el-dropdown class="tag-dropdown" size="mini" @command="handleTags">
-      <el-button type="primary" size="mini">
-        标签选项<i class="el-icon-arrow-down el-icon--right"></i>
-      </el-button>
-      <el-dropdown-menu slot="dropdown" >
-        <el-dropdown-item command="closeOther">关闭其他</el-dropdown-item>
-        <el-dropdown-item command="closeAll">关闭所有</el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
+    <el-button class="close-button" type="primary" size="mini" @click="tagList = tagList.filter(item => item.path === $route.fullPath )">
+      <span>关闭其他</span>
+    </el-button>
   </div>
-</template>
+</template>splice
 
 <script>
+  import bus from './bus'
+
   export default {
     name: "tag",
     data() {
       return {
-        isActive: true,
-        tagList: [{title: "1", path: "1",type:"success"}, {title: "2", path: "2"}, {title: "3", path: "3"}]
+        collapse: false,
+        tagList: []
       }
     },
+    watch: {
+      $route(to, from) {
+        this.setTags(to)
+      }
+    },
+    created() {
+      this.setTags(this.$route)
+      bus.$on("collapse", getCollapse => {
+        this.collapse = getCollapse
+      })
+    },
     methods: {
-      closeIndex(index){
-
+      setTags(route) {
+        if (!this.tagList.some(item => item.path === route.fullPath )) {
+          this.tagList.push({title: route.meta.title, path: route.fullPath})
+        }
       },
-      closeOther(){
-        const curItem = this.tagList.filter(item => {
-          return item.path === this.$route.fullPath
-        })
-      },
-      closeAll(){
-
-      },
-      handleTags(command) {
-        command === "closeOther" ? this.closeOther() : this.closeAll()
+      closeOne(index) {
+        let curItem = this.tagList.filter(item => item.path === this.$route.fullPath )[0]
+        if( this.tagList.length >= 2){
+          if(this.tagList[index].path === curItem.path){
+            this.$route.push(this.tagList[index - 1].path)
+          }
+          this.tagList.splice(this.tagList[index], 1)
+        }
       }
     }
   }
 </script>
 
 <style scoped>
-  .tag {
-    background-color: #aaaaaa;
+  .common-tag {
+    position: fixed;
     right: 0;
     height: 30px;
-    width: 100%;
     font-size: 12px;
     overflow: hidden;
+    vertical-align: middle;
+    z-index: 2;
   }
-  .tag-list{
+
+  .tag-li {
     float: left;
     margin: 3px 5px 2px 2px;
     cursor: pointer;
@@ -63,11 +74,18 @@
     height: 23px;
     line-height: 23px;
     border: 1px solid #e9eaec;
-    padding: 0px 5px 0 12px;
-    color: #666;
+    padding: 0 5px 0 8px;
+    max-width: 80px;
+    white-space: nowrap;
   }
-  .tag-dropdown{
-    float: right;
-    padding: 0 3px 0 0;
+
+  .close-button {
+    margin: 0 5px 0 5px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 80px;
+    height: 30px;
+    box-shadow: -3px 0 0 3px rgba(0, 0, 0, 0.1);
   }
 </style>

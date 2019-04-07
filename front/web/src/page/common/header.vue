@@ -5,7 +5,7 @@
     </div>
     <div class="header-title"><span>尾矿库坝体安全性能检测平台</span></div>
     <div class="header-right">
-      <el-dropdown class="header-right-user">
+      <el-dropdown class="header-right-user" size="mini" @command="handleCommand">
           <span class="header-right-user-link">
             username<i class="el-icon-caret-bottom"></i>
           </span>
@@ -31,6 +31,12 @@
       collapseChage() {
         this.collapse = !this.collapse
         bus.$emit("collapse", this.collapse)
+      },
+      exitLogin(){
+        this.$router.push("/login")
+      },
+      handleCommand(command){
+        command === "exitLogin" ? this.exitLogin() : this.editPassword()
       }
     }
   }
