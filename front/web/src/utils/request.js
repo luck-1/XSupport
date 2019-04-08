@@ -106,32 +106,28 @@ export default {
   get: async (url, param, isLoading = true) => {
     let loading = beginLoading(isLoading);
     url = param ? getFullUrl(url) + '?' + common.serialize(param) : getFullUrl(url);
-    let response = await axios.get(url, getResConfig('GET'));
-    let result = response.data;
+    let result = (await axios.get(url, getResConfig('GET'))).data;
     endLoading(result,loading);
     return result;
   },
   delete: async (url,param,isLoading = true) => {
     let loading = beginLoading(isLoading);
     url = param ? getFullUrl(url) + '?' + common.serialize(param) : getFullUrl(url);
-    let response = await axios.delete(url, getResConfig('DELETE'));
-    let result = response.data;
+    let result = (await axios.delete(url, getResConfig('DELETE'))).data;
     endLoading(result,loading);
     return result;
   },
   post: async (url, data = {}, isLoading = true) => {
     let loading = beginLoading(isLoading);
     url = getFullUrl(url);
-    let response = await axios.post(url,data, getResConfig('POST'));
-    let result = response.data;
+    let result = (await axios.post(url,data, getResConfig('POST'))).data;
     endLoading(result,loading);
     return result;
   },
   put: async (url, data = {}, isLoading = true) => {
     let loading = beginLoading(isLoading);
     url = getFullUrl(url);
-    let response = await axios.put(url,data, getResConfig('PUT')) ;
-    let result = response.data
+    let result = (await axios.post(url,data, getResConfig('PUT'))).data;
     endLoading(result,loading);
     return result;
   }

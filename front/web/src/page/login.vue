@@ -88,7 +88,8 @@
 
 <style scoped>
   .login {
-    background-image: url("../assets/login.png");
+    /*background-image: url("../assets/login.jpg");*/
+    background-color: rgba(0,0,0,1);
     height: 100vh;
     width: 100vw;
   }
