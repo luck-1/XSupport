@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {Loading, Message} from 'element-ui';
-import {common} from "../router/common";
+import {common} from "./common";
 
 axios.interceptors.response.use(function (response) {
   return response
@@ -118,6 +118,7 @@ export default {
     return result;
   },
   post: async (url, data = {}, isLoading = true) => {
+    debugger
     let loading = beginLoading(isLoading);
     url = getFullUrl(url);
     let result = (await axios.post(url,data, getResConfig('POST'))).data;

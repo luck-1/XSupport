@@ -13,7 +13,7 @@
         <FormItem prop="user" label="账号:">
           <Input type="text" clearable
                  class="input-box"
-                 v-model="form.user"
+                 v-model="form.username"
                  placeholder="请输入账号"
                  prefix="ios-person"/>
         </FormItem>
@@ -39,17 +39,18 @@
 
 <script>
   import {loginService} from '../api/service'
+
   export default {
     name: "login",
     data() {
       return {
         loading: false,
         form: {
-          user: '',
+          username: '',
           password: ''
         },
         rules: {
-          user: [
+          username: [
             {required: true, message: '账号不能为空！', trigger: 'blur'}
           ],
           password: [
@@ -62,24 +63,18 @@
     methods: {
       submitLogin() {
         this.$refs.formInfo.validate((valid) => {
-          if (valid) {
-            this.loading = true
-            let str = "username=" + this.form.user + "&password=" + this.form.password;
-            loginService.login(str).then( res => {
-              if(res.code === 0){
-                localStorage.setItem("accessToken",res.obj ? res.obj.webToken : '')
-                this.loading = false
-                this.password = ''
-                this.user = ''
-                this.$router.push('/')
-              }else {
-                this.$Message.error(res.msg);
-              }
-            })
-            this.$Message.success('登录成功!');
-          } else {
-
-          }
+          this.loading = true
+          debugger
+          loginService.login(this.form).then(res => {
+            if (res.code === 0) {
+              localStorage.setItem("accessToken", res.obj ? res.obj.webToken : '')
+              this.loading = false
+              this.$router.push('/')
+            } else {
+              this.$Message.error(res.msg);
+            }
+          })
+          this.$Message.success('登录成功!');
         })
       }
     }
@@ -89,7 +84,7 @@
 <style scoped>
   .login {
     /*background-image: url("../assets/login.jpg");*/
-    background-color: rgba(0,0,0,1);
+    background-color: rgba(0, 0, 0, 1);
     height: 100vh;
     width: 100vw;
   }
