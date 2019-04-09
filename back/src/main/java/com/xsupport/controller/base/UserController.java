@@ -68,7 +68,7 @@ public class  UserController {
  	@ApiOperation(value = "登录")
     public ReturnCode update(@RequestBody LoginParam loginParam, BindingResult bindingResult) {
         if (bindingResult.hasErrors()){
-            return new ReturnCode.Builder().failed().msg(bindingResult.getFieldError().getField()).build();
+            return new ReturnCode.Builder().failed().msg(bindingResult.getFieldError().getDefaultMessage()).build();
         }
 	    userService.login( loginParam);
 	 	return new ReturnCode.Builder().success().msg("登录成功").build();
