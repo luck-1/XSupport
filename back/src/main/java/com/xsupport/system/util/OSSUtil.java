@@ -77,7 +77,7 @@ public class OSSUtil {
      */
     public static byte[] getObjectForByte(OSSClient ossClient, String objectName) {
         //OSS对象存储下载文件
-        String bucketName = getBucketName();//文件夹名
+        String bucketName = getBucketName();
         if (!ossClient.doesObjectExist(bucketName, objectName)) {
             return null;
         }

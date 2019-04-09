@@ -1,4 +1,4 @@
-package com.xsupport;
+package com.xsupport.system.config;
 
 import org.springframework.stereotype.Component;
 

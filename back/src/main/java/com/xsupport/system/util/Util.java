@@ -29,7 +29,7 @@ public class Util {
         String APP_ID = "15194026";
         String API_KEY = "cPrIGjfOxiErrXNBZpjh92f1";
         String SECRET_KEY = "kmtzs1oGwVD7rC90qPPYyxXSpc3rB7Kd";
-        AipOcr client = new AipOcr(APP_ID, API_KEY, SECRET_KEY);//登录
+        AipOcr client = new AipOcr(APP_ID, API_KEY, SECRET_KEY);
         //可选参数
         client.setConnectionTimeoutInMillis(2000);
         client.setSocketTimeoutInMillis(60000);
