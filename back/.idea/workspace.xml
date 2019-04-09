@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="db2e9dee-5b7b-4fb0-847b-fd9ef9a5e360" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/xsupport.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/web/src/api/service.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/web/src/api/service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/web/src/page/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../front/web/src/page/login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/web/src/router/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/web/src/utils/common.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/web/src/utils/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/web/src/utils/request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../source/xsupport.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../source/xsupport.sql" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -27,8 +23,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
-              <caret line="2" column="64" lean-forward="true" selection-start-line="2" selection-start-column="64" selection-end-line="2" selection-end-column="64" />
+            <state relative-caret-position="60">
+              <caret line="3" column="55" lean-forward="true" selection-start-line="3" selection-start-column="55" selection-end-line="3" selection-end-column="55" />
             </state>
           </provider>
         </entry>
@@ -68,7 +64,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/awayrisk/system/config/SwaggerConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/awayrisk/controller/user/UserController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/awayrisk/model/user/Param.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/xsupport/dao/MyMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/xsupport/Application.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/xsupport/CORS.java" />
@@ -85,6 +80,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/xsupport/system/run/ReturnCode.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/xsupport/service/Service.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/xsupport/service/AbstractService.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
       </list>
     </option>
   </component>
@@ -255,18 +251,18 @@
       <updated>1554631826770</updated>
       <workItem from="1554631828465" duration="10626000" />
       <workItem from="1554732784018" duration="3898000" />
-      <workItem from="1554815688380" duration="1930000" />
+      <workItem from="1554815688380" duration="3713000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16454000" />
+    <option name="totallyTimeSpent" value="18237000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20442359" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20442359" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="JRebel" order="2" side_tool="true" />
       <window_info id="UI Designer" order="3" />
@@ -276,7 +272,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.58498585" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49865952" visible="true" weight="0.31444758" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49865952" weight="0.40934843" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -291,7 +287,7 @@
       <window_info anchor="bottom" id="Database Changes" order="15" />
       <window_info anchor="bottom" id="Version Control" order="16" />
       <window_info anchor="bottom" id="JRebel Executor" order="17" />
-      <window_info anchor="bottom" id="JRebel Console" order="18" side_tool="true" />
+      <window_info anchor="bottom" id="JRebel Console" order="18" sideWeight="0.5013405" side_tool="true" weight="0.66288954" />
       <window_info anchor="bottom" id="Messages" order="19" weight="0.3286119" />
       <window_info anchor="bottom" id="Tail" order="20" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -510,8 +506,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="2" column="64" lean-forward="true" selection-start-line="2" selection-start-column="64" selection-end-line="2" selection-end-column="64" />
+        <state relative-caret-position="60">
+          <caret line="3" column="55" lean-forward="true" selection-start-line="3" selection-start-column="55" selection-end-line="3" selection-end-column="55" />
         </state>
       </provider>
     </entry>
