@@ -8,7 +8,8 @@
             @click="$router.push(tag.path)">
       {{tag.title}}
     </el-tag>
-    <el-button class="close-button" type="primary" size="mini" @click="tagList = tagList.filter(item => item.path === $route.fullPath )">
+    <el-button class="close-button" type="primary" size="mini"
+               @click="tagList = tagList.filter(item => item.path === $route.fullPath )">
       <span>关闭其他</span>
     </el-button>
   </div>
@@ -38,14 +39,14 @@
     },
     methods: {
       setTags(route) {
-        if (!this.tagList.some(item => item.path === route.fullPath )) {
+        if (!this.tagList.some(item => item.path === route.fullPath)) {
           this.tagList.push({title: route.meta.title, path: route.fullPath})
         }
       },
       closeOne(index) {
-        let curItem = this.tagList.filter(item => item.path === this.$route.fullPath )[0]
-        if( this.tagList.length >= 2){
-          if(this.tagList[index].path === curItem.path){
+        let curItem = this.tagList.filter(item => item.path === this.$route.fullPath)[0]
+        if (this.tagList.length >= 2) {
+          if (this.tagList[index].path === curItem.path) {
             this.$route.push(this.tagList[index - 1].path)
           }
           this.tagList.splice(this.tagList[index], 1)

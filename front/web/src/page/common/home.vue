@@ -2,7 +2,7 @@
   <div class="home">
     <v-header/>
     <v-sidebar/>
-    <div class="content-box" :style="{left: (collapse ? 65 : 200) + 'px' }" >
+    <div class="content-box" :style="{left: (collapse ? 65 : 200) + 'px' }">
       <v-tag/>
       <div class="content">
         <keep-alive>
@@ -29,7 +29,9 @@
     },
     components: {vHeader, vSidebar, vTag},
     created() {
-      bus.$on("collapse", headerCollapse => { this.collapse = headerCollapse; })
+      bus.$on("collapse", headerCollapse => {
+        this.collapse = headerCollapse;
+      })
     }
   }
 </script>

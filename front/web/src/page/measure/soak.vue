@@ -1,13 +1,13 @@
 <template>
-    <div>
-      soak
-    </div>
+  <div>
+    soak
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "soak"
-    }
+  export default {
+    name: "soak"
+  }
 </script>
 
 <style scoped>

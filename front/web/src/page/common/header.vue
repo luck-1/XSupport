@@ -20,6 +20,7 @@
 
 <script>
   import bus from './bus'
+
   export default {
     name: "common-header",
     data() {
@@ -32,10 +33,10 @@
         this.collapse = !this.collapse
         bus.$emit("collapse", this.collapse)
       },
-      exitLogin(){
+      exitLogin() {
         this.$router.push("/login")
       },
-      handleCommand(command){
+      handleCommand(command) {
         command === "exitLogin" ? this.exitLogin() : this.editPassword()
       }
     }

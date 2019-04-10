@@ -73,7 +73,7 @@ const loadingConfig = {
 }
 
 function getResConfig(methods) {
-  return{
+  return {
     credentials: 'include',
     method: methods,
     headers: {
@@ -94,42 +94,44 @@ function beginLoading(isLoading) {
   return isLoading ? Loading.service(loadingConfig) : null
 }
 
-function endLoading(result,loading){
+function endLoading(result, loading) {
   if (loading) {
-    setTimeout(() => { loading.close()}, 300);
+    setTimeout(() => {
+      loading.close()
+    }, 300);
     if (result.code != 0) {
       Message.error(result.msg);
     }
   }
 }
+
 export default {
   get: async (url, param, isLoading = true) => {
     let loading = beginLoading(isLoading);
     url = param ? getFullUrl(url) + '?' + common.serialize(param) : getFullUrl(url);
     let result = (await axios.get(url, getResConfig('GET'))).data;
-    endLoading(result,loading);
+    endLoading(result, loading);
     return result;
   },
-  delete: async (url,param,isLoading = true) => {
+  delete: async (url, param, isLoading = true) => {
     let loading = beginLoading(isLoading);
     url = param ? getFullUrl(url) + '?' + common.serialize(param) : getFullUrl(url);
     let result = (await axios.delete(url, getResConfig('DELETE'))).data;
-    endLoading(result,loading);
+    endLoading(result, loading);
     return result;
   },
   post: async (url, data = {}, isLoading = true) => {
-    debugger
     let loading = beginLoading(isLoading);
     url = getFullUrl(url);
-    let result = (await axios.post(url,data, getResConfig('POST'))).data;
-    endLoading(result,loading);
+    let result = (await axios.post(url, data, getResConfig('POST'))).data;
+    endLoading(result, loading);
     return result;
   },
   put: async (url, data = {}, isLoading = true) => {
     let loading = beginLoading(isLoading);
     url = getFullUrl(url);
-    let result = (await axios.post(url,data, getResConfig('PUT'))).data;
-    endLoading(result,loading);
+    let result = (await axios.post(url, data, getResConfig('PUT'))).data;
+    endLoading(result, loading);
     return result;
   }
 }

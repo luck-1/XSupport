@@ -62,20 +62,17 @@
     },
     methods: {
       submitLogin() {
-        this.$refs.formInfo.validate((valid) => {
-          this.loading = true
-          debugger
-          loginService.login(this.form).then(res => {
-            if (res.code === 0) {
-              localStorage.setItem("accessToken", res.obj ? res.obj.webToken : '')
-              this.loading = false
-              this.$router.push('/')
-            } else {
-              this.$Message.error(res.msg);
-            }
-          })
-          this.$Message.success('登录成功!');
+        this.loading = true
+        debugger
+        loginService.login(this.form).then(res => {
+          if (res.code === 0) {
+            localStorage.setItem("accessToken", res.obj ? res.obj.webToken : '')
+            this.$router.push('/')
+          } else {
+            this.$Message.error(res.msg);
+          }
         })
+        this.$Message.success('登录成功!');
       }
     }
   }

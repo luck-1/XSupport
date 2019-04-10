@@ -1,13 +1,13 @@
 <template>
   <div>
-    monitor
+    video-box
   </div>
 </template>
 
 <script>
-export default {
-  name: "monitor",
-}
+  export default {
+    name: "video-box",
+  }
 </script>
 
 <style scoped>

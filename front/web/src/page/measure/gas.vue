@@ -1,13 +1,13 @@
 <template>
-<div>
-  gas
-</div>
+  <div>
+    gas
+  </div>
 </template>
 
 <script>
-export default {
-  name: "gas"
-}
+  export default {
+    name: "gas"
+  }
 </script>
 
 <style scoped>

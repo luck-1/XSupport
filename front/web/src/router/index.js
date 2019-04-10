@@ -23,13 +23,13 @@ export default new Router({
         {
           path: 'monitor',
           name: 'monitor',
-          component: () => import('../page/monitor'),
+          component: () => import('../page/video'),
           meta: {title: "视频监控", keepAlive: keepAlive}
         },
         {
           path: 'rimArea',
           name: 'rimArea',
-          component: () => import('../page/rimArea'),
+          component: () => import('../page/map'),
           meta: {title: "地图监测", keepAlive: keepAlive}
         },
         {
