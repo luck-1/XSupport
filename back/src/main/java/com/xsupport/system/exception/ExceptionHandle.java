@@ -1,5 +1,6 @@
-package com.xsupport.system.run;
+package com.xsupport.system.exception;
 
+import com.xsupport.system.run.ReturnCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -7,7 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * @author  klaus
+ * @author klaus
  * 全局异常处理类，捕获所有来自Controller的异常，打印异常信息到日志文件中，并返回简单错误码给前端。
  * @date 创建时间：2017年12月27日 下午12:24:28
  * @version 1.0

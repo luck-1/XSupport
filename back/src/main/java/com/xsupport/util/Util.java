@@ -1,21 +1,15 @@
-package com.xsupport.system.util;
+package com.xsupport.util;
 
 import com.baidu.aip.ocr.AipOcr;
 import io.swagger.annotations.ApiModelProperty;
-import org.springframework.core.env.Environment;
 
-import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.Field;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.List;
 
 public class Util {
 
@@ -98,7 +92,9 @@ public class Util {
                 System.out.println(fields[i].getName());
                 field = classZ.getDeclaredField(fields[i].getName());
                 ApiModelProperty apiModelProperty = field.getAnnotation(ApiModelProperty.class);
-                if (apiModelProperty == null) continue;
+                if (apiModelProperty == null) {
+                    continue;
+                }
                 val = apiModelProperty.value();
 
                 map.put(field.getName(), val);

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/awayrisk.iml" filepath="$PROJECT_DIR$/awayrisk.iml" />
       <module fileurl="file://F://xsupport/../../Xsupport/back/xsupport.iml" filepath="F://xsupport/../../Xsupport/back/xsupport.iml" />
     </modules>
   </component>

@@ -2,8 +2,9 @@ package com.xsupport.service.impl.base;
 
 import javax.annotation.Resource;
 
+import com.xsupport.model.http.ChangePasswordParam;
 import com.xsupport.model.http.LoginParam;
-import com.xsupport.system.run.CustomException;
+import com.xsupport.system.exception.CustomException;
 import com.xsupport.system.run.ReturnCode;
 import org.springframework.stereotype.Service;
 import com.xsupport.service.base.UserService;
@@ -36,5 +37,17 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
 		}
 	}
 
+	@Override
+	public void changePassword(ChangePasswordParam changePasswordParam){
+		User user = userDao.selectByPrimaryKey(changePasswordParam.getId());
+		if(user == null){
+			throw new CustomException(new ReturnCode.Builder().failed().msg("用户不存在！").build());
+		}
+		if(! changePasswordParam.getOldPossword().equals(user.getPassword())){
+			throw new CustomException(new ReturnCode.Builder().failed().msg("原密码不正确！").build());
+		}
+		user.setPassword(changePasswordParam.getNewPossword());
+		userDao.updateByPrimaryKey(user);
+	}
 	
 }

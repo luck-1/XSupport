@@ -1,4 +1,4 @@
-package com.xsupport.system.util;
+package com.xsupport.util;
 
 import com.alibaba.fastjson.JSON;
 import com.aliyun.oss.OSSClient;

@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.Column;
 import javax.persistence.Table;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import io.swagger.annotations.ApiModelProperty;
 
 /**
@@ -33,10 +36,12 @@ public class User implements Serializable {
     @Column(name = "updateTime")
     private Date updateTime;
 
+    @Size(min = 6,max = 20,message = "账号长度在6到20之间")
     @ApiModelProperty(value="账号")
     @Column(name = "username")
     private String username;
 
+    @Size(min = 6,max = 20,message = "密码长度在6到20之间")
     @ApiModelProperty(value="密码")
     @Column(name = "password")
     private String password;
@@ -49,6 +54,7 @@ public class User implements Serializable {
     @Column(name = "isForbidden")
     private Boolean isForbidden;
 
+    @NotBlank(message = "姓名不能为空！")
     @ApiModelProperty(value="姓名")
     @Column(name = "name")
     private String name;
@@ -57,14 +63,17 @@ public class User implements Serializable {
     @Column(name = "sex")
     private int sex;
 
+    @NotBlank(message = "年龄不能为空！")
     @ApiModelProperty(value="年龄")
     @Column(name = "age")
     private int age;
 
+    @NotBlank(message = "家庭住址不能为空！")
     @ApiModelProperty(value="家庭住址")
     @Column(name = "address")
     private String address;
 
+    @NotBlank(message = "联系电话不能为空！")
     @ApiModelProperty(value="联系电话")
     @Column(name = "phone")
     private String phone;

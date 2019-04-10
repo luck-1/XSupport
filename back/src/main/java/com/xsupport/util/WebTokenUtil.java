@@ -1,4 +1,4 @@
-package com.xsupport.system.util;
+package com.xsupport.util;
 
 import java.io.IOException;
 import java.security.Key;
