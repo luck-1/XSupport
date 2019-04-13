@@ -5,10 +5,13 @@ import java.util.Date;
 import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.Length;
 
 /**
  * @author lxc
@@ -23,8 +26,8 @@ public class User implements Serializable {
     private static final long serialVersionUID = 42L;
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid")
+    @GeneratedValue(generator = "JDBC")
+    @GenericGenerator(name = "JDBC", strategy = "uuid")
     @ApiModelProperty(value="id")
     @Column(name = "id")
     private String id;
@@ -37,7 +40,7 @@ public class User implements Serializable {
     @Column(name = "updateTime")
     private Date updateTime;
 
-    @Size(min = 6,max = 20,message = "账号长度在6到20之间")
+    @NotNull(message = "用户名不能为空！")
     @ApiModelProperty(value="账号")
     @Column(name = "username")
     private String username;
@@ -64,10 +67,10 @@ public class User implements Serializable {
     @Column(name = "sex")
     private int sex;
 
-    @NotBlank(message = "年龄不能为空！")
+    @NotNull(message = "年龄不能为空！")
     @ApiModelProperty(value="年龄")
     @Column(name = "age")
-    private int age;
+    private Integer age;
 
     @NotBlank(message = "家庭住址不能为空！")
     @ApiModelProperty(value="家庭住址")

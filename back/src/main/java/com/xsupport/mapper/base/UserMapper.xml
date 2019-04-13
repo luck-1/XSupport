@@ -17,10 +17,6 @@
         <result column="remark" property="remark"/>
     </resultMap>
 
-    <select id="findByUserName" parameterType="string" resultType="com.xsupport.model.base.User">
-        SELECT * FROM user WHERE username = #{username}
-    </select>
-
     <select id="findCountByUsernameAndId" resultType="integer">
         SELECT COUNT(*) FROM user WHERE username = #{username} AND id != #{id}
     </select>

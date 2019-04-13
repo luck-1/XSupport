@@ -1,4 +1,4 @@
-package com.xsupport.jpa.jpa;
+package com.xsupport.jpa.base;
 
 import com.xsupport.jpa.MyBaseJpaDao;
 import com.xsupport.model.base.User;

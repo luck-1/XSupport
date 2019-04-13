@@ -13,7 +13,5 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface UserDao extends MyMapper<User> {
 
-    User findByUserName(@Param("username") String username);
-
     Integer findCountByUsernameAndId(@Param("username") String username,@Param("id") String id);
 }
