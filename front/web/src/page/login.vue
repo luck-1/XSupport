@@ -66,13 +66,16 @@
         debugger
         loginService.login(this.form).then(res => {
           if (res.code === 0) {
+            localStorage.setItem('username',res.obj.username)
             localStorage.setItem("accessToken", res.obj ? res.obj.webToken : '')
             this.$router.push('/')
+            this.$Message.success('登录成功!');
           } else {
             this.$Message.error(res.msg);
+            this.password = ''
+            this.loading = false
           }
         })
-        this.$Message.success('登录成功!');
       }
     }
   }

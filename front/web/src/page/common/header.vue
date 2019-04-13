@@ -36,6 +36,9 @@
       exitLogin() {
         this.$router.push("/login")
       },
+      editPassword(){
+
+      },
       handleCommand(command) {
         command === "exitLogin" ? this.exitLogin() : this.editPassword()
       }

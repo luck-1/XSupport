@@ -4,11 +4,11 @@
 
 <script>
   import BMap from 'baiduMap'
+
   export default {
     name: "map-box",
     data() {
       return {
-        point: {lng: 116.331398, lat: 39.897445},
         zoom: 12
       }
     },
@@ -17,23 +17,31 @@
     },
     methods: {
       getLocation() {
-        debugger
-        var map = new BMap.Map("map-box");
-        var point = new BMap.Point(this.point.lng, this.point.lat);
+        let map = new BMap.Map("map-box");
+        let point = new BMap.Point(116.331398, 39.897445);
         map.centerAndZoom(point, this.zoom);
-        //
-        (new BMap.Geolocation()).getCurrentPosition(location => {
-            this.point.lng = location.point.lng;
-            this.point.lat = location.point.lat;
+        let geolocation = new BMap.Geolocation()
+        geolocation.getCurrentPosition(location => {
+
+          if (geolocation.getStatus() === 0) {
+            // if(1){
+            map.panTo(location.point)
+            //当前位置标注
+            map.addOverlay(new BMap.Marker(location.point));
+          } else {
+            alert('err code: ' + this.getStatus());
+          }
         });
-        // var point = new BMap.Point(104.075796, 30.659684);
-        // map.centerAndZoom(point, 14);
-        map.addControl(new BMap.MapTypeControl());
+        //鼠标滑轮缩放
         map.enableScrollWheelZoom(true);
+        //双击缩放
         map.enableDoubleClickZoom(true);
-        map.addOverlay(new BMap.Marker(point));
-
-
+        //地图缩放
+        map.addControl(new BMap.ScaleControl());
+        //可折叠的缩略图
+        map.addControl(new BMap.OverviewMapControl());
+        // 地图类型
+        map.addControl(new BMap.MapTypeControl());
       }
     }
   }
