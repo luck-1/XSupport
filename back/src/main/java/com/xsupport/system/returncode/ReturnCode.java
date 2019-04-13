@@ -1,8 +1,13 @@
-package com.xsupport.system.run;
+package com.xsupport.system.returncode;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+/**
+ * @author lxc
+ * @date 2019/4/13
+ * @description
+ */
 @Data
 public class ReturnCode {
 
@@ -21,6 +26,7 @@ public class ReturnCode {
     }
 
     public static class Builder {
+
         private ReturnCode returnCode;
 
         public Builder() {
@@ -70,26 +76,5 @@ public class ReturnCode {
             return returnCode;
         }
 
-    }
-    public enum RetCodeEnum {
-
-        SUCCESS(0,"成功"),
-        FAILED(-1,"失败"),
-        PARAM_ERROR(1,"参数异常"),
-        ERROR(2,"方法异常");
-
-        private int code;
-        private String msg;
-
-        RetCodeEnum(int code,String msg){
-            this.code = code;
-            this.msg = msg;
-        }
-        public int getCode(){
-            return this.code;
-        }
-        public String getMsg(){
-            return this.msg;
-        }
     }
 }

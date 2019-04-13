@@ -1,6 +1,6 @@
 package com.xsupport.system.exception;
 
-import com.xsupport.system.run.ReturnCode;
+import com.xsupport.system.returncode.ReturnCode;
 import lombok.Data;
 
 /**

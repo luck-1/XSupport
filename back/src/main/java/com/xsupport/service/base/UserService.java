@@ -18,4 +18,6 @@ public interface UserService extends Service<User> {
 
     void changePassword(ChangePasswordParam changePasswordParam);
 
+    void saveInfo(User user);
+
 }

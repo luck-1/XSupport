@@ -3,27 +3,28 @@ package com.xsupport.model.base;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
-import javax.persistence.Entity;
-import javax.persistence.Column;
-import javax.persistence.Table;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
 import io.swagger.annotations.ApiModelProperty;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * @author lxc
  * @date 2019/4/10
- * @description 
+ * @description 用户
  */
 @Data
 @Entity
+@DynamicUpdate
 @Table(name="user")
 public class User implements Serializable {
     private static final long serialVersionUID = 42L;
 
     @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid")
     @ApiModelProperty(value="id")
     @Column(name = "id")
     private String id;

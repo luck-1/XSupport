@@ -1,35 +1,30 @@
-package com.xsupport.util;
+package com.xsupport.util.token;
 
-import java.io.IOException;
-import java.security.Key;
-import java.util.Date;
-import java.util.Properties;
-import javax.crypto.spec.SecretKeySpec;
-import javax.servlet.http.HttpServletRequest;
-import javax.xml.bind.DatatypeConverter;
-
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtBuilder;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-/**
- * @author yf
- * jwt
- * 依赖 /webtoken.properties 配置文件 信息生成token值
- * @version 1.0
- * @date 创建时间：2017年12月2日 上午10:45:57
- */
-public class WebTokenUtil {
+import javax.crypto.spec.SecretKeySpec;
+import javax.servlet.http.HttpServletRequest;
+import javax.xml.bind.DatatypeConverter;
+import java.io.IOException;
+import java.security.Key;
+import java.util.Date;
+import java.util.Properties;
 
-    private static Logger log = LoggerFactory.getLogger(WebTokenUtil.class);
-    private static WebToken webToken = new WebToken();
+/**
+ * @author lxc
+ * @date 2019/4/12
+ * @description
+ */
+public class TokenUtil {
+    private static Logger log = LoggerFactory.getLogger(TokenUtil.class);
+    private static Token webToken = new Token();
 
     static {
         try {
@@ -105,30 +100,3 @@ public class WebTokenUtil {
     }
 
 }
-
-
-
-/**
- * @author yf 生成token所需要的信息
- * @date 创建时间：2017年12月2日 上午10:52:48
- * @version 1.0
- */
-@Data
-class WebToken {
-
-    @ApiModelProperty(value = "base64位签名")
-    private String salt;
-
-    @ApiModelProperty(value = "发行人名称")
-    private String name;
-
-    @ApiModelProperty(value = "保存时间")
-    private int expiresSecond;
-
-    @Override
-    public String toString() {
-        return "WebToken [salt=" + salt + ", name=" + name + ", expiresSecond=" + expiresSecond + "]";
-    }
-
-}
-
