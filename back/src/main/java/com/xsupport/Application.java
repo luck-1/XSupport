@@ -1,10 +1,12 @@
 package com.xsupport;
 
+import com.xsupport.dao.MyMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import tk.mybatis.spring.annotation.MapperScan;
 
 /**
  * @author lxc
@@ -12,6 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @EnableSwagger2
 @SpringBootApplication
+@MapperScan(basePackages ={"com.xsupport.dao.base"},markerInterface = MyMapper.class)
 public class Application extends SpringBootServletInitializer {
 
     @Override

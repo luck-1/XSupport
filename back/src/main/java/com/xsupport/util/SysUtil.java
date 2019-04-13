@@ -8,6 +8,7 @@ public class SysUtil {
     }
 
     public static void main(String[] args) {
-        System.out.println(getUuid());
+        String s = int.class.getCanonicalName();
+        System.out.println(s);
     }
 }
