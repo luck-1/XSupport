@@ -23,58 +23,58 @@
         </layout>
     </appender>
     <!-- error 日志 -->
-    <appender name="errorAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- 文件名称 -->
-            <fileNamePattern>${LOG_HOME}/error/error-%d{yyyy-MM-dd}._%i.log
-            </fileNamePattern>
-            <!-- 文件最大保存历史数量 -->
-            <MaxHistory>30</MaxHistory>
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>500MB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-        </rollingPolicy>
-        <encoder>
-            <!-- 格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
-        </encoder>
-        <!-- 日志文件最大的大小 -->
-        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <MaxFileSize>20MB</MaxFileSize>
-        </triggeringPolicy>
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>ERROR</level>
-            <onMatch>ACCEPT</onMatch>
-            <onMismatch>DENY</onMismatch>
-        </filter>
-    </appender>
-    <!-- info 日志 -->
-    <appender name="infoAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- 文件名称 -->
-            <fileNamePattern>${LOG_HOME}/info/info-%d{yyyy-MM-dd}._%i.log
-            </fileNamePattern>
-            <!-- 文件最大保存历史数量 -->
-            <MaxHistory>30</MaxHistory>
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>500MB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-        </rollingPolicy>
-        <encoder>
-            <!-- 格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
-        </encoder>
-        <!-- 日志文件最大的大小 -->
-        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <MaxFileSize>20MB</MaxFileSize>
-        </triggeringPolicy>
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>INFO</level>
-            <onMatch>ACCEPT</onMatch>
-            <onMismatch>DENY</onMismatch>
-        </filter>
-    </appender>
-    <!-- warn 日志 -->
+<!--    <appender name="errorAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+<!--        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+<!--            &lt;!&ndash; 文件名称 &ndash;&gt;-->
+<!--            <fileNamePattern>${LOG_HOME}/error/error-%d{yyyy-MM-dd}._%i.log-->
+<!--            </fileNamePattern>-->
+<!--            &lt;!&ndash; 文件最大保存历史数量 &ndash;&gt;-->
+<!--            <MaxHistory>30</MaxHistory>-->
+<!--            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">-->
+<!--                <maxFileSize>500MB</maxFileSize>-->
+<!--            </timeBasedFileNamingAndTriggeringPolicy>-->
+<!--        </rollingPolicy>-->
+<!--        <encoder>-->
+<!--            &lt;!&ndash; 格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 &ndash;&gt;-->
+<!--            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>-->
+<!--        </encoder>-->
+<!--        &lt;!&ndash; 日志文件最大的大小 &ndash;&gt;-->
+<!--        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">-->
+<!--            <MaxFileSize>20MB</MaxFileSize>-->
+<!--        </triggeringPolicy>-->
+<!--        <filter class="ch.qos.logback.classic.filter.LevelFilter">-->
+<!--            <level>ERROR</level>-->
+<!--            <onMatch>ACCEPT</onMatch>-->
+<!--            <onMismatch>DENY</onMismatch>-->
+<!--        </filter>-->
+<!--    </appender>-->
+<!--    &lt;!&ndash; info 日志 &ndash;&gt;-->
+<!--    <appender name="infoAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+<!--        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+<!--            &lt;!&ndash; 文件名称 &ndash;&gt;-->
+<!--            <fileNamePattern>${LOG_HOME}/info/info-%d{yyyy-MM-dd}._%i.log-->
+<!--            </fileNamePattern>-->
+<!--            &lt;!&ndash; 文件最大保存历史数量 &ndash;&gt;-->
+<!--            <MaxHistory>30</MaxHistory>-->
+<!--            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">-->
+<!--                <maxFileSize>500MB</maxFileSize>-->
+<!--            </timeBasedFileNamingAndTriggeringPolicy>-->
+<!--        </rollingPolicy>-->
+<!--        <encoder>-->
+<!--            &lt;!&ndash; 格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 &ndash;&gt;-->
+<!--            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>-->
+<!--        </encoder>-->
+<!--        &lt;!&ndash; 日志文件最大的大小 &ndash;&gt;-->
+<!--        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">-->
+<!--            <MaxFileSize>20MB</MaxFileSize>-->
+<!--        </triggeringPolicy>-->
+<!--        <filter class="ch.qos.logback.classic.filter.LevelFilter">-->
+<!--            <level>INFO</level>-->
+<!--            <onMatch>ACCEPT</onMatch>-->
+<!--            <onMismatch>DENY</onMismatch>-->
+<!--        </filter>-->
+<!--    </appender>-->
+<!--    &lt;!&ndash; warn 日志 &ndash;&gt;-->
 <!--    <appender name="warnAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
 <!--        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
 <!--            &lt;!&ndash; 文件名称 &ndash;&gt;-->
@@ -103,17 +103,11 @@
     <!-- show sql -->
     <logger name="com.xsupport.dao.base" level="DEBUG"/>
     <!-- 	存入数据库-->
-    <!-- <root level="WARN">
-        <appender-ref ref="db-classic-mysql" />
-    </root>  -->
+<!--     <root level="WARN"><appender-ref ref="db-classic-mysql" /></root>  -->
     <!--输出在控制台-->
-    <root level="DEBUG">
-        <appender-ref ref="STDOUT"/>
-    </root>
-    <!--     输出在文件
-        <root level="INFO">
-            <appender-ref ref="FILE" />
-        </root> -->
+    <root level="DEBUG"><appender-ref ref="STDOUT"/></root>
+    <!--     输出在文件 -->
+<!--        <root level="INFO"><appender-ref ref="FILE" /></root> -->
     <!-- 输出在文件 -->
     <!--<root level="${log.lever}">-->
     <!--<appender-ref ref="infoAppender" />-->
