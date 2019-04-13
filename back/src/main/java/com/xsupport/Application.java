@@ -1,6 +1,5 @@
 package com.xsupport;
 
-import com.xsupport.dao.MyMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -14,7 +13,7 @@ import tk.mybatis.spring.annotation.MapperScan;
  */
 @EnableSwagger2
 @SpringBootApplication
-@MapperScan(basePackages ={"com.xsupport.dao.base"},markerInterface = MyMapper.class)
+@MapperScan(basePackages = {"com.xsupport.dao.base"})
 public class Application extends SpringBootServletInitializer {
 
     @Override
