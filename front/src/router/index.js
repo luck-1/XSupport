@@ -5,8 +5,7 @@ Vue.use(Router)
 
 const keepAlive = false
 
-export default new Router({
-
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -21,14 +20,14 @@ export default new Router({
           meta: {title: "用户管理", keepAlive: keepAlive}
         },
         {
-          path: 'monitor',
-          name: 'monitor',
+          path: 'video',
+          name: 'video',
           component: () => import('../page/video'),
           meta: {title: "视频监控", keepAlive: keepAlive}
         },
         {
-          path: 'rimArea',
-          name: 'rimArea',
+          path: 'map',
+          name: 'map',
           component: () => import('../page/map'),
           meta: {title: "地图监测", keepAlive: keepAlive}
         },
@@ -74,3 +73,13 @@ export default new Router({
     {path: '*', redirect: '/404'}
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (localStorage.getItem('accessToken') === null) {
+    next({path: '/login'})
+  } else {
+    next()
+  }
+})
+
+export default router

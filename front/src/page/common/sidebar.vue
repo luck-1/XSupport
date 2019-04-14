@@ -1,11 +1,6 @@
 <template>
-  <el-menu :router="true"
-           :collapse-transition="false"
-           :default-active="$route.fullPath"
-           class="sidebar-menu"
-           background-color="#555"
-           text-color="#fff"
-           :collapse="collapse">
+  <el-menu :router="true" :collapse-transition="false" :default-active="$route.fullPath"
+           class="sidebar-menu" background-color="#555" text-color="#fff" :collapse="collapse">
     <template v-for="item in menuList">
       <template v-if="item.subs">
         <el-submenu :index="item.path">
@@ -35,8 +30,8 @@
         collapse: false,
         menuList: [
           {title: "用户管理", icon: "iconfont icon-yonghu", path: "/user", subs: null},
-          {title: "视频监控", icon: "icon iconfont icon-video", path: "/monitor", subs: null},
-          {title: "地图监测", icon: "iconfont icon-ditu", path: "/rimArea", subs: null},
+          {title: "视频监控", icon: "icon iconfont icon-video", path: "/video", subs: null},
+          {title: "地图监测", icon: "iconfont icon-ditu", path: "/map", subs: null},
           {
             title: "测量中心", icon: "iconfont icon-measure", path: '',
             subs: [

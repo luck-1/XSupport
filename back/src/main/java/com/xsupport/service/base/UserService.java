@@ -1,6 +1,6 @@
 package com.xsupport.service.base;
 
-import com.xsupport.model.http.ChangePasswordParam;
+import com.xsupport.model.http.PasswordParam;
 import com.xsupport.model.http.LoginParam;
 import org.springframework.stereotype.Component;
 import com.xsupport.service.Service;
@@ -14,9 +14,9 @@ import com.xsupport.model.base.User;
 @Component
 public interface UserService extends Service<User> {
 
-    void login(LoginParam loginParam);
+    User login(LoginParam loginParam);
 
-    void changePassword(ChangePasswordParam changePasswordParam);
+    void changePassword(PasswordParam passwordParam);
 
     void saveInfo(User user);
 

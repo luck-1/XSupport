@@ -1,12 +1,11 @@
 package com.xsupport.model.http;
 
 import lombok.Data;
-import org.hibernate.validator.constraints.NotBlank;
-//import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Data
-public class ChangePasswordParam {
+public class PasswordParam {
     @NotBlank(message = "用户名不能为空！")
     private String id;
 

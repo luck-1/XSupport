@@ -1,35 +1,18 @@
 <template>
-  <Row type="flex" aligin="middle"
-       justify="center"
-       @keydown.enter.native="submitLogin()"
-       class="login">
-    <Col :xs="{span:22}"
-         class="login-content">
-      <Form ref="formInfo"
-            :model="form"
-            :rules="rules"
-            :label-width="65">
+  <Row type="flex" aligin="middle" justify="center" @keydown.enter.native="submitLogin()" class="login">
+    <Col :xs="{span:22}" class="login-content">
+      <Form ref="formInfo" :model="form" :rules="rules" :label-width="65">
         <p class="login-title">尾矿库坝体安全性能检测平台</p>
-        <FormItem prop="user" label="账号:">
-          <Input type="text" clearable
-                 class="input-box"
-                 v-model="form.username"
-                 placeholder="请输入账号"
+        <FormItem prop="user" label="账 号:">
+          <Input type="text" clearable class="input-box" v-model="form.username" placeholder="请输入账号"
                  prefix="ios-person"/>
         </FormItem>
         <FormItem prop="password" label="密 码:">
-          <Input type="password"
-                 class="input-box"
-                 v-model="form.password"
-                 placeholder="请输入密码"
+          <Input type="password" class="input-box" v-model="form.password" placeholder="请输入密码"
                  prefix="ios-lock-outline"/>
         </FormItem>
       </Form>
-      <Button type="primary" long
-              class="submit-btn"
-              size="large"
-              :loading="loading"
-              @click="submitLogin()">
+      <Button type="primary" long class="submit-btn" size="large" :loading="loading" @click="submitLogin()">
         <span v-if="!loading">登录</span>
         <span v-else>登录中...</span>
       </Button>
@@ -38,7 +21,7 @@
 </template>
 
 <script>
-  import {loginService} from '../api/service'
+  import {userService} from '../api/service'
 
   export default {
     name: "login",
@@ -55,18 +38,19 @@
           ],
           password: [
             {required: true, message: '密码不能为空', trigger: 'blur'},
-            {type: 'string', min: 6, message: '密码长度不能小于 6 位！', trigger: 'blur'}
+            {type: 'string', min: 4, message: '密码长度不能小于 4 位！', trigger: 'blur'}
           ]
         }
       }
     },
     methods: {
       submitLogin() {
-        this.loading = true
         debugger
-        loginService.login(this.form).then(res => {
+        this.loading = true
+        userService.login(this.form).then(res => {
           if (res.code === 0) {
-            localStorage.setItem('username',res.obj.username)
+            localStorage.setItem('username', this.form.username)
+            localStorage.setItem('userId', res.obj.id)
             localStorage.setItem("accessToken", res.obj ? res.obj.webToken : '')
             this.$router.push('/')
             this.$Message.success('登录成功!');

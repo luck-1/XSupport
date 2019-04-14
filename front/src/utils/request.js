@@ -130,7 +130,7 @@ export default {
   put: async (url, data = {}, isLoading = true) => {
     let loading = beginLoading(isLoading);
     url = getFullUrl(url);
-    let result = (await axios.post(url, data, getResConfig('PUT'))).data;
+    let result = (await axios.put(url, data, getResConfig('PUT'))).data;
     endLoading(result, loading);
     return result;
   }

@@ -4,13 +4,12 @@ import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
 import javax.persistence.*;
-//import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.validator.constraints.NotBlank;
 
 @Data
 @Entity
@@ -39,7 +38,7 @@ public class User implements Serializable {
     @Column(name = "username")
     private String username;
 
-    @Size(min = 6,max = 20,message = "密码长度在6到20之间")
+    @Size(min = 4,max = 20,message = "密码长度在4到20之间")
     @ApiModelProperty(value="密码")
     @Column(name = "password")
     private String password;

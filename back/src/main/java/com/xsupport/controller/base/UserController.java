@@ -3,10 +3,9 @@ package com.xsupport.controller.base;
 import java.util.List;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.xsupport.model.http.ChangePasswordParam;
+import com.xsupport.model.http.PasswordParam;
 import com.xsupport.model.http.LoginParam;
 import com.xsupport.system.returncode.ReturnCode;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,17 +42,17 @@ public class  UserController {
         if (bindingResult.hasErrors()){
             return new ReturnCode.Builder().failed().msg(bindingResult.getFieldError().getDefaultMessage()).build();
         }
-        userService.login( loginParam);
-        return new ReturnCode.Builder().success().msg("登录成功").build();
+        User user = userService.login( loginParam);
+        return new ReturnCode.Builder().object(user).success().msg("登录成功").build();
     }
 
     @PutMapping("changePassword")
     @ApiOperation(value = "修改密码")
-    public ReturnCode changePassword(@RequestBody @Valid ChangePasswordParam changePasswordParam, BindingResult bindingResult) {
+    public ReturnCode changePassword(@RequestBody @Valid PasswordParam passwordParam, BindingResult bindingResult) {
         if (bindingResult.hasErrors()){
             return new ReturnCode.Builder().failed().msg(bindingResult.getFieldError().getDefaultMessage()).build();
         }
-        userService.changePassword( changePasswordParam);
+        userService.changePassword(passwordParam);
         return new ReturnCode.Builder().success().msg("登录成功").build();
     }
 

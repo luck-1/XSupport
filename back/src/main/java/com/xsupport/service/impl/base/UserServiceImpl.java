@@ -4,7 +4,7 @@ import javax.annotation.Resource;
 
 import com.xsupport.dao.base.UserDao;
 import com.xsupport.jpa.base.UserMapper;
-import com.xsupport.model.http.ChangePasswordParam;
+import com.xsupport.model.http.PasswordParam;
 import com.xsupport.model.http.LoginParam;
 import com.xsupport.system.exception.CustomException;
 import com.xsupport.system.returncode.ReturnCode;
@@ -28,29 +28,30 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
     private UserDao userDao;
 
     @Override
-    public void login(LoginParam loginParam) {
+    public User login(LoginParam loginParam) {
         User user = userMapper.findUserByUsername(loginParam.getUsername());
         if (user == null) {
             throw new CustomException(new ReturnCode.Builder().failed().msg("用户不存在！").build());
         }
-        if (!loginParam.getPossword().equals(user.getPassword())) {
+        if (!user.getPassword().equals(loginParam.getPassword())) {
             throw new CustomException(new ReturnCode.Builder().failed().msg("密码错误！").build());
         }
         if (user.getIsForbidden()) {
             throw new CustomException(new ReturnCode.Builder().failed().msg("该用户已被禁用！").build());
         }
+        return user;
     }
 
     @Override
-    public void changePassword(ChangePasswordParam changePasswordParam) {
-        User user = userDao.selectByPrimaryKey(changePasswordParam.getId());
+    public void changePassword(PasswordParam passwordParam) {
+        User user = userDao.selectByPrimaryKey(passwordParam.getId());
         if (user == null) {
             throw new CustomException(new ReturnCode.Builder().failed().msg("用户不存在！").build());
         }
-        if (!changePasswordParam.getOldPossword().equals(user.getPassword())) {
+        if (!passwordParam.getOldPossword().equals(user.getPassword())) {
             throw new CustomException(new ReturnCode.Builder().failed().msg("原密码不正确！").build());
         }
-        user.setPassword(changePasswordParam.getNewPossword());
+        user.setPassword(passwordParam.getNewPossword());
         userDao.updateByPrimaryKey(user);
     }
 

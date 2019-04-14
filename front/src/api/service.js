@@ -1,9 +1,13 @@
 import req from '../utils/request'
 
-export const loginService = {
+export const userService = {
   login: (userData) => req.post('user/login', userData),
-  changePassword: (changePassword) => req.put('user/changePassword', changePassword),
-  add: (user) => req.post('user/add', user),
-  update: (user) => req.put('user/update', user),
-  delete: (id) => req.delete('user/delete',id),
+
+  changePassword: (param) => req.put('user/changePassword', param),
+
+  findByUserName: (username) => req.get('user/findByUserName',username),
+
+  saveInfo: (user) => req.post('user/saveInfo', user),
+
+  deleteUser: (id) => req.delete('user/delete',id),
 }

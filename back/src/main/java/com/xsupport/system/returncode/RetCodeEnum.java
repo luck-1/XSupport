@@ -1,5 +1,6 @@
 package com.xsupport.system.returncode;
 
+
 public enum RetCodeEnum {
 
     SUCCESS(0,"成功"),
