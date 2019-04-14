@@ -1,7 +1,8 @@
 package com.xsupport.model.http;
 
 import lombok.Data;
-import javax.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotBlank;
+//import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Data

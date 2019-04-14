@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Primary;
  * @description 
  */
 @Mapper
-@Primary
 public interface UserDao extends MyMapper<User> {
 
     Integer findCountByUsernameAndId(@Param("username") String username,@Param("id") String id);

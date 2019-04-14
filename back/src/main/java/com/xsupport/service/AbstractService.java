@@ -3,9 +3,9 @@ package com.xsupport.service;
 import com.xsupport.dao.MyMapper;
 import com.xsupport.system.returncode.ReturnCode;
 import org.apache.ibatis.exceptions.TooManyResultsException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Condition;
-import javax.annotation.Resource;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.Map;
 @Service
 public abstract class AbstractService<T> {
 
-    @Resource
+    @Autowired
     protected MyMapper<T> mapper;
 
     private Class<T> modelClass;
