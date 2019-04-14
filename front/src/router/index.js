@@ -74,12 +74,12 @@ const router = new Router({
   ]
 })
 
-router.beforeEach((to, from, next) => {
-  if (localStorage.getItem('accessToken') === null) {
-    next({path: '/login'})
-  } else {
-    next()
-  }
-})
+// router.beforeEach((to, from, next) => {
+//   if (localStorage.getItem('accessToken') === null) {
+//     next({path: '/login'})
+//   } else {
+//     next()
+//   }
+// })
 
 export default router

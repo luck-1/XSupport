@@ -12,7 +12,7 @@
                  prefix="ios-lock-outline"/>
         </FormItem>
       </Form>
-      <Button type="primary" long class="submit-btn" size="large" :loading="loading" @click="submitLogin()">
+      <Button type="primary" long class="submit-btn" size="large" :loading="loading" @click="submitLogin">
         <span v-if="!loading">登录</span>
         <span v-else>登录中...</span>
       </Button>
@@ -47,19 +47,21 @@
       submitLogin() {
         debugger
         this.loading = true
-        userService.login(this.form).then(res => {
-          if (res.code === 0) {
-            localStorage.setItem('username', this.form.username)
-            localStorage.setItem('userId', res.obj.id)
-            localStorage.setItem("accessToken", res.obj ? res.obj.webToken : '')
-            this.$router.push('/')
-            this.$Message.success('登录成功!');
-          } else {
-            this.$Message.error(res.msg);
-            this.password = ''
-            this.loading = false
-          }
-        })
+        // userService.login(this.form).then(res => {
+          // if (res.code === 0) {
+          //   localStorage.setItem('username', this.form.username)
+          //   localStorage.setItem('userId', res.obj.id)
+          //   localStorage.setItem("accessToken", res.obj ? res.obj.webToken : '')
+          //   this.$router.push('/')
+          //   this.$Message.success('登录成功!');
+          // } else {
+          //   this.$Message.error(res.msg);
+          //   this.password = ''
+          //   this.loading = false
+          // }
+        // })
+          this.$router.push('/')
+          this.$Message.success('登录成功!')
       }
     }
   }
