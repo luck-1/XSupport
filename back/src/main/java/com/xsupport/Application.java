@@ -13,7 +13,7 @@ import tk.mybatis.spring.annotation.MapperScan;
  */
 @EnableSwagger2
 @SpringBootApplication
-@MapperScan(basePackages = {"com.xsupport.dao.base"})
+@MapperScan("com.xsupport.dao.base")
 public class Application extends SpringBootServletInitializer {
 
     @Override

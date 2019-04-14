@@ -6,18 +6,10 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.validator.constraints.Length;
-
-/**
- * @author lxc
- * @date 2019/4/10
- * @description 用户
- */
 @Data
 @Entity
 @DynamicUpdate

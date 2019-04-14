@@ -20,8 +20,8 @@ public class Temp implements Serializable {
     private static final long serialVersionUID = 42L;
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid")
+    @GeneratedValue(generator = "JDBC")
+    @GenericGenerator(name = "JDBC", strategy = "uuid")
     @ApiModelProperty(value="id")
     @Column(name = "id")
     private int id;
