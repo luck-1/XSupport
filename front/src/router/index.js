@@ -38,33 +38,29 @@ const router = new Router({
           meta: {title: "系统管理", keepAlive: keepAlive}
         },
         {
-          path: 'measure', name: 'measure', children: [
-            {
-              path: 'temperature',
-              name: 'temperature',
-              component: () => import('../page/measure/temperature'),
-              meta: {title: "温度测量", keepAlive: keepAlive}
-            },
-            {
-              path: 'humidity',
-              name: 'humidity',
-              component: () => import('../page/measure/humidity'),
-              meta: {title: "湿度测量", keepAlive: keepAlive}
-            },
-            {
-              path: 'soak',
-              name: 'soak',
-              component: () => import('../page/measure/soak'),
-              meta: {title: "浸润测量", keepAlive: keepAlive}
-            },
-            {
-              path: 'gas',
-              name: 'gas',
-              component: () => import('../page/measure/gas'),
-              meta: {title: "金气测量", keepAlive: keepAlive}
-            }
-          ]
+          path: 'measure/temperature',
+          name: 'temperature',
+          component: () => import('../page/measure/temperature'),
+          meta: {title: "温度测量", keepAlive: keepAlive}
         },
+        {
+          path: 'measure/humidity',
+          name: 'humidity',
+          component: () => import('../page/measure/humidity'),
+          meta: {title: "湿度测量", keepAlive: keepAlive}
+        },
+        {
+          path: 'measure/soak',
+          name: 'soak',
+          component: () => import('../page/measure/soak'),
+          meta: {title: "浸润测量", keepAlive: keepAlive}
+        },
+        {
+          path: 'measure/gas',
+          name: 'gas',
+          component: () => import('../page/measure/gas'),
+          meta: {title: "金气测量", keepAlive: keepAlive}
+        }
       ]
     },
     {path: '/login', name: 'login', component: () => import('../page/login')},

@@ -16,16 +16,16 @@
       </el-dropdown>
     </div>
 
-    <el-dialog title="修改密码" :visible.sync="dialogShow" width="400px">
+    <el-dialog title="修改密码" :visible.sync="dialogShow" width="300px">
       <el-form :model="passwordParam" :rules="changeRules" label-width="80px" label-position="right">
         <el-form-item label="原密码：" prop="oldPassword">
-          <el-input v-model="passwordParam.oldPassword" />
+          <el-input v-model="passwordParam.oldPassword" placeholder="请输入原密码"/>
         </el-form-item>
         <el-form-item label="新密码：" prop="newPassword">
-          <el-input v-model="passwordParam.newPassword" />
+          <el-input v-model="passwordParam.newPassword" placeholder="请输入新密码"></el-input>
         </el-form-item>
         <el-form-item label="新密码：" prop="againPassword">
-          <el-input v-model="againPassword" />
+          <el-input v-model="passwordParam.againPassword" placeholder="请再次输入密码"/>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm()">确 定</el-button>
@@ -39,7 +39,6 @@
 <script>
   import bus from './bus'
   import {userService} from '../../api/service'
-
   export default {
     name: "common-header",
     data() {
@@ -53,7 +52,6 @@
         }
       }
       const validateTemp = (rule, value, callback) => {
-        debugger
         if (value !== this.passwordParam.newPassword) {
           callback(new Error("两个输入密码不一致！"))
         } else {
@@ -64,11 +62,11 @@
         collapse: true,
         username: localStorage.getItem('username'),
         dialogShow: false,
-        againPassword: '',
         passwordParam: {
           id: localStorage.getItem('userId'),
           oldPassword: '',
           newPassword: '',
+          againPassword: '',
         },
         changeRules: {
           oldPassword: [{required: true, validator: validatePassword, trigger: 'blur'}],
@@ -87,24 +85,20 @@
         localStorage.clear()
       },
       submitForm() {
-        alert('old:'+this.passwordParam.oldPassword+' new:'+ this.passwordParam.newPassword)
-        // userService.changePassword(this.passwordParam).then(res => {
-        //   debugger
-        //   if (res.code === 0) {
-        //     this.dialogShow = false
-        //     this.$Massage.success(res.msg)
-        //     this.$router.push('/login')
-        //   } else {
-        //     this.$Massage.error(res.msg)
-        //     this.passwordParam.newPassword = ''
-        //     this.againPassword = ''
-        //   }
-        // })
+        userService.changePassword(this.passwordParam).then(res => {
+          if (res.code === 0) {
+            this.dialogShow = false
+            this.$router.push('/login')
+          } else {
+            this.passwordParam.newPassword = ''
+            this.passwordParam.againPassword = ''
+          }
+        })
       },
       editPassword() {
         this.passwordParam.oldPassword = ''
         this.passwordParam.newPassword = ''
-        this.againPassword = ''
+        this.passwordParam.againPassword = ''
         this.dialogShow = true
       },
       handleCommand(command) {

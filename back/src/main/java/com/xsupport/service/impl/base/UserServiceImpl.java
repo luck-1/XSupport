@@ -48,10 +48,10 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
         if (user == null) {
             throw new CustomException(new ReturnCode.Builder().failed().msg("用户不存在！").build());
         }
-        if (!passwordParam.getOldPossword().equals(user.getPassword())) {
+        if (!passwordParam.getOldPassword().equals(user.getPassword())) {
             throw new CustomException(new ReturnCode.Builder().failed().msg("原密码不正确！").build());
         }
-        user.setPassword(passwordParam.getNewPossword());
+        user.setPassword(passwordParam.getNewPassword());
         userDao.updateByPrimaryKey(user);
     }
 

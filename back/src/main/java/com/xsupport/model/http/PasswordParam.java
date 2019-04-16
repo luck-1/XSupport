@@ -10,8 +10,8 @@ public class PasswordParam {
     private String id;
 
     @NotBlank(message = "原密码不能为空！")
-    private String oldPossword;
+    private String oldPassword;
 
-    @Size(min = 6,max = 20,message = "新密码长度在6到20之间")
-    private String newPossword;
+    @Size(min = 4,max = 20,message = "新密码长度在4到20之间")
+    private String newPassword;
 }
