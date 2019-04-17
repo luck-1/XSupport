@@ -13,10 +13,10 @@
       }
     },
     mounted() {
-      this.getLocation();
+      this.getLocationMap();
     },
     methods: {
-      getLocation() {
+      getLocationMap() {
         let map = new BMap.Map("map-box");
         let point = new BMap.Point(116.331398, 39.897445);
         map.centerAndZoom(point, this.zoom);

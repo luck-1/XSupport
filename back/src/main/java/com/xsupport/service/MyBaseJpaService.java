@@ -1,6 +1,6 @@
 //package com.xsupport.service;
 //
-//import com.xsupport.dao.MyBaseJpaDao;
+//import com.xsupport.jpa.MyBaseJpaDao;
 //import org.springframework.data.domain.Page;
 //import org.springframework.data.domain.Pageable;
 //import org.springframework.data.jpa.domain.Specification;
@@ -12,8 +12,8 @@
 //
 //    MyBaseJpaDao<E, ID> getRepository();
 //
-//    public default E get(ID id) {
-//        return getRepository().findOne(id);
+//    default E get(ID ids) {
+//        return getRepository().findOne(ids);
 //    }
 //
 //    /**
@@ -79,8 +79,8 @@
 //     * 批量删除
 //     * @param entities
 //     */
-//    default void delete(Iterable<E> entities) {
-//        getRepository().delete(entities);
+//    default void delete(Iterable<E> ids1) {
+//        getRepository().delete(ids1);
 //    }
 //
 //    /**

@@ -29,10 +29,6 @@ public class User implements Serializable {
     @Column(name = "createTime")
     private Date createTime;
 
-    @ApiModelProperty(value="更新时间")
-    @Column(name = "updateTime")
-    private Date updateTime;
-
     @NotNull(message = "用户名不能为空！")
     @ApiModelProperty(value="账号")
     @Column(name = "username")
