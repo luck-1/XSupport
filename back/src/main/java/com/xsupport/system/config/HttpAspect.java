@@ -7,21 +7,20 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
 @Aspect
 @Component
-public aspect HttpAspect {
+public class HttpAspect {
 
     private static final Logger log = LoggerFactory.getLogger(HttpAspect.class);
 
-    @Pointcut(value = "execution(public * com.xsupport.controller.base.*(..))")
+    @Pointcut(value = "execution(* com.xsupport.controller.*.*.*(..))")
     private void controllerAspect() {
     }
 
-    @Before(value = "controllerAspect()")
+    @Before("controllerAspect()")
     public void methodBefore(JoinPoint joinPoint) {
 
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
@@ -34,10 +33,10 @@ public aspect HttpAspect {
         log.info("===============请求内容===============");
     }
 
-    @AfterReturning(returning = "obj", value = "controllerAspect()")
-    public void methodAfter(Object obj) {
+    @AfterReturning(returning = "returnCode", value = "controllerAspect()")
+    public void methodAfter(Object returnCode) {
         log.info("===============返回内容===============");
-        log.info(obj.toString());
+        log.info(returnCode.toString());
         log.info("===============返回内容===============");
     }
 

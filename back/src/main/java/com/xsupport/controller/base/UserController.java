@@ -19,7 +19,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import com.xsupport.model.base.User;
 import com.xsupport.service.base.UserService;
-
 import javax.annotation.Resource;
 import javax.validation.Valid;
 

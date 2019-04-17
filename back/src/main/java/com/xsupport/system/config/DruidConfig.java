@@ -29,8 +29,8 @@ import java.util.List;
  * 参考https://www.jianshu.com/p/a8f653fc0c54?from=singlemessage
  */
 @Configuration
-public class DruidConfiguration {
-    private Logger logger = LoggerFactory.getLogger(DruidConfiguration.class);
+public class DruidConfig {
+    private Logger logger = LoggerFactory.getLogger(DruidConfig.class);
 
     /**
      * @功能描述 把配置文件的参数自动赋值到dataSource里。

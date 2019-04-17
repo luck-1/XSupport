@@ -13,7 +13,6 @@ import tk.mybatis.spring.annotation.MapperScan;
  * @description 打war包必须继承 SpringBootServletInitializer 并重写 configure()
  */
 @EnableSwagger2
-@EnableAspectJAutoProxy
 @SpringBootApplication
 @MapperScan("com.xsupport.dao.base")
 public class Application extends SpringBootServletInitializer {
