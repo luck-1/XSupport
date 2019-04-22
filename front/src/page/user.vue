@@ -14,8 +14,8 @@
       </FormItem>
     </Form>
 
-    <Button @click="showDialog(true)" type="primary" icon="md-add" :disabled="! loginIsAdmin">添加用户</Button>
-    <Button @click="deleteList" type="error" icon="md-trash" :disabled="! loginIsAdmin">批量删除</Button>
+    <Button @click="showDialog(true)" type="primary" icon="md-add" :disabled="loginIsAdmin === '0'">添加用户</Button>
+    <Button @click="deleteList" type="error" icon="md-trash" :disabled="loginIsAdmin ==='0'">批量删除</Button>
 
     <Row>
       <el-table border size="small" :data="userList" height="calc(100vh - 265px)" loading
@@ -32,14 +32,14 @@
         </el-table-column>
         <el-table-column align="center" label="性别" width="50" prop="sex">
           <template slot-scope="{row}">
-            {{row.sex ? '男' : '女'}}
+            {{row.sex ? '女' : '男'}}
           </template>
         </el-table-column>
         <el-table-column align="center" label="手机号码" width="150" prop="phone"></el-table-column>
         <el-table-column align="center" label="地址" width="200" prop="address"></el-table-column>
         <el-table-column align="center" label="用户类型" width="100" prop="isAdmin"
-                         :filters="[{text: '普通用户', value: 0 },{text: '管理员', value: 1 }]"
-                         filter-placement="bottom-start" :filter-multiple="false">
+                         :filters="[{text: '普通用户', value: 0 },{text: '管理员', value: 1 }]" :filter-multiple="false"
+                         :filter-method="(value,row) => row.isAdmin === value" filter-placement="bottom-start">
           <template slot-scope="{row}">
             <el-tag :type="row.isAdmin ? 'success' : 'info'" class="tag-min">
               {{row.isAdmin ? '管理员' : '普通用户'}}
@@ -47,8 +47,8 @@
           </template>
         </el-table-column>
         <el-table-column align="center" label="用户状态" width="150" prop="isForbidden"
-                         :filters="[{text: '正常启用', value: 0 },{text: '已禁用', value: 1 }]"
-                         filter-placement="bottom-start" :filter-multiple="false">
+                         :filters="[{text: '正常启用', value: false },{text: '已禁用', value: true }]" :filter-multiple="false"
+                         :filter-method="(value,row) => row.isForbidden === value" filter-placement="bottom-start">
           <template slot-scope="{row}">
             <el-tag :type="row.isForbidden ? 'danger' : ''" class="tag-min">
               {{row.isForbidden ? '已禁用' : '正常启用'}}
@@ -95,42 +95,42 @@
         <el-row :gutter="20">
           <el-col :span="12">
             <FormItem label="用户名" prop="username">
-              <Input v-model="userInfo.username" placeholder="请输入"/>
+              <Input v-model="userInfo.username" placeholder="请输入" clearable/>
             </FormItem>
             <FormItem label="密码" prop="password">
-              <Input v-model="userInfo.password" type="password" placeholder="请输入"/>
+              <Input v-model="userInfo.password" type="password" placeholder="请输入" clearable/>
             </FormItem>
             <FormItem label="年龄" prop="age">
-              <Input v-model="userInfo.age" placeholder="请输入"/>
+              <Input v-model="userInfo.age" placeholder="请输入" clearable/>
             </FormItem>
             <FormItem label="用户类型" prop="isAdmin">
-              <Select v-model="userInfo.isAdmin" placeholder="请选择">
-                <Option :value="0">普通用户</Option>
+              <Select v-model="userInfo.isAdmin" placeholder="请选择" clearable>
+                <Option :value="0"  selected>普通用户</Option>
                 <Option :value="1">管理员</Option>
               </Select>
             </FormItem>
             <FormItem label="用户地址" prop="address">
-              <Input v-model="userInfo.address" placeholder="请输入"/>
+              <Input v-model="userInfo.address" placeholder="请输入" clearable/>
             </FormItem>
           </el-col>
           <el-col :span="12">
             <FormItem label="姓名" prop="name">
-              <Input v-model="userInfo.name" placeholder="请输入"/>
+              <Input v-model="userInfo.name" placeholder="请输入" clearable/>
             </FormItem>
             <FormItem label="确认密码" prop="password">
-              <Input v-model="userInfo.againPassword" type="password" placeholder="请输入"/>
+              <Input v-model="userInfo.againPassword" type="password" show-passwor placeholder="请输入" clearable/>
             </FormItem>
             <FormItem label="性别" prop="sex">
               <RadioGroup v-model="userInfo.sex">
-                <Radio label="0">男</Radio>
-                <Radio label="1">女</Radio>
+                <Radio :label="0">男</Radio>
+                <Radio :label="1">女</Radio>
               </RadioGroup>
             </FormItem>
             <FormItem label="手机号码" prop="phone">
-              <Input v-model="userInfo.phone" placeholder="请输入"/>
+              <Input v-model="userInfo.phone" type="tel" placeholder="请输入" clearable/>
             </FormItem>
             <FormItem label="备注" prop="remark">
-              <Input v-model="userInfo.remark" placeholder="请输入"/>
+              <Input v-model="userInfo.remark" placeholder="请输入" clearable/>
             </FormItem>
           </el-col>
         </el-row>
@@ -220,7 +220,7 @@
         userService.saveInfo(this.userInfo).then(res => this.dialogShow = (res.code !== 0)).then(() => this.findByCondition())
       },
       deleteOne(user) {
-        userService.deleteOne(user.id).then(() => this.findByCondition())
+        userService.deleteOne({id:user.id}).then(() => this.findByCondition())
       },
       deleteList() {
         if (this.selectList.length === 0) {
@@ -235,10 +235,11 @@
         this.selectList = selectList
       },
       optionBtnIsDisabled(row) {
-        return this.loginIsAdmin ? false : (row.id !== this.loginUserId)
+        return this.loginIsAdmin === '1' ? false : (row.id !== this.loginUserId)
       },
       pageChange(num) {
         this.searchForm.pageNum = num
+        this.findByCondition()
       },
       pageSizeChange(pageSize) {
         this.searchForm.pageSize = pageSize

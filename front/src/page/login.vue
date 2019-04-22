@@ -29,6 +29,28 @@
     data() {
       return {
         loading: false,
+        notice: {
+          loginWelcome: {
+            title: '欢迎访问',
+            desc:'<b>尾矿库坝体安全性能检测平台</b>',
+            duration: 3
+          },
+          loginInfo: {
+            title: '体验账号与密码',
+            desc:'<pre>账号1：admin 密码：000000 角色：管理员 </pre><pre>账号2：test  密码：000000 角色：普通用户</pre>',
+            duration: 5
+          },
+          successWelcome: {
+            title: '欢迎使用尾矿库坝体安全性能检测平台',
+            desc: '尾矿库坝体安全性能检测平台<br/><i>（Spring Boot + Vue 的前后端分离平台）</i>',
+            duration: 3
+          },
+          successInfo: {
+            title: '已成功登陆',
+            desc:'通过右上角的下拉按钮<br/>退出登录体验不同角色账号',
+            duration: 5
+          }
+        },
         form: {
           username: '',
           password: ''
@@ -44,6 +66,10 @@
         }
       }
     },
+    mounted() {
+      this.$Notice.info(this.notice.loginWelcome)
+      this.$Notice.info(this.notice.loginInfo)
+    },
     computed: mapMutations(['setToken', 'setUserId', 'setUsername', 'setLoginIsAdmin']),
     methods: {
       submitLogin() {
@@ -51,8 +77,9 @@
         userService.login(this.form).then(res => {
           if (res.code === 0) {
             this.saveTolocalStorage(res.obj)
-            // this.saveToStore(res.obj)
             this.$router.push('/')
+            this.$Notice.info(this.notice.successWelcome)
+            this.$Notice.info(this.notice.successInfo)
           } else {
             this.password = null
             this.loading = false
@@ -70,15 +97,15 @@
         this.setUsername(user.username)
         this.setLoginIsAdmin(user.isAdmin)
         this.setToken(user.token)
-      },
+      }
     }
   }
 </script>
 
 <style scoped>
   .login {
-    /*background-image: url("../assets/login.jpg");*/
-    background-color: rgba(0, 0, 0, 1);
+    background-image: url("../assets/background.svg");
+    background-color: rgba(255, 255, 255,.5);
     height: 100vh;
     width: 100vw;
   }
@@ -104,6 +131,6 @@
     text-align: left;
     opacity: 8;
     transform: translate(-50%, -50%);
-    background-color: rgba(255, 255, 255, .6);
+    background-color: rgba(200, 200, 200, .6);
   }
 </style>

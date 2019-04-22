@@ -1,14 +1,14 @@
 <template>
   <Card>
     <Row>
-      <el-table border size="small" :data="warnData" hit height="calc(100vh - 170px)">
+      <el-table border size="small" :data="warnData" hit height="calc(100vh - 180px)">
         <el-table-column align="center" type="index" label="序号" width="55"></el-table-column>
         <el-table-column align="center" label="异常时间" sortable width="150" prop="createTime"></el-table-column>
         <el-table-column align="center" label="更改时间" sortable width="150" prop="updateTime"></el-table-column>
         <el-table-column align="center" label="操作人" sortable width="120" prop="optionUser"></el-table-column>
-        <el-table-column align="center" label="异常类型" width="120"
+        <el-table-column align="center" label="异常类型" width="120" prop="exceptionLocation"
                          :filters="[{text: '温度异常', value: 0 },{text: '湿度异常', value: 1 }, { text: '浸润异常', value: 2 },{text: '金气异常', value: 3 }]"
-                         filter-placement="bottom-start" :filter-multiple="false" prop="exceptionLocation">
+                         :filter-method="(value,row) => row.exceptionLocation === value" filter-placement="bottom-start" :filter-multiple="true" >
           <template slot-scope="{row}">
             <el-tag type="info">
               <span v-if="row.exceptionLocation === 0">温度异常</span>
@@ -19,11 +19,11 @@
           </template>
         </el-table-column>
         <el-table-column align="center" label="异常描述" width="200" prop="exceptionDescription"></el-table-column>
-        <el-table-column align="center" label="异常值" width="150" prop="exceptionValue"></el-table-column>
-        <el-table-column align="center" label="阈值" width="150" prop="limitValue"></el-table-column>
+        <el-table-column align="center" label="异常值" width="120" prop="exceptionValue"></el-table-column>
+        <el-table-column align="center" label="阈值" width="120" prop="limitValue"></el-table-column>
         <el-table-column align="center" label="异常状态" width="120" prop="exceptionState"
                          :filters="[{text: '未处理', value: 0 },{text: '正在处理', value: 1 }, { text: '已处理', value: 2 }]"
-                         filter-placement="bottom-start" :filter-multiple="false">
+                         :filter-method="(value,row) => row.exceptionState === value" filter-placement="bottom-start" :filter-multiple="true">
           <template slot-scope="{row}">
             <el-tag v-if="row.exceptionState === 0" type="danger" class="tag-min"><span>未处理</span></el-tag>
             <el-tag v-else-if="row.exceptionState === 1" type="warning" class="tag-min"><span>正在处理</span></el-tag>

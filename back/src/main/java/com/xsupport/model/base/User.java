@@ -10,11 +10,13 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import io.swagger.annotations.ApiModelProperty;
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 
 @Data
 @Entity
+@DynamicInsert
 @DynamicUpdate
 @Table(name="user")
 public class User implements Serializable {
