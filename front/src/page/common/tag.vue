@@ -1,14 +1,10 @@
 <template>
   <div class="common-tag" v-if="this.tagList.length > 0" :style="{left: (collapse ? 65 : 200) + 'px'}">
-    <el-tag v-for="(tag,index) in tagList"
-            :key="index" closable
-            :type="tag.path === $route.fullPath ? 'success' : 'info'"
-            class="tag-li"
-            @close="closeOne(index)"
-            @click="$router.push(tag.path)">
+    <el-tag v-for="(tag,index) in tagList" :key="index" :type="tag.path === $route.fullPath ? '' : 'info'"
+            class="tag-li" @close="closeTag(index)" @click="$router.push(tag.path)" closable hit>
       {{tag.title}}
     </el-tag>
-    <el-button class="close-button" type="primary" size="mini"
+    <el-button class="tag-button" type="primary" size="mini"
                @click="tagList = tagList.filter(item => item.path === $route.fullPath )">
       <span>关闭其他</span>
     </el-button>
@@ -43,11 +39,13 @@
           this.tagList.push({title: route.meta.title, path: route.fullPath})
         }
       },
-      closeOne(index) {
+      closeTag(index) {
         let curItem = this.tagList.filter(item => item.path === this.$route.fullPath)[0]
+        debugger
         if (this.tagList.length >= 2) {
           if (this.tagList[index].path === curItem.path) {
-            this.$route.push(this.tagList[index - 1].path)
+            let tag = this.tagList[index - 1] ? this.tagList[index - 1] : this.tagList[index + 1]
+            this.$router.push(tag.path)
           }
           this.tagList.splice(this.tagList[index], 1)
         }
@@ -76,11 +74,11 @@
     line-height: 23px;
     border: 1px solid #e9eaec;
     padding: 0 5px 0 8px;
-    max-width: 80px;
+    max-width: 90px;
     white-space: nowrap;
   }
 
-  .close-button {
+  .tag-button {
     margin: 0 5px 0 5px;
     position: absolute;
     right: 0;

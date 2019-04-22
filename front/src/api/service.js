@@ -1,13 +1,26 @@
 import req from '../utils/request'
 
 export const userService = {
+
   login: (userData) => req.post('user/login', userData),
 
   changePassword: (param) => req.put('user/changePassword', param),
 
-  findByUserName: (username) => req.get('user/findByUserName',username),
+  findByCondition: (param) => req.post('user/findByCondition',param),
 
-  saveInfo: (user) => req.post('user/saveInfo', user),
+  saveInfo: (date) => req.post('user/saveInfo', date),
 
-  deleteUser: (id) => req.delete('user/delete',id),
+  deleteOne: (id) => req.delete('user/deleteOne',id),
+
+  deleteList: (ids) => req.post('user/deleteList',ids),
+
+  changeForbiddenState: (id) => req.get('user/changeForbiddenState',id)
+}
+
+export const systemService ={
+
+  findAll: (param) => req.get('systemWarning/findAll',param),
+
+  changeState: (param) => req.post('systemWarning/changeState',param)
+
 }

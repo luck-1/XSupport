@@ -7,7 +7,6 @@ const loadingConfig = {
   text: 'loading...',
   spinner: 'el-icon-loading',
   background: 'rgba(0, 0, 0, 0.8)'
-  // customClass: 'loading-zindex'
 };
 
 function requestHeader(methodType) {
@@ -37,10 +36,10 @@ function serverResponse(methodType, url, param) {
 }
 
 async function serverResult(methodType, url, param, isLoading) {
-  let loading = isLoading ? Loading.service(loadingConfig) : null;
-  let result = (await serverResponse(methodType, url, param)).data;
-  loading ? setTimeout(() => loading.close(),700) : null;
-  result.code === 0 ? Message.success(result.msg) : Message.error(result.msg);
+  let loading = isLoading ? Loading.service(loadingConfig) : null
+  let result = (await serverResponse(methodType, url, param)).data
+  loading ? setTimeout(() => loading.close(),500) : null
+  result.code !== 0 ? Message.error(result.msg) : null
   return result
 }
 

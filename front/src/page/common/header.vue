@@ -7,7 +7,7 @@
     <div class="header-right">
       <el-dropdown class="header-right-user" size="small" @command="handleCommand">
           <span class="header-right-user-link">
-            {{username}} username<i class="el-icon-caret-bottom"></i>
+            {{username}}<i class="el-icon-caret-bottom"></i>
           </span>
         <el-dropdown-menu>
           <el-dropdown-item command="editPassword">修改密码</el-dropdown-item>

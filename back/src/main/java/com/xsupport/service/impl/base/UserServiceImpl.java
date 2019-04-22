@@ -2,8 +2,11 @@ package com.xsupport.service.impl.base;
 
 import javax.annotation.Resource;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.xsupport.dao.base.UserDao;
 import com.xsupport.jpa.base.UserMapper;
+import com.xsupport.model.http.FindUserParam;
 import com.xsupport.model.http.PasswordParam;
 import com.xsupport.model.http.LoginParam;
 import com.xsupport.system.exception.CustomException;
@@ -12,6 +15,9 @@ import org.springframework.stereotype.Service;
 import com.xsupport.service.base.UserService;
 import com.xsupport.service.AbstractService;
 import com.xsupport.model.base.User;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * @author lxc
@@ -36,13 +42,14 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
         if (!user.getPassword().equals(loginParam.getPassword())) {
             throw new CustomException(new ReturnCode.Builder().failed().msg("密码错误！").build());
         }
-        if (user.getIsForbidden()) {
+        if (user.getIsForbidden() == null ? false : user.getIsForbidden()) {
             throw new CustomException(new ReturnCode.Builder().failed().msg("该用户已被禁用！").build());
         }
         return user;
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void changePassword(PasswordParam passwordParam) {
         User user = userDao.selectByPrimaryKey(passwordParam.getId());
         if (user == null) {
@@ -56,6 +63,7 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void saveInfo(User user) {
         Integer count = userDao.findCountByUsernameAndId(user.getUsername(), user.getId());
         if (count > 0) {
@@ -63,7 +71,33 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
         }
 
         userMapper.save(user);
+    }
 
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteUsersById(List<String> idList){
+        userMapper.deleteUsersByIdIn(idList);
+    }
+
+    @Override
+    public PageInfo findByCondition(FindUserParam findUserParam){
+        PageHelper.startPage(findUserParam.getPageNum(),findUserParam.getPageSize());
+        List<User> userList = userDao.findByConditions(findUserParam.getName(),findUserParam.getPhone());
+        PageInfo pageInfo = new PageInfo(userList);
+        return pageInfo;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public String changeForbiddenState(String id){
+        User user = userMapper.getOne(id);
+        if (user == null) {
+            throw new CustomException(new ReturnCode.Builder().failed().msg("用户不存在！").build());
+        }
+        Boolean isForbidden = user.getIsForbidden();
+        user.setIsForbidden(isForbidden != null && !isForbidden);
+        userMapper.save(user);
+        return user.getIsForbidden() ? "禁用成功" : "启用成功" ;
     }
 
 }

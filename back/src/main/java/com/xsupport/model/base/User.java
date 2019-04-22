@@ -2,6 +2,8 @@ package com.xsupport.model.base;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -25,6 +27,7 @@ public class User implements Serializable {
     @Column(name = "id")
     private String id;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
     @ApiModelProperty(value="创建时间")
     @Column(name = "createTime")
     private Date createTime;
@@ -41,9 +44,9 @@ public class User implements Serializable {
 
     @ApiModelProperty(value="是否管理员(1:管理员  0:普通用户)")
     @Column(name = "isAdmin")
-    private int isAdmin;
+    private Integer isAdmin;
 
-    @ApiModelProperty(value="是否禁用(0:正常 1::禁用)")
+    @ApiModelProperty(value="是否禁用(0:正常 1:禁用)")
     @Column(name = "isForbidden")
     private Boolean isForbidden;
 
@@ -54,7 +57,7 @@ public class User implements Serializable {
 
     @ApiModelProperty(value="性别(0:男  1:女)")
     @Column(name = "sex")
-    private int sex;
+    private Integer sex;
 
     @NotNull(message = "年龄不能为空！")
     @ApiModelProperty(value="年龄")

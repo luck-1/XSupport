@@ -12,3 +12,11 @@ html, body, .home, #app {
 body {
   font-family: 'PingFang SC', "Helvetica Neue", Helvetica, "microsoft yahei", arial, STHeiTi, sans-serif;
 }
+
+.page {
+  margin-top: 2vh;
+}
+
+.tag-min {
+  min-width: 80px
+}

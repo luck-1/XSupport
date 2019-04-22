@@ -24,8 +24,6 @@ public interface Service<T> {
 
     List<T> findByIds(String ids);
 
-    List<T> findByCondition(Condition condition);
-
     List<T> findAll();
 
 }

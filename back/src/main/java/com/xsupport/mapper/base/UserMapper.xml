@@ -5,7 +5,6 @@
     <resultMap id="User" type="com.xsupport.model.base.User">
         <id column="id" property="id"/>
         <result column="createTime" property="createTime"/>
-        <result column="updateTime" property="updateTime"/>
         <result column="username" property="username"/>
         <result column="password" property="password"/>
         <result column="isAdmin" property="isAdmin"/>
@@ -20,6 +19,16 @@
 
     <select id="findCountByUsernameAndId" resultType="integer">
         SELECT COUNT(*) FROM user WHERE username = #{username} AND id != #{id}
+    </select>
+
+    <select id="findByConditions" resultType="com.xsupport.model.base.User">
+        SELECT * FROM user WHERE 1 = 1
+        <if test="name != null and name != ''">
+            AND name = #{name}
+        </if>
+        <if test="phone != null and phone != ''">
+            AND phone = #{phone}
+        </if>
     </select>
 
 </mapper>

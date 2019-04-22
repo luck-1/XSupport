@@ -11,7 +11,7 @@
           <Input type="password" class="input-box" v-model="form.password" placeholder="请输入密码"
                  prefix="ios-lock-outline"/>
         </FormItem>
-      </Form>c
+      </Form>
       <Button type="primary" long class="submit-btn" size="large" :loading="loading" @click="submitLogin">
         <span v-if="!loading">登录</span>
         <span v-else>登录中...</span>
@@ -22,6 +22,7 @@
 
 <script>
   import {userService} from '../api/service'
+  import {mapMutations} from 'vuex'
 
   export default {
     name: "login",
@@ -43,22 +44,33 @@
         }
       }
     },
+    computed: mapMutations(['setToken', 'setUserId', 'setUsername', 'setLoginIsAdmin']),
     methods: {
       submitLogin() {
         this.loading = true
         userService.login(this.form).then(res => {
           if (res.code === 0) {
-            localStorage.setItem('username', this.form.username)
-            localStorage.setItem('userId', res.obj.id)
-            localStorage.setItem("accessToken", res.obj ? res.obj.webToken : '')
+            this.saveTolocalStorage(res.obj)
+            // this.saveToStore(res.obj)
             this.$router.push('/')
           } else {
-            this.password = ''
+            this.password = null
             this.loading = false
           }
         })
-          // this.$router.push('/')
-      }
+      },
+      saveTolocalStorage(user) {
+        localStorage.setItem('username', user.username)
+        localStorage.setItem('userId', user.id)
+        localStorage.setItem('loginIsAdmin', user.isAdmin)
+        localStorage.setItem("accessToken", user.token)
+      },
+      saveToStore(user) {
+        this.setUserId(user.id)
+        this.setUsername(user.username)
+        this.setLoginIsAdmin(user.isAdmin)
+        this.setToken(user.token)
+      },
     }
   }
 </script>

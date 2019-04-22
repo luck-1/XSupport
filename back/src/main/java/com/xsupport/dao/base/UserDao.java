@@ -6,6 +6,8 @@ import com.xsupport.model.base.User;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.context.annotation.Primary;
 
+import java.util.List;
+
 /**
  * @author lxc
  * @date 2019/4/10
@@ -15,4 +17,6 @@ import org.springframework.context.annotation.Primary;
 public interface UserDao extends MyMapper<User> {
 
     Integer findCountByUsernameAndId(@Param("username") String username,@Param("id") String id);
+
+    List<User> findByConditions(@Param("name") String name,@Param("phone") String phone);
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <!-- 定义参数 -->
-    <property name="log.lever" value="DEBUG"/>
+
     <!--打印级别由低到高：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF -->
     <!-- 配置数据库连接 -->
     <!-- 	<appender name="db-classic-mysql" class="ch.qos.logback.classic.db.DBAppender">

@@ -30,13 +30,13 @@
         console.log("WebSocket连接成功");
       },
       onMessage(res) {
-        const redata = JSON.parse(res.data);
-        console.log(redata.value);
+        res = JSON.parse(res.data);
+        console.log(res.value);
       },
-      onClose(e) {
-        console.log("connection closed (" + e.code + ")");
+      onClose() {
+        console.log("connection closed");
       },
-      onError(error) {
+      onError() {
         console.log("WebSocket连接发生错误");
       },
       sendData(data) {
