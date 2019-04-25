@@ -18,8 +18,8 @@ public class ExceptionHandle {
 
     private final static Logger logger = LoggerFactory.getLogger(ExceptionHandle.class);
 
-    @ExceptionHandler(value = Exception.class)
     @ResponseBody
+    @ExceptionHandler(value = Exception.class)
     public ReturnCode handle(Exception e) {
         if (e instanceof CustomException) {
 

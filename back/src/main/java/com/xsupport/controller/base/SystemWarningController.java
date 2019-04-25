@@ -1,10 +1,15 @@
 package com.xsupport.controller.base;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 
+import com.alibaba.fastjson.JSON;
 import com.xsupport.model.http.ExceptionStateParam;
+import com.xsupport.model.http.SendTextParam;
+import com.xsupport.system.websocket.MyWebsocket;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +35,8 @@ import com.xsupport.system.returncode.ReturnCode;
 @RequestMapping("systemWarning")
 @Api(description = "系统异常")
 public class SystemWarningController {
+    @Resource
+    private MyWebsocket myWebsocket;
 
     @Resource
     private SystemWarningService systemWarningService;
@@ -102,5 +109,17 @@ public class SystemWarningController {
         systemWarningService.changeState(id,state,userId);
         return new ReturnCode.Builder().success().msg("查询成功").build();
     }
+
+    @PostMapping("sendData")
+    @ApiOperation(value = "修改状态")
+    public ReturnCode sendData() {
+        SendTextParam sendTextParam = new SendTextParam();
+        sendTextParam.setTime(new Date());
+        sendTextParam.setValue("88");
+        String json= JSON.toJSONString(sendTextParam);
+        myWebsocket.sendMessageForAllClient(json);
+        return new ReturnCode.Builder().success().msg("查询成功").build();
+    }
+
 
 }

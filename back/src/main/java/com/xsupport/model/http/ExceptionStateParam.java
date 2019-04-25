@@ -11,7 +11,9 @@ import lombok.Data;
 public class ExceptionStateParam {
 
     private String id;
+
     private Integer state;
+    
     private String userId;
 
 }

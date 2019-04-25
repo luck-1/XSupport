@@ -1,46 +1,70 @@
 <template>
   <div>
-    soak
+    {{result}}
   </div>
 </template>
 
 <script>
+  import websocketUtil from '../../utils/websocket'
+
   export default {
     name: "soak",
     data() {
       return {
-        websocketServerUrl: process.env.BASE_API.replace('http://','ws://') + 'websocket',
-        webSocket: null
+        webSocket: new WebSocket(websocketUtil.webSocketUrl),
+        result: null,
+        data() {
+          return {
+            receiveData: [
+              {time: '2019.4.24', value: -50},
+              {time: '2019.4.25', value: 43},
+              {time: '2019.4.26', value: 46},
+              {time: '2019.4.27', value: 42},
+              {time: '2019.4.28', value: 100}
+            ]
+          }
+        },
       }
     },
     mounted() {
-      this.initWebSocket()
+      this.init(this.webSocket)
     },
     methods: {
-      initWebSocket() {
-        debugger
-        this.webSocket = new WebSocket(this.websocketServerUrl);
-        this.webSocket.onopen = this.onOpen;
-        this.webSocket.onmessage = this.onMessage;
-        this.webSocket.onclose = this.onClose;
-        this.webSocket.onerror = this.onError;
+      init(webSocket) {
+        webSocket.onopen = websocketUtil.onopen()
+        webSocket.onclose = websocketUtil.onclose()
+        webSocket.onerror = websocketUtil.onerror()
+        webSocket.onmessage = (res) => this.result = res.data
       },
-
-      onOpen() {
-        console.log("WebSocket连接成功");
-      },
-      onMessage(res) {
-        res = JSON.parse(res.data);
-        console.log(res.value);
-      },
-      onClose() {
-        console.log("connection closed");
-      },
-      onError() {
-        console.log("WebSocket连接发生错误");
-      },
-      sendData(data) {
-        this.websock.send(data);
+      chart() {
+        let str = []
+        let str1 = []
+        for (let item of this.receiveData) {
+          str.push(item.time)
+          str1.push(item.value)
+        }
+        let option = {
+          title: {text: '温度测量'},
+          legend: {},
+          tooltip: {},
+          dataset: {
+            source: [this.receiveData]
+          },
+          xAxis: {
+            type: 'category',
+            data: str
+          },
+          yAxis: {
+            type: 'value'
+          },
+          series: [{type: 'line',data: str1}]
+        }
+        let myChart = this.$echarts.init(document.getElementById('temperature-chart'));
+        //数据加载
+        myChart.showLoading();
+        //关闭加载
+        myChart.hideLoading();
+        myChart.setOption(option)
       }
     }
   }

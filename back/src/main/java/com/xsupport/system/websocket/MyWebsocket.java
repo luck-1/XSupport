@@ -1,6 +1,7 @@
 package com.xsupport.system.websocket;
 
 import org.springframework.stereotype.Component;
+
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
@@ -19,32 +20,32 @@ public class MyWebsocket {
     private static CopyOnWriteArraySet<Session> sessionSet = new CopyOnWriteArraySet<>();
 
     @OnOpen
-    public void onOpen(Session session){
+    public void onOpen(Session session) {
         sessionSet.add(session);
     }
 
     @OnMessage
-    public void onMessage(Session session,String message){
+    public void onMessage(Session session, String message) {
         System.out.println(session.getId() + " -> " + message);
     }
 
     @OnClose
-    public void onClose(Session session){
+    public void onClose(Session session) {
         sessionSet.remove(session);
     }
 
     @OnError
-    public void onError(Session session,Throwable error) throws IOException {
+    public void onError(Session session, Throwable error) throws IOException {
         session.close();
         sessionSet.remove(session);
         error.printStackTrace();
     }
 
-    public void sendMessageForAllClient(String message){
+    public void sendMessageForAllClient(String obj) {
         sessionSet.forEach(session -> {
             try {
-                session.getBasicRemote().sendText(message);
-            } catch (IOException e) {
+                session.getBasicRemote().sendText(obj);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         });
