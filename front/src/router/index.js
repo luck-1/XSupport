@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-const keepAlive = false
+const keepAlive = true
 
 const router = new Router({
   routes: [
