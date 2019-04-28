@@ -1,8 +1,6 @@
 package com.xsupport.controller.base;
 
 import java.util.List;
-
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xsupport.model.http.FindUserParam;
 import com.xsupport.model.http.PasswordParam;
@@ -14,7 +12,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import com.xsupport.model.base.User;
 import com.xsupport.service.base.UserService;
-
 import javax.annotation.Resource;
 import javax.validation.Valid;
 

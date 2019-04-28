@@ -1,7 +1,6 @@
 package com.xsupport.system.websocket;
 
 import org.springframework.stereotype.Component;
-
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
@@ -14,7 +13,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
  */
 @Component
 @ServerEndpoint(value = "/websocket")
-public class MyWebsocket {
+public class WebsocketUtil {
 
     //concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。
     private static CopyOnWriteArraySet<Session> sessionSet = new CopyOnWriteArraySet<>();
@@ -22,6 +21,7 @@ public class MyWebsocket {
     @OnOpen
     public void onOpen(Session session) {
         sessionSet.add(session);
+        System.out.println(sessionSet.size());
     }
 
     @OnMessage
@@ -30,7 +30,8 @@ public class MyWebsocket {
     }
 
     @OnClose
-    public void onClose(Session session) {
+    public void onClose(Session session) throws IOException {
+        session.close();
         sessionSet.remove(session);
     }
 
@@ -41,10 +42,13 @@ public class MyWebsocket {
         error.printStackTrace();
     }
 
-    public void sendMessageForAllClient(String obj) {
+    public void sendMessageForAllClient(String message) {
+
         sessionSet.forEach(session -> {
             try {
-                session.getBasicRemote().sendText(obj);
+                synchronized (session){
+                    session.getBasicRemote().sendText(message);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

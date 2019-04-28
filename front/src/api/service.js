@@ -24,3 +24,13 @@ export const systemService ={
   changeState: (param) => req.post('systemWarning/changeState',param)
 
 }
+
+export const temperatureService = {
+
+  findAll: (param) => req.post('temperature/findAll',param),
+
+  setLimitValue: (param) => req.post('temperature/setLimitValue',param),
+
+  getLimitValue: () => req.post('temperature/getLimitValue'),
+
+}
