@@ -10,6 +10,6 @@ import com.xsupport.model.base.LimitValue;
  */
 public interface LimitValueMapper extends MyBaseJpaDao<LimitValue,String> {
 
-
+    LimitValue findLimitValueById(String id);
 
 }

@@ -4,7 +4,6 @@ import lombok.Data;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author lxc
@@ -16,17 +15,20 @@ public class SendTextParam {
 
     private Date time;
 
-    private String value;
+    private Integer value;
 
-    private List<MapParam> list;
+    private List list;
 
     private Integer type;
 
-    public <T> SendTextParam(T value,Integer type){
-        if(value instanceof String){
-            this.value = value.toString();
-        }else if (value instanceof List){
-            this.list = (List)value;
+    public SendTextParam() {
+    }
+
+    public <T> SendTextParam(T value, Integer type) {
+        if (value instanceof Integer) {
+            this.value = (Integer) value;
+        } else if (value instanceof List) {
+            this.list = (List) value;
         }
         this.time = new Date();
         this.type = type;

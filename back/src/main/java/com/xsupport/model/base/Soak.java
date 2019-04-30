@@ -4,9 +4,6 @@ import java.util.Date;
 import java.io.Serializable;
 import lombok.Data;
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
@@ -14,18 +11,17 @@ import io.swagger.annotations.ApiModelProperty;
 
 /**
  * @author lxc
- * @date 2019/4/28
- * @description 阈值
+ * @date 2019/4/30
+ * @description 浸润测量
  */
 @Data
 @Entity
 @DynamicUpdate
 @DynamicInsert
-@Table(name="limit_value")
-public class LimitValue implements Serializable {
+@Table(name="soak")
+public class Soak implements Serializable {
     private static final long serialVersionUID = 42L;
 
-    @NotBlank(message = "ID不能为空")
     @Id
     @GeneratedValue(generator = "JDBC")
     @GenericGenerator(name = "JDBC", strategy = "uuid")
@@ -37,26 +33,21 @@ public class LimitValue implements Serializable {
     @Column(name = "createTime")
     private Date createTime;
 
-    @ApiModelProperty(value="更新时间")
-    @Column(name = "updateTime")
-    private Date updateTime;
-
     @ApiModelProperty(value="类型")
     @Column(name = "type")
     private Integer type;
 
-    @ApiModelProperty(value="测量单位")
-    @Column(name = "unit")
-    private Integer unit;
+    @ApiModelProperty(value="浸润值")
+    @Column(name = "value")
+    private String value;
 
-    @ApiModelProperty(value="子类型")
-    @Column(name = "subType")
-    private Integer subType;
-
-    @NotNull(message = "阈值不能为空")
-    @ApiModelProperty(value="最大值")
+    @ApiModelProperty(value="阈值")
     @Column(name = "limitValue")
-    private Integer limitValue;
+    private String limitValue;
+
+    @ApiModelProperty(value="状态(0：正常，1：异常，2：已处理)")
+    @Column(name = "state")
+    private Integer state;
 
     @ApiModelProperty(value="备注")
     @Column(name = "remark")

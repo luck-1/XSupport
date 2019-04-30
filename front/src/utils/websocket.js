@@ -8,7 +8,10 @@ const toolbox = {
     saveAsImage: {}
   }
 }
+const grid = {
+  top: '10%', left: '8%', right: '8%', bottom: '0%', containLabel: true
+}
 
 export default {
-  webSocketUrl, toolbox
+  webSocketUrl, toolbox,grid
 }

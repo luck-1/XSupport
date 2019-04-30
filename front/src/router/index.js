@@ -4,6 +4,8 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 const keepAlive = true
+const noKeepAlive = true
+
 
 const router = new Router({
   routes: [
@@ -17,7 +19,7 @@ const router = new Router({
           path: 'user',
           name: 'user',
           component: () => import('../page/user'),
-          meta: {title: "用户管理", keepAlive: keepAlive}
+          meta: {title: "用户管理", keepAlive: noKeepAlive}
         },
         {
           path: 'video',
@@ -35,7 +37,7 @@ const router = new Router({
           path: 'system',
           name: 'system',
           component: () => import('../page/system'),
-          meta: {title: "系统管理", keepAlive: keepAlive}
+          meta: {title: "系统管理", keepAlive: noKeepAlive}
         },
         {
           path: 'measure/temperature',
@@ -65,7 +67,6 @@ const router = new Router({
     },
     {path: '/login', name: 'login', component: () => import('../page/login')},
     {path: '/404', component: () => import('../components/404')},
-
     {path: '*', redirect: '/404'}
   ]
 })

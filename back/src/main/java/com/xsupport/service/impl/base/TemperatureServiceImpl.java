@@ -8,6 +8,8 @@ import com.xsupport.dao.base.TemperatureDao;
 import com.xsupport.jpa.base.TemperatureMapper;
 import com.xsupport.model.base.Temperature;
 
+import java.util.List;
+
 /**
  * @author lxc
  * @date 2019/4/28
@@ -22,6 +24,10 @@ public class TemperatureServiceImpl extends AbstractService<Temperature> impleme
     @Resource
     private TemperatureMapper temperatureMapper;
 
+    @Override
+    public List<Temperature> findAll(){
+        return temperatureDao.findAll();
+    }
 
 	
 }

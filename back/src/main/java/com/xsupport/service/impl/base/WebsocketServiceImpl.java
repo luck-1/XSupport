@@ -1,12 +1,17 @@
 package com.xsupport.service.impl.base;
 
 import com.alibaba.fastjson.JSON;
+import com.xsupport.jpa.base.HumidityMapper;
+import com.xsupport.jpa.base.LimitValueMapper;
+import com.xsupport.jpa.base.SystemWarningMapper;
+import com.xsupport.jpa.base.TemperatureMapper;
+import com.xsupport.model.base.Humidity;
+import com.xsupport.model.base.LimitValue;
+import com.xsupport.model.base.SystemWarning;
+import com.xsupport.model.base.Temperature;
 import com.xsupport.model.http.MapParam;
 import com.xsupport.model.http.SendTextParam;
-import com.xsupport.system.config.HttpAspect;
 import com.xsupport.system.websocket.WebsocketUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -27,21 +32,47 @@ public class WebsocketServiceImpl {
     @Resource
     private WebsocketUtil websocketUtil;
 
-//    private static final Logger log = LoggerFactory.getLogger(HttpAspect.class);
+    @Resource
+    private TemperatureMapper temperatureMapper;
 
-    @Scheduled(fixedDelay = 1000L * 10)
+    @Resource
+    private HumidityMapper humidityMapper ;
+
+    @Resource
+    private LimitValueMapper limitValueMapper;
+
+    @Resource
+    private SystemWarningMapper systemWarningMapper ;
+
+    //    @Scheduled(fixedDelay = 1000L * 10)
     public void sendTemperatureData() {
-        String value = String.valueOf(Math.round((Math.random() - 0.5) * 200));
+
+        Integer value = Math.toIntExact(Math.round((Math.random() - 0.5) * 200));
+
+        Integer limit = limitValueMapper.findLimitValueById("0").getLimitValue();
+
         sendDataUtil(value, 0);
+
+        temperatureMapper.save(new Temperature(value, limit));
+
+//        if(limit <= value ){
+//            systemWarningMapper.save(new SystemWarning());
+//        }
     }
 
     @Scheduled(fixedDelay = 1000L * 10)
     public void sendSoakData() {
-        String value = getRandNum();
-        sendDataUtil(value, 2);
+
+        Integer value = Math.toIntExact(Math.round(Math.random() * 100));
+
+        Integer limit = limitValueMapper.findLimitValueById("1").getLimitValue();
+
+        sendDataUtil(value, 0);
+
+        humidityMapper.save(new Humidity(value, limit));
     }
 
-    @Scheduled(fixedDelay = 1000L * 10)
+    //    @Scheduled(fixedDelay = 1000L * 10)
     public void sendGasData() {
 
         List<MapParam> list = new ArrayList<>();
@@ -55,7 +86,7 @@ public class WebsocketServiceImpl {
         sendDataUtil(list, 3);
     }
 
-    @Scheduled(fixedDelay = 1000L * 10)
+    //    @Scheduled(fixedDelay = 1000L * 10)
     public void sendMetalData() {
 
         List<MapParam> list = new ArrayList<>();

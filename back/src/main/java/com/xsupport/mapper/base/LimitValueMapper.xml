@@ -7,8 +7,8 @@
         <result column="createTime" property="createTime" />
         <result column="updateTime" property="updateTime" />
         <result column="type" property="type" />
+        <result column="subType" property="subType" />
         <result column="limitValue" property="limitValue" />
-        <result column="suffixName" property="suffixName" />
         <result column="remark" property="remark" />
     </resultMap>
 

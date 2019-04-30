@@ -12,6 +12,6 @@ import com.xsupport.model.base.LimitValue;
 @Component
 public interface LimitValueService extends Service<LimitValue> {
 
-
+    void saveInfo(LimitValue limitValue);
 
 }
