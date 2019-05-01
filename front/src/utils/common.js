@@ -22,5 +22,13 @@ export const common = {
       formatData.push(item + '=' + value);
     }
     return formatData.join('&')
-  }
+  },
+
+  getTime: (dateTime)=>  {
+    let time = new Date(dateTime)
+    let hours = time.getHours() < 10 ? '0' + time.getHours() : time.getHours()
+    let minutes = time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes()
+    let seconds = time.getSeconds() < 10 ? '0' + time.getSeconds() : time.getSeconds()
+    return hours + ':' + minutes + ':' + seconds
+  },
 }
