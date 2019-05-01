@@ -15,6 +15,7 @@ import com.xsupport.model.http.SendTextParam;
 import com.xsupport.system.websocket.WebsocketUtil;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
 
 /**
@@ -81,12 +82,12 @@ public class WebsocketServiceImpl {
         soakMapper.save(new Soak(value, limit));
     }
 
-//    @Scheduled(fixedDelay = 1000L * 10)
+    //    @Scheduled(fixedDelay = 1000L * 10)
     public void sendGasData() {
 
 //        Integer subIndex = Math.round()
 
-        Float limit = typeMapper.findTypeByBigTypeAndSubIndex(3,0).getLimitValue();
+        Float limit = typeMapper.findTypeByBigTypeAndSubIndex(3, 0).getLimitValue();
 
         Float value = getRandNum();
 
@@ -94,7 +95,7 @@ public class WebsocketServiceImpl {
 
         sendDataUtil(gasParam, 3);
 
-        gasMapper.save(new Gas(3,0,value,limit));
+        gasMapper.save(new Gas(3, 0, value, limit));
     }
 
     //    @Scheduled(fixedDelay = 1000L * 10)
@@ -124,6 +125,6 @@ public class WebsocketServiceImpl {
     }
 
     private Float getRandNum() {
-        return (float)(Math.random() * 100);
+        return (float) (Math.random() * 100);
     }
 }
