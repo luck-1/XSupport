@@ -56,7 +56,7 @@
 </template>
 
 <script>
-  import {systemService} from '../api/service'
+  import {systemService} from '../../api/service'
 
   export default {
     name: "system",

@@ -33,7 +33,7 @@
           {title: "视频监控", icon: "icon iconfont icon-video", path: "/video", subs: null},
           {title: "地图监测", icon: "iconfont icon-ditu", path: "/map", subs: null},
           {
-            title: "测量中心", icon: "iconfont icon-measure", path: '',
+            title: "测量中心", icon: "iconfont icon-measure",
             subs: [
               {title: "温度测量", icon: "iconfont icon-wendu", path: "/measure/temperature"},
               {title: "湿度测量", icon: "iconfont icon-shidu", path: "/measure/humidity"},

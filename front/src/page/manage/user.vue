@@ -144,7 +144,7 @@
 </template>
 
 <script>
-  import {userService} from "../api/service";
+  import {userService} from "../../api/service";
 
   export default {
     name: "user",

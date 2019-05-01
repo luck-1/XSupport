@@ -16,5 +16,5 @@ import java.util.List;
 @Mapper
 public interface GasDao extends MyMapper<Gas> {
 
-    Gas findNewestData(@Param("bigType") Integer bigType, @Param("subIndex")Integer subIndex);
+    Gas findNewestData(@Param("bigType") Integer bigType, @Param("subIndex") Integer subIndex);
 }

@@ -4,7 +4,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 const keepAlive = true
-const noKeepAlive = true
+const noKeepAlive = false
 
 
 const router = new Router({
@@ -18,25 +18,25 @@ const router = new Router({
         {
           path: 'user',
           name: 'user',
-          component: () => import('../page/user'),
+          component: () => import('../page/manage/user'),
           meta: {title: "用户管理", keepAlive: noKeepAlive}
         },
         {
           path: 'video',
           name: 'video',
-          component: () => import('../page/video'),
+          component: () => import('../page/manage/video'),
           meta: {title: "视频监控", keepAlive: keepAlive}
         },
         {
           path: 'map',
           name: 'map',
-          component: () => import('../page/map'),
+          component: () => import('../page/manage/map'),
           meta: {title: "地图监测", keepAlive: keepAlive}
         },
         {
           path: 'system',
           name: 'system',
-          component: () => import('../page/system'),
+          component: () => import('../page/manage/system'),
           meta: {title: "系统管理", keepAlive: noKeepAlive}
         },
         {
