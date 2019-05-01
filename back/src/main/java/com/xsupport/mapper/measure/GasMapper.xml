@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xsupport.dao.base.TypeDao">
+<mapper namespace="com.xsupport.dao.measure.GasDao">
 
-    <resultMap id="BaseResult" type="com.xsupport.model.base.Type" >
+    <resultMap id="BaseResult" type="com.xsupport.model.base.Gas" >
         <id column="id" property="id" />
         <result column="createTime" property="createTime" />
-        <result column="updateTime" property="updateTime" />
+        <result column="type" property="type" />
         <result column="bigType" property="bigType" />
         <result column="subIndex" property="subIndex" />
+        <result column="value" property="value" />
         <result column="limitValue" property="limitValue" />
-        <result column="name" property="name" />
+        <result column="state" property="state" />
         <result column="remark" property="remark" />
     </resultMap>
 
-    <select id="findByBigType" parameterType="string" resultType="com.xsupport.model.base.Type">
-        SELECT * FROM type WHERE bigType = #{bigType}
+    <select id="findNewestData" resultType="com.xsupport.model.base.Gas">
+        SELECT g.* FROM gas AS g
+        WHERE g.bigType = #{bigType} AND g.subIndex = #{subIndex}
+        ORDER BY g.createTime DESC
+        limit 1
     </select>
 
 </mapper>

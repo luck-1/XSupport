@@ -37,10 +37,24 @@ export const humidityService = {
 
 }
 
-export const limitValueService = {
+export const soakService = {
 
-  setLimitValue: (param) => req.post('limitValue/saveInfo', param),
+  findNewestData: () => req.get('soak/findNewestData'),
 
-  getLimitValue: (id) => req.get('limitValue/findById', id)
+}
+
+export const gasService = {
+
+  findNewestData: (bigType) => req.get('gas/findNewestData', bigType),
+
+}
+
+export const typeService = {
+
+  setLimitValue: (param) => req.post('type/updateLimitValue', param),
+
+  getLimitValue: (id) => req.get('type/findById', id),
+
+  findTypes: (bigType) => req.get('type/findTypes', bigType)
 
 }

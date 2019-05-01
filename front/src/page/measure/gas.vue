@@ -7,11 +7,14 @@
 
 <script>
   import websocketUtil from '../../utils/websocket'
+  import {gasService, typeService} from '../../api/service'
 
   export default {
     name: "temperature",
     data() {
       return {
+        leftBigType: 3,
+        rightBigType: 4,
         webSocket: new WebSocket(websocketUtil.webSocketUrl),
         leftChart: null,
         rightChart: null,
@@ -26,13 +29,7 @@
               radius: '55%',
               center: ['50%', '60%'],
               data: [],
-              itemStyle: {
-                emphasis: {
-                  shadowBlur: 10,
-                  shadowOffsetX: 0,
-                  shadowColor: 'rgba(0, 0, 0, 0.5)'
-                }
-              }
+              itemStyle: {emphasis: {shadowBlur: 10, shadowOffsetX: 0, shadowColor: 'rgba(0, 0, 0, 0.5)'}}
             }
           ],
         },
@@ -40,20 +37,12 @@
           color: ['#3398DB'],
           title: {text: '坝体重金属元素检测', x: 'center'},
           tooltip: {trigger: 'axis'},
-          grid: {left: '3%', right: '4%', bottom: '3%', containLabel: true},
+          toolbox: websocketUtil.toolbox,
+          grid: websocketUtil.grid,
           xAxis: [{type: 'category', data: [], axisTick: {alignWithLabel: true}}],
-          yAxis: [{type: 'value',name: '含量（mg/L）'}],
-          series: [{name: '含量', type: 'bar', barWidth: '60%', data: []}
-          ],
-          toolbox: websocketUtil.toolbox
-        },
-        leftData: [
-          {value: 20, name: 'CO'},
-          {value: 20, name: 'SO 2'},
-          {value: 20, name: 'NO x'},
-          {value: 20, name: 'HCl'},
-          {value: 20, name: 'ClO 2'}
-        ],
+          yAxis: [{type: 'value', name: '含量（mg/L）'}],
+          series: [{name: '含量', type: 'bar', barWidth: '60%', data: []}]
+        }
       }
     },
     mounted() {
@@ -70,43 +59,56 @@
       },
       onmessage(res) {
         res = JSON.parse(res.data)
-        if (res.type === 3) {
-          this.leftOption.series[0].data = res.list
+        if (res.type === this.leftBigType) {
+          this.leftOption.series[0].data[res.gasParam.subIndex].value = res.gasParam.value
           this.leftChart.setOption(this.leftOption)
-        } else if (res.type === 4) {
-          this.getRightData(res.list)
+        } else {
+          this.rightOption.series[0].data[res.gasParam.subIndex] = res.gasParam.value
           this.rightChart.setOption(this.rightOption)
         }
       },
-      initLeftChart() {
+      async initLeftChart() {
         this.leftChart = this.$echarts.init(document.getElementById('gas-left'))
-        //数据加载
-        this.leftChart.showLoading();
-        //初始化坐标轴数据
-        this.getLeftDefaultData()
-        //关闭加载
-        this.leftChart.hideLoading();
+        this.leftChart.showLoading()
+        await this.getDefaultName(this.leftBigType)
+        await this.getDefaultValue(this.leftBigType)
+        this.leftChart.hideLoading()
         this.leftChart.setOption(this.leftOption)
       },
-      initRightChart() {
+      async initRightChart() {
         this.rightChart = this.$echarts.init(document.getElementById('gas-right'))
-        //数据加载
         this.rightChart.showLoading();
-        //关闭加载
-        this.rightChart.hideLoading();
+        await this.getDefaultName(this.rightBigType)
+        await this.getDefaultValue(this.rightBigType)
+        this.rightChart.hideLoading()
         this.rightChart.setOption(this.rightOption)
       },
-      getRightData(list){
-        this.rightOption.xAxis[0].data = []
-        this.rightOption.series[0].data = []
-        list.forEach(item => {
-          this.rightOption.xAxis[0].data.push(item.name)
-          this.rightOption.series[0].data.push(item.value)
+      getDefaultName(bigType) {
+        typeService.findTypes({bigType: bigType}).then(res => {
+          if (res.code === 0) {
+            res.obj.forEach(item => {
+              if (bigType === this.leftBigType) {
+                this.leftOption.series[0].data.push({name: item.name, value: 0})
+              }else {
+                this.rightOption.xAxis[0].data.push(item.name)
+              }
+            })
+          }
         })
       },
-      getLeftDefaultData() {
-        this.leftOption.series[0].data = this.leftData
-      },
+      getDefaultValue(bigType) {
+        return gasService.findNewestData({bigType: bigType}).then(res => {
+          if (res.code === 0) {
+            res.obj.forEach(item => {
+              if (bigType === this.leftBigType){
+                this.leftOption.series[0].data[item.subIndex].value = item.value
+              } else {
+                this.rightOption.series[0].data[item.subIndex] = item.value
+              }
+            })
+          }
+        })
+      }
     }
   }
 </script>

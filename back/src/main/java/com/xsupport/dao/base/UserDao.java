@@ -4,8 +4,6 @@ import org.apache.ibatis.annotations.Mapper;
 import com.xsupport.dao.MyMapper;
 import com.xsupport.model.base.User;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.context.annotation.Primary;
-
 import java.util.List;
 
 /**

@@ -20,6 +20,7 @@ import io.swagger.annotations.ApiModelProperty;
 @DynamicInsert
 @Table(name="soak")
 public class Soak implements Serializable {
+
     private static final long serialVersionUID = 42L;
 
     @Id
@@ -39,11 +40,11 @@ public class Soak implements Serializable {
 
     @ApiModelProperty(value="浸润值")
     @Column(name = "value")
-    private String value;
+    private Integer value;
 
     @ApiModelProperty(value="阈值")
     @Column(name = "limitValue")
-    private String limitValue;
+    private Float limitValue;
 
     @ApiModelProperty(value="状态(0：正常，1：异常，2：已处理)")
     @Column(name = "state")
@@ -52,4 +53,15 @@ public class Soak implements Serializable {
     @ApiModelProperty(value="备注")
     @Column(name = "remark")
     private String remark;
+
+    public Soak() {
+    }
+
+    public Soak(Integer value, Float limitValue) {
+
+        this.value = value;
+        this.limitValue = limitValue;
+
+        this.state = limitValue > value ? 0 : 1;
+    }
 }

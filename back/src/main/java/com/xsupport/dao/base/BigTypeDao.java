@@ -1,8 +1,10 @@
 package com.xsupport.dao.base;
 
-import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.*;
 import com.xsupport.dao.MyMapper;
 import com.xsupport.model.base.BigType;
+
+import java.util.List;
 
 /**
  * @author lxc
@@ -12,5 +14,4 @@ import com.xsupport.model.base.BigType;
 @Mapper
 public interface BigTypeDao extends MyMapper<BigType> {
 
-  
 }

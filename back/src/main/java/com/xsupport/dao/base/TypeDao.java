@@ -3,6 +3,7 @@ package com.xsupport.dao.base;
 import org.apache.ibatis.annotations.Mapper;
 import com.xsupport.dao.MyMapper;
 import com.xsupport.model.base.Type;
+import java.util.List;
 
 /**
  * @author lxc
@@ -12,5 +13,6 @@ import com.xsupport.model.base.Type;
 @Mapper
 public interface TypeDao extends MyMapper<Type> {
 
-  
+
+
 }

@@ -3,6 +3,8 @@ package com.xsupport.jpa.base;
 import com.xsupport.jpa.MyBaseJpaDao;
 import com.xsupport.model.base.Type;
 
+import java.util.List;
+
 /**
  * @author lxc
  * @date 2019/4/30
@@ -10,6 +12,10 @@ import com.xsupport.model.base.Type;
  */
 public interface TypeMapper extends MyBaseJpaDao<Type,String> {
 
+    Type findTypeById(String id);
 
+    Type findTypeByBigTypeAndSubIndex(Integer bigYype,Integer subIndex);
+
+    List<Type> findTypesByBigType(Integer bigType);
 
 }

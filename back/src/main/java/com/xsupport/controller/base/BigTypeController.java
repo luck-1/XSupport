@@ -51,18 +51,6 @@ public class  BigTypeController {
 	  	return new ReturnCode.Builder().success().msg("删除成功").build();
     }
 
-/*
-    @DeleteMapping("deleteByIds")
-    @ApiOperation(value = "批量删除")
-    public ReturnCode deleteBySelect(@RequestParam List<String> ids) {
-        if(ids == null || ids.size == 0)){
-            return new ReturnCode.Builder().failed().msg("输入为空").build();
-        }
-        bigTypeService.deleteByIds(ids);
-        return new ReturnCode.Builder().success().msg("删除成功").build();
-    }
-*/
-
  	@PutMapping("update")
  	@ApiOperation(value = "更新")
     public ReturnCode update(@RequestBody BigType bigType) {

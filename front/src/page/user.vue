@@ -84,7 +84,7 @@
             :page-size="searchForm.pageSize"
             @on-change="pageChange"
             @on-page-size-change="pageSizeChange"
-            :page-size-opts="[10,20,50]"
+            :page-size-opts="[15,30,50]"
             show-sizer show-total show-elevator
             size="small">
       </Page>

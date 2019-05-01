@@ -37,13 +37,21 @@ public class Gas implements Serializable {
     @Column(name = "type")
     private Integer type;
 
+    @ApiModelProperty(value="大类型")
+    @Column(name = "bigType")
+    private Integer bigType;
+
+    @ApiModelProperty(value="子序号")
+    @Column(name = "subIndex")
+    private Integer subIndex;
+
     @ApiModelProperty(value="采集值")
     @Column(name = "value")
-    private Integer value;
+    private Float value;
 
     @ApiModelProperty(value="阈值")
     @Column(name = "limitValue")
-    private Integer limitValue;
+    private Float limitValue;
 
     @ApiModelProperty(value="状态")
     @Column(name = "state")
@@ -52,4 +60,17 @@ public class Gas implements Serializable {
     @ApiModelProperty(value="备注")
     @Column(name = "remark")
     private String remark;
+
+    public Gas() {
+    }
+
+    public Gas(Integer bigType,Integer subIndex,Float value, Float limitValue) {
+
+        this.bigType = bigType;
+        this.subIndex = subIndex;
+        this.value = value;
+        this.limitValue = limitValue;
+
+        this.state = limitValue > value ? 0 : 1;
+    }
 }

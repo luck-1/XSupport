@@ -48,7 +48,7 @@ public class Temperature implements Serializable {
 
     @ApiModelProperty(value = "最大值")
     @Column(name = "limitValue")
-    private Integer limitValue;
+    private Float limitValue;
 
     @ApiModelProperty(value = "备注")
     @Column(name = "remark")
@@ -57,7 +57,7 @@ public class Temperature implements Serializable {
     public Temperature() {
     }
 
-    public Temperature(Integer value, Integer limitValue) {
+    public Temperature(Integer value, Float limitValue) {
 
         this.value = value;
         this.limitValue = limitValue;

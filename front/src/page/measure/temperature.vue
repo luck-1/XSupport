@@ -14,8 +14,8 @@
           </el-tooltip>
         </el-col>
         <el-col :span="7" style="padding: 0">
-          <el-input class="temperature-input" type="number" v-model="LIMIT_VALUE" size="mini"
-                    :placeholder="'当前阈值：' + option.series[0].markLine.data[0].yAxis + '℃'">
+          <el-input class="limit-input" type="number" v-model="LIMIT_VALUE" size="mini"
+                    :placeholder="'当前阈值：' + option.series[0].markLine.data[0].yAxis + ' ℃'">
           </el-input>
           <el-tooltip content="设置阈值" placement="bottom">
             <el-button type="danger" :disabled="! LIMIT_VALUE" size="mini" @click="setLimitValue"
@@ -54,7 +54,7 @@
               :page-size="searchForm.size"
               @on-change="pageChange"
               @on-page-size-change="pageSizeChange"
-              :page-size-opts="[15,30,45]"
+              :page-size-opts="[15,30,50]"
               show-sizer show-total show-elevator
               size="small">
         </Page>
@@ -65,12 +65,14 @@
 
 <script>
   import websocketUtil from '../../utils/websocket'
-  import {temperatureService, limitValueService} from '../../api/service'
+  import {temperatureService, typeService} from '../../api/service'
+  import {common} from '../../utils/common'
 
   export default {
     name: "temperature",
     data() {
       return {
+        bigType: 0,
         webSocket: new WebSocket(websocketUtil.webSocketUrl),
         leftChart: null,
         MAX_POINT_COUNT: 15,
@@ -107,33 +109,30 @@
       },
       onmessage(res) {
         res = JSON.parse(res.data)
-        if (res.type === 0) {
+        if (res.type === this.bigType) {
           if (this.option.xAxis.data.length > this.searchForm.size) {
             this.option.xAxis.data.splice(0, 1)
             this.option.series[0].data.splice(0, 1)
           }
-          this.option.xAxis.data.push(this.getTime(res.time))
+          this.option.xAxis.data.push(common.getTime(res.time))
           this.option.series[0].data.push(res.value)
           this.leftChart.setOption(this.option)
         }
       },
-      initChart() {
+      async initChart() {
         this.leftChart = this.$echarts.init(document.getElementById('left-chart'))
-        //加载动画
         this.leftChart.showLoading()
-        //数据加载
-        this.getDefaultData()
-        //关闭加载动画
+        await this.getDefaultData()
         this.leftChart.hideLoading()
         this.leftChart.setOption(this.option)
       },
-      getDefaultData() {
-        this.getLimitValue()
-        this.getRightData()
-        this.getLeftData(this.rightData)
+      async getDefaultData() {
+        await this.getRightData()
+        await this.getLeftData(this.rightData)
+        await this.getLimitValue()
       },
       getRightData() {
-        temperatureService.findAll(this.searchForm).then(res => {
+        return temperatureService.findAll(this.searchForm).then(res => {
           if (res.code === 0) {
             this.rightData = res.obj.list
             this.total = res.obj.total
@@ -142,22 +141,15 @@
       },
       getLeftData(list) {
         list.forEach(item => {
-          this.option.xAxis.data.push(this.getTime(item.createTime))
+          this.option.xAxis.data.push(common.getTime(item.createTime))
           this.option.series[0].data.push(item.value)
         })
       },
-      getTime(dateTime) {
-        let time = new Date(dateTime)
-        let hours = time.getHours() < 10 ? '0' + time.getHours() : time.getHours()
-        let minutes = time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes()
-        let seconds = time.getSeconds() < 10 ? '0' + time.getSeconds() : time.getSeconds()
-        return hours + ':' + minutes + ':' + seconds
-      },
       getLimitValue() {
-        limitValueService.getLimitValue({id: '0'}).then(res => res.code === 0 ? this.setLimitData(res.obj.limitValue) : null)
+        typeService.getLimitValue({id: '0'}).then(res => res.code === 0 ? this.setLimitData(res.obj.limitValue) : null)
       },
       setLimitValue() {
-        limitValueService.setLimitValue({id: '0', limitValue: this.LIMIT_VALUE}).then(res => {
+        typeService.setLimitValue({id: '0', limitValue: this.LIMIT_VALUE}).then(res => {
           if (res.code === 0) {
             this.setLimitData(Number(this.LIMIT_VALUE))
             this.leftChart.setOption(this.option)
@@ -193,7 +185,7 @@
     width: 41%;
   }
 
-  .temperature-input {
+  .limit-input {
     width: 150px;
     margin: 0;
     padding: 0;

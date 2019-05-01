@@ -18,16 +18,23 @@ html, body, #app, .home, all {
   min-width: 80px
 }
 
-.left{
+.left {
   float: left;
   height: 100%;
   width: 50%;
   border-right: 1px solid;
   padding: 3px;
 }
-.right{
+
+.right {
   float: right;
   height: 100%;
   width: 50%;
   padding: 3px;
+}
+
+.limit-input {
+  width: 150px;
+  margin: 0;
+  padding: 0;
 }

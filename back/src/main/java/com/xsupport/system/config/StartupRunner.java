@@ -1,12 +1,8 @@
 package com.xsupport.system.config;
 
-import com.xsupport.jpa.base.LimitValueMapper;
-import com.xsupport.jpa.base.TemperatureMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
 
 /**
  * 启动结束执行

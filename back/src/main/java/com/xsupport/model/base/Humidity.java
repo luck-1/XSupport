@@ -39,7 +39,7 @@ public class Humidity implements Serializable {
 
     @ApiModelProperty(value="阈值")
     @Column(name = "limitValue")
-    private Integer limitValue;
+    private Float limitValue;
 
     @ApiModelProperty(value="状态(0：正常，1：异常，2：已处理)")
     @Column(name = "state")
@@ -52,7 +52,7 @@ public class Humidity implements Serializable {
     public Humidity() {
     }
 
-    public Humidity(Integer value, Integer limitValue) {
+    public Humidity(Integer value, Float limitValue) {
 
         this.value = value;
         this.limitValue = limitValue;

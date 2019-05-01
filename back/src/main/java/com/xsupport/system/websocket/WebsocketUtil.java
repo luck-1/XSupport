@@ -21,7 +21,6 @@ public class WebsocketUtil {
     @OnOpen
     public void onOpen(Session session) {
         sessionSet.add(session);
-        System.out.println(sessionSet.size());
     }
 
     @OnMessage
