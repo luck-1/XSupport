@@ -66,7 +66,7 @@ const router = new Router({
       ]
     },
     {path: '/login', name: 'login', component: () => import('../page/login')},
-    {path: '/404', component: () => import('../components/404')},
+    {path: '/404', component: () => import('../page/404')},
     {path: '*', redirect: '/404'}
   ]
 })

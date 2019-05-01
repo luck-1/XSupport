@@ -2,7 +2,7 @@ package com.xsupport.service.impl.measure;
 
 import javax.annotation.Resource;
 
-import com.xsupport.jpa.base.TypeMapper;
+import com.xsupport.jpa.manage.TypeMapper;
 import com.xsupport.model.base.Type;
 import org.springframework.stereotype.Service;
 import com.xsupport.service.AbstractService;

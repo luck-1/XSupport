@@ -22,7 +22,7 @@
 
 <script>
   import {userService} from '../api/service'
-  import {mapMutations} from '_vuex@3.1.0@vuex/types'
+  import {mapMutations} from 'vuex'
 
   export default {
     name: "login",

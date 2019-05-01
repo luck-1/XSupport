@@ -1,10 +1,9 @@
 package com.xsupport.service.impl.measure;
 
 import com.alibaba.fastjson.JSON;
-import com.xsupport.jpa.base.TypeMapper;
+import com.xsupport.jpa.manage.TypeMapper;
 import com.xsupport.jpa.measure.GasMapper;
 import com.xsupport.jpa.measure.HumidityMapper;
-import com.xsupport.jpa.base.SystemWarningMapper;
 import com.xsupport.jpa.measure.SoakMapper;
 import com.xsupport.jpa.measure.TemperatureMapper;
 import com.xsupport.model.base.Gas;
@@ -15,7 +14,6 @@ import com.xsupport.model.http.GasParam;
 import com.xsupport.model.http.SendTextParam;
 import com.xsupport.system.websocket.WebsocketUtil;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
@@ -45,9 +43,6 @@ public class WebsocketServiceImpl {
 
     @Resource
     private TypeMapper typeMapper;
-
-    @Resource
-    private SystemWarningMapper systemWarningMapper;
 
     //    @Scheduled(fixedDelay = 1000L * 10)
     public void sendTemperatureData() {
