@@ -130,6 +130,7 @@
         await this.getRightData()
         await this.getLeftData(this.rightData)
         await this.getLimitValue()
+
       },
       getRightData() {
         return temperatureService.findAll(this.searchForm).then(res => {
@@ -146,7 +147,9 @@
         })
       },
       getLimitValue() {
-        typeService.getLimitValue({id: '0'}).then(res => res.code === 0 ? this.setLimitData(res.obj.limitValue) : null)
+        return typeService.getLimitValue({id: '0'}).then(res => {
+          res.code === 0 ? this.setLimitData(res.obj.limitValue) : null
+        })
       },
       setLimitValue() {
         typeService.setLimitValue({id: '0', limitValue: this.LIMIT_VALUE}).then(res => {

@@ -2,6 +2,8 @@ package com.xsupport.model.base;
 
 import java.util.Date;
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import javax.persistence.*;
 import org.hibernate.annotations.DynamicInsert;
@@ -29,6 +31,7 @@ public class Gas implements Serializable {
     @Column(name = "id")
     private String id;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
     @ApiModelProperty(value="创建时间")
     @Column(name = "createTime")
     private Date createTime;

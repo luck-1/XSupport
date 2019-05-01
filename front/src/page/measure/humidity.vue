@@ -132,7 +132,7 @@
         await this.getLimitValue()
       },
       getRightData() {
-        humidityService.findAll(this.searchForm).then(res => {
+        return humidityService.findAll(this.searchForm).then(res => {
           if (res.code === 0) {
             this.rightData = res.obj.list
             this.total = res.obj.total
@@ -146,7 +146,7 @@
         })
       },
       getLimitValue() {
-        typeService.getLimitValue({id: '1'}).then(res => res.code === 0 ? this.setLimitData(res.obj.limitValue) : null)
+        return typeService.getLimitValue({id: '1'}).then(res => res.code === 0 ? this.setLimitData(res.obj.limitValue) : null)
       },
       setLimitValue() {
         typeService.setLimitValue({id: '1', limitValue: this.LIMIT_VALUE}).then(res => {

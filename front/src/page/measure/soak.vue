@@ -99,7 +99,7 @@
         this.leftChart = this.$echarts.init(document.getElementById('soak-left'))
         this.leftChart.showLoading()
         await this.getLeftData()
-        await this.getLimitValue()
+        this.getLimitValue()
         this.leftChart.hideLoading()
         this.leftChart.setOption(this.leftOption)
       },

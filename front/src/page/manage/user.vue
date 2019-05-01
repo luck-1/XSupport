@@ -198,7 +198,6 @@
     methods: {
       findByCondition() {
         userService.findByCondition(this.searchForm).then(res => {
-          debugger
           if (res.code === 0) {
             this.userList = res.obj.list
             this.pageTotal = res.obj.total

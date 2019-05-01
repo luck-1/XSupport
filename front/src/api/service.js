@@ -19,9 +19,9 @@ export const userService = {
 
 export const systemService = {
 
-  findAll: (param) => req.get('systemWarning/findAll', param),
+  findAll: (param) => req.get('sysWarn/findAll', param),
 
-  changeState: (param) => req.post('systemWarning/changeState', param)
+  changeState: (param) => req.post('sysWarn/changeState', param)
 
 }
 

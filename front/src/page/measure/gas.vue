@@ -21,6 +21,7 @@
         leftOption: {
           title: {text: '坝体有毒有害气体占比检测', x: 'center'},
           tooltip: {trigger: 'item', formatter: "{a} <br/>{b} : {c} ({d}%)"},
+          grid: websocketUtil.grid,
           legend: {orient: 'vertical', left: 'left'},
           series: [
             {
@@ -84,7 +85,7 @@
         this.rightChart.setOption(this.rightOption)
       },
       getDefaultName(bigType) {
-        typeService.findTypes({bigType: bigType}).then(res => {
+        return typeService.findTypes({bigType: bigType}).then(res => {
           if (res.code === 0) {
             res.obj.forEach(item => {
               if (bigType === this.leftBigType) {
