@@ -1,7 +1,7 @@
 package com.xsupport.jpa.measure;
 
 import com.xsupport.jpa.MyBaseJpaDao;
-import com.xsupport.model.base.Humidity;
+import com.xsupport.model.measure.Humidity;
 
 /**
  * @author lxc

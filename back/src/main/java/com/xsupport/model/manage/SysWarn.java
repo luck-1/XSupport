@@ -2,7 +2,6 @@ package com.xsupport.model.manage;
 
 import java.util.Date;
 import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import javax.persistence.*;
@@ -45,7 +44,7 @@ public class SysWarn implements Serializable {
     @Column(name = "optionUser")
     private String optionUser;
 
-    @ApiModelProperty(value="异常类型（0：温度异常，1：湿度异常，2：浸润异常，3：金气异常）")
+    @ApiModelProperty(value="异常类型（0：温度异常，1：湿度异常，2：浸润异常，3：金气异常，4：金属异常）")
     @Column(name = "exceptionLocation")
     private Integer exceptionLocation;
 
@@ -59,13 +58,20 @@ public class SysWarn implements Serializable {
 
     @ApiModelProperty(value="异常值")
     @Column(name = "exceptionValue")
-    private String exceptionValue;
+    private Float exceptionValue;
 
     @ApiModelProperty(value="阈值")
     @Column(name = "limitValue")
-    private String limitValue;
+    private Float limitValue;
 
     @ApiModelProperty(value="备注")
     @Column(name = "remark")
     private String remark;
+    public SysWarn(){}
+    public SysWarn(Integer exceptionLocation,String exceptionDescription,Float exceptionValue,Float limitValue){
+        this.exceptionLocation = exceptionLocation;
+        this.exceptionDescription = exceptionDescription;
+        this.exceptionValue = exceptionValue;
+        this.limitValue = limitValue;
+    }
 }

@@ -1,22 +1,25 @@
 package com.xsupport.service.impl.measure;
 
 import com.alibaba.fastjson.JSON;
+import com.xsupport.jpa.manage.SysWarnMapper;
 import com.xsupport.jpa.manage.TypeMapper;
 import com.xsupport.jpa.measure.GasMapper;
 import com.xsupport.jpa.measure.HumidityMapper;
 import com.xsupport.jpa.measure.SoakMapper;
 import com.xsupport.jpa.measure.TemperatureMapper;
-import com.xsupport.model.base.Gas;
-import com.xsupport.model.base.Humidity;
-import com.xsupport.model.base.Soak;
-import com.xsupport.model.base.Temperature;
-import com.xsupport.model.http.GasParam;
+import com.xsupport.model.measure.Gas;
+import com.xsupport.model.measure.Humidity;
+import com.xsupport.model.measure.Soak;
+import com.xsupport.model.measure.Temperature;
 import com.xsupport.model.http.SendTextParam;
+import com.xsupport.model.manage.SysWarn;
+import com.xsupport.model.manage.Type;
 import com.xsupport.system.websocket.WebsocketUtil;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.Resource;
+import java.util.Random;
 
 /**
  * @author lxc
@@ -45,86 +48,59 @@ public class WebsocketServiceImpl {
     @Resource
     private TypeMapper typeMapper;
 
-    //    @Scheduled(fixedDelay = 1000L * 10)
-    public void sendTemperatureData() {
+    @Resource
+    private SysWarnMapper sysWarnMapper;
 
-        Integer value = Math.toIntExact(Math.round((Math.random() - 0.5) * 200));
+    private static final Random random = new Random();
 
-        Float limit = typeMapper.findTypeById("0").getLimitValue();
+    @Scheduled(fixedDelay = 1000L * 10)
+    public void sendData() {
 
-        sendDataUtil(value, 0);
-
-        temperatureMapper.save(new Temperature(value, limit));
-
-    }
-
-    //    @Scheduled(fixedDelay = 1000L * 10)
-    public void sendHumidityData() {
-
-        Integer value = Math.toIntExact(Math.round(Math.random() * 100));
-
-        Float limit = typeMapper.findTypeById("1").getLimitValue();
-
-        sendDataUtil(value, 1);
-
-        humidityMapper.save(new Humidity(value, limit));
-    }
-
-    //    @Scheduled(fixedDelay = 1000L * 10)
-    public void sendSoakData() {
-
-        Integer value = Math.toIntExact(Math.round(Math.random() * 100));
-
-        Float limit = typeMapper.findTypeById("2").getLimitValue();
-
-        sendDataUtil(value, 2);
-
-        soakMapper.save(new Soak(value, limit));
-    }
-
-    //    @Scheduled(fixedDelay = 1000L * 10)
-    public void sendGasData() {
-
-//        Integer subIndex = Math.round()
-
-        Float limit = typeMapper.findTypeByBigTypeAndSubIndex(3, 0).getLimitValue();
-
-        Float value = getRandNum();
-
-        GasParam gasParam = new GasParam(0, value);
-
-        sendDataUtil(gasParam, 3);
-
-        gasMapper.save(new Gas(3, 0, value, limit));
-    }
-
-    //    @Scheduled(fixedDelay = 1000L * 10)
-    public void sendMetalData() {
-
-    }
-
-    private <T> void sendDataUtil(T value, Integer type) {
-        String sendData = JSON.toJSONString(new SendTextParam(value, type));
-        websocketUtil.sendMessageForAllClient(sendData);
-        String str = "";
-        switch (type) {
+        Integer bigType = random.nextInt(5);
+        Integer subIndex = 0;
+        Float value = 0f;
+        Float limit = 0f;
+        String description = "";
+        Type type = null;
+        switch (bigType) {
             case 0:
-                str = "温度";
+                value = (float) (random.nextFloat() - 0.5) * 200;
+                type = typeMapper.findTypeByBigTypeAndSubIndex(bigType, subIndex);
+                temperatureMapper.save(new Temperature(value, type.getLimitValue()));
+                break;
+            case 1:
+                value = random.nextFloat() * 100;
+                type = typeMapper.findTypeByBigTypeAndSubIndex(bigType, subIndex);
+                humidityMapper.save(new Humidity(value, type.getLimitValue()));
                 break;
             case 2:
-                str = "浸润";
+                value = random.nextFloat() * 100;
+                type = typeMapper.findTypeByBigTypeAndSubIndex(bigType, subIndex);
+                soakMapper.save(new Soak(value, type.getLimitValue()));
                 break;
             case 3:
-                str = "气体";
+                subIndex = random.nextInt(5);
+                value = random.nextFloat();
+                type = typeMapper.findTypeByBigTypeAndSubIndex(bigType, subIndex);
+                gasMapper.save(new Gas(bigType, subIndex, value, type.getLimitValue()));
                 break;
             case 4:
-                str = "金属";
-                break;
+                subIndex = random.nextInt(8);
+                value = random.nextFloat();
+                type = typeMapper.findTypeByBigTypeAndSubIndex(bigType, subIndex);
+                gasMapper.save(new Gas(bigType, subIndex, value, type.getLimitValue()));
         }
-        System.out.println(str + "：" + sendData);
+        String sendData = JSON.toJSONString(new SendTextParam(bigType, subIndex, value));
+        websocketUtil.sendMessageForAllClient(sendData);
+        System.out.println(type.getName() + "：" + sendData);
+        if (value >= limit) {
+            SysWarn sysWarn = new SysWarn(bigType,type.getName() + "过高",value,limit);
+            sysWarnMapper.save(sysWarn);
+        }
     }
 
-    private Float getRandNum() {
-        return (float) (Math.random() * 100);
+    public void exportExcel(Integer bigType){
+
     }
+
 }

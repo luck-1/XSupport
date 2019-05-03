@@ -3,7 +3,7 @@ package com.xsupport.util;
 import java.util.UUID;
 
 public class SysUtil {
-    public static String getUuid(){
+    public static String getUUID(){
         return UUID.randomUUID().toString().replaceAll("-","");
     }
 

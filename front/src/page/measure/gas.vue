@@ -1,7 +1,35 @@
 <template>
   <div class="gas">
-    <div id="gas-left"></div>
-    <div id="gas-right"></div>
+    <div class="left">
+      <el-row>
+        <el-col :span="20">
+          <el-input :placeholder="'当前阈值:'" v-model="LIMIT_VALUE" class="input-with-select" style="width: 300px">
+            <el-select v-model="select" slot="prepend" style="width: 80px">
+              <el-option v-for="(item,index) in leftOption.series[0].data" :label="item.name" :value="index"></el-option>
+            </el-select>
+              <el-button type="primary" slot="append" size="mini" @click="setLimitValue">更改</el-button>
+          </el-input>
+        </el-col>
+        <el-col :span="4">
+          <el-tooltip content="导出" placement="bottom">
+            <el-button type="success" size="mini" @click="exportExcel" icon="el-icon-download" circle></el-button>
+          </el-tooltip>
+        </el-col>
+      </el-row>
+      <div id="gas-left"></div>
+    </div>
+    <div class="left">
+      <el-row>
+        <el-col>
+          <el-tooltip content="导出" placement="bottom">
+            <el-button type="success" size="mini" @click="exportExcel" icon="el-icon-download" circle></el-button>
+          </el-tooltip>
+        </el-col>
+      </el-row>
+      <div id="gas-right"></div>
+    </div>
+
+
   </div>
 </template>
 
@@ -13,6 +41,8 @@
     name: "temperature",
     data() {
       return {
+        LIMIT_VALUE: null,
+        leftSelect: 0,
         leftBigType: 3,
         rightBigType: 4,
         webSocket: new WebSocket(websocketUtil.webSocketUrl),
@@ -90,7 +120,7 @@
             res.obj.forEach(item => {
               if (bigType === this.leftBigType) {
                 this.leftOption.series[0].data.push({name: item.name, value: 0})
-              }else {
+              } else {
                 this.rightOption.xAxis[0].data.push(item.name)
               }
             })
@@ -101,7 +131,7 @@
         return gasService.findNewestData({bigType: bigType}).then(res => {
           if (res.code === 0) {
             res.obj.forEach(item => {
-              if (bigType === this.leftBigType){
+              if (bigType === this.leftBigType) {
                 this.leftOption.series[0].data[item.subIndex].value = item.value
               } else {
                 this.rightOption.series[0].data[item.subIndex] = item.value
@@ -109,7 +139,14 @@
             })
           }
         })
-      }
+      },
+      setLimitValue() {
+        typeService.setLimitValue({id: '0', limitValue: this.LIMIT_VALUE}).then(res => {
+          if (res.code === 0) {
+            this.LIMIT_VALUE = null
+          }
+        })
+      },
     }
   }
 </script>

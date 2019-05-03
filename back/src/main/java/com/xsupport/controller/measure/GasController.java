@@ -2,14 +2,13 @@ package com.xsupport.controller.measure;
 
 import java.util.List;
 import javax.annotation.Resource;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import com.xsupport.model.base.Gas;
+import com.xsupport.model.measure.Gas;;
 import com.xsupport.service.measure.GasService;
 import com.xsupport.system.returncode.ReturnCode;
 

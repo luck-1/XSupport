@@ -2,7 +2,6 @@ package com.xsupport.controller.measure;
 
 import java.util.List;
 import javax.annotation.Resource;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,7 +10,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import com.xsupport.model.base.Temperature;
+import com.xsupport.model.measure.Temperature;
 import com.xsupport.service.measure.TemperatureService;
 import com.xsupport.system.returncode.ReturnCode;
 

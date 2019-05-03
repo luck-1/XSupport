@@ -6,8 +6,7 @@ import com.xsupport.service.AbstractService;
 import com.xsupport.service.measure.HumidityService;
 import com.xsupport.dao.measure.HumidityDao;
 import com.xsupport.jpa.measure.HumidityMapper;
-import com.xsupport.model.base.Humidity;
-
+import com.xsupport.model.measure.Humidity;
 import java.util.List;
 
 /**

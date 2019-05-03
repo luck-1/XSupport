@@ -1,8 +1,8 @@
 package com.xsupport.service.manage;
 
+import com.xsupport.model.manage.BigType;
 import org.springframework.stereotype.Component;
 import com.xsupport.service.Service;
-import com.xsupport.model.base.BigType;
 
 /**
  * @author lxc

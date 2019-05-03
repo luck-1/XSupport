@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xsupport.dao.measure.SoakDao">
 
-    <resultMap id="BaseResult" type="com.xsupport.model.base.Soak" >
+    <resultMap id="BaseResult" type="com.xsupport.model.measure.Soak" >
         <id column="id" property="id" />
         <result column="createTime" property="createTime" />
         <result column="type" property="type" />

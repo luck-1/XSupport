@@ -2,7 +2,7 @@ package com.xsupport.service.measure;
 
 import org.springframework.stereotype.Component;
 import com.xsupport.service.Service;
-import com.xsupport.model.base.Humidity;
+import com.xsupport.model.measure.Humidity;
 
 /**
  * @author lxc

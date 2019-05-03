@@ -1,9 +1,8 @@
 package com.xsupport.model.http;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author lxc
@@ -13,24 +12,23 @@ import java.util.List;
 @Data
 public class SendTextParam {
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
     private Date time;
 
-    private Integer value;
+    private Integer bigType;
 
-    private GasParam gasParam;
+    private Integer subIndex;
 
-    private Integer type;
+    private Float value;
 
     public SendTextParam() {
     }
 
-    public <T> SendTextParam(T value, Integer type) {
-        if (value instanceof Integer) {
-            this.value = (Integer) value;
-        } else if (value instanceof GasParam) {
-            this.gasParam = (GasParam) value;
-        }
+    public SendTextParam(Integer bigType,Integer subIndex,Float value) {
+
         this.time = new Date();
-        this.type = type;
+        this.bigType = bigType;
+        this.subIndex = subIndex;
+        this.value = value;
     }
 }

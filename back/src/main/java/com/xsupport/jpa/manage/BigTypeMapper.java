@@ -1,7 +1,7 @@
 package com.xsupport.jpa.manage;
 
 import com.xsupport.jpa.MyBaseJpaDao;
-import com.xsupport.model.base.BigType;
+import com.xsupport.model.manage.BigType;
 
 /**
  * @author lxc

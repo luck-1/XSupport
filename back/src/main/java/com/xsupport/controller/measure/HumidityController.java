@@ -10,7 +10,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import com.xsupport.model.base.Humidity;
+import com.xsupport.model.measure.Humidity;
 import com.xsupport.service.measure.HumidityService;
 import com.xsupport.system.returncode.ReturnCode;
 

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xsupport.dao.manage.BigTypeDao">
 
-    <resultMap id="BaseResult" type="com.xsupport.model.base.BigType" >
+    <resultMap id="BaseResult" type="com.xsupport.model.manage.BigType" >
         <id column="id" property="id" />
         <result column="type" property="type" />
         <result column="unit" property="unit" />

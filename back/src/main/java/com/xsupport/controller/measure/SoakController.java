@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import com.xsupport.model.base.Soak;
+import com.xsupport.model.measure.Soak;
 import com.xsupport.service.measure.SoakService;
 import com.xsupport.system.returncode.ReturnCode;
 

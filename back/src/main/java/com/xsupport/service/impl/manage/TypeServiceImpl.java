@@ -9,7 +9,7 @@ import com.xsupport.service.AbstractService;
 import com.xsupport.service.manage.TypeService;
 import com.xsupport.dao.manage.TypeDao;
 import com.xsupport.jpa.manage.TypeMapper;
-import com.xsupport.model.base.Type;
+import com.xsupport.model.manage.Type;
 
 import java.util.List;
 

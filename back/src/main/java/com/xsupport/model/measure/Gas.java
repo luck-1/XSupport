@@ -1,4 +1,4 @@
-package com.xsupport.model.base;
+package com.xsupport.model.measure;
 
 import java.util.Date;
 import java.io.Serializable;
@@ -32,13 +32,13 @@ public class Gas implements Serializable {
     private String id;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
-    @ApiModelProperty(value="创建时间")
+    @ApiModelProperty(value="记录时间")
     @Column(name = "createTime")
     private Date createTime;
 
-    @ApiModelProperty(value="类型")
-    @Column(name = "type")
-    private Integer type;
+    @ApiModelProperty(value="记录类型")
+    @Column(name = "typeName")
+    private Integer typeName;
 
     @ApiModelProperty(value="大类型")
     @Column(name = "bigType")
@@ -48,7 +48,7 @@ public class Gas implements Serializable {
     @Column(name = "subIndex")
     private Integer subIndex;
 
-    @ApiModelProperty(value="采集值")
+    @ApiModelProperty(value="记录值")
     @Column(name = "value")
     private Float value;
 

@@ -6,7 +6,7 @@ import com.xsupport.service.AbstractService;
 import com.xsupport.service.measure.SoakService;
 import com.xsupport.dao.measure.SoakDao;
 import com.xsupport.jpa.measure.SoakMapper;
-import com.xsupport.model.base.Soak;
+import com.xsupport.model.measure.Soak;
 
 /**
  * @author lxc

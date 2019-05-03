@@ -3,13 +3,13 @@ package com.xsupport.service.impl.measure;
 import javax.annotation.Resource;
 
 import com.xsupport.jpa.manage.TypeMapper;
-import com.xsupport.model.base.Type;
+import com.xsupport.model.manage.Type;
 import org.springframework.stereotype.Service;
 import com.xsupport.service.AbstractService;
 import com.xsupport.service.measure.GasService;
 import com.xsupport.dao.measure.GasDao;
 import com.xsupport.jpa.measure.GasMapper;
-import com.xsupport.model.base.Gas;
+import com.xsupport.model.measure.Gas;
 
 import java.util.ArrayList;
 import java.util.List;

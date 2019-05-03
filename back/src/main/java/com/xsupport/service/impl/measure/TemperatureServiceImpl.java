@@ -6,7 +6,7 @@ import com.xsupport.service.AbstractService;
 import com.xsupport.service.measure.TemperatureService;
 import com.xsupport.dao.measure.TemperatureDao;
 import com.xsupport.jpa.measure.TemperatureMapper;
-import com.xsupport.model.base.Temperature;
+import com.xsupport.model.measure.Temperature;
 
 import java.util.List;
 

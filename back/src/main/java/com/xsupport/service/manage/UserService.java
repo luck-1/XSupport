@@ -4,9 +4,9 @@ import com.github.pagehelper.PageInfo;
 import com.xsupport.model.http.FindUserParam;
 import com.xsupport.model.http.PasswordParam;
 import com.xsupport.model.http.LoginParam;
+import com.xsupport.model.manage.User;
 import org.springframework.stereotype.Component;
 import com.xsupport.service.Service;
-import com.xsupport.model.base.User;
 
 import java.util.List;
 

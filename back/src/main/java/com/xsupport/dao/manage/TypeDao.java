@@ -2,7 +2,7 @@ package com.xsupport.dao.manage;
 
 import org.apache.ibatis.annotations.Mapper;
 import com.xsupport.dao.MyMapper;
-import com.xsupport.model.base.Type;
+import com.xsupport.model.manage.Type;
 import java.util.List;
 
 /**

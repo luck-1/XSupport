@@ -1,4 +1,4 @@
-package com.xsupport.model.base;
+package com.xsupport.model.measure;
 
 import java.util.Date;
 import java.io.Serializable;
@@ -32,19 +32,19 @@ public class Humidity implements Serializable {
     private String id;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
-    @ApiModelProperty(value="创建时间")
+    @ApiModelProperty(value="记录时间")
     @Column(name = "createTime")
     private Date createTime;
 
-    @ApiModelProperty(value="湿度值")
+    @ApiModelProperty(value="记录值")
     @Column(name = "value")
-    private Integer value;
+    private Float value;
 
     @ApiModelProperty(value="阈值")
     @Column(name = "limitValue")
     private Float limitValue;
 
-    @ApiModelProperty(value="状态(0：正常，1：异常，2：已处理)")
+    @ApiModelProperty(value="状态")
     @Column(name = "state")
     private Integer state;
 
@@ -55,7 +55,7 @@ public class Humidity implements Serializable {
     public Humidity() {
     }
 
-    public Humidity(Integer value, Float limitValue) {
+    public Humidity(Float value, Float limitValue) {
 
         this.value = value;
         this.limitValue = limitValue;

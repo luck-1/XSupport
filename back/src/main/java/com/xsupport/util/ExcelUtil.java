@@ -28,7 +28,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.List;
 
-public class POIUtil{
+public class ExcelUtil {
 
     /**
      * 默认偏移像素单位（ DEFAULT_OFFSET_PIX * 1 为偏移一像素）
@@ -103,7 +103,7 @@ public class POIUtil{
         poifs.getRoot().createDocument(Ole10Native.OLE10_NATIVE, new ByteArrayInputStream(bos.toByteArray()));
         poifs.getRoot().setStorageClsid(ClassID.OLE10_PACKAGE);
 
-        final PackagePartName pnOLE = PackagingURIHelper.createPartName( "/xl/embeddings/oleObject"+Util.getUUID()+".bin" );
+        final PackagePartName pnOLE = PackagingURIHelper.createPartName( "/xl/embeddings/oleObject"+ SysUtil.getUUID()+".bin" );
         final PackagePart partOLE = sheet.getWorkbook().getPackage().createPart( pnOLE, "application/vnd.openxmlformats-officedocument.oleObject" );
         PackageRelationship prOLE = sheet.getPackagePart().addRelationship( pnOLE, TargetMode.INTERNAL, POIXMLDocument.OLE_OBJECT_REL_TYPE );
         OutputStream os = partOLE.getOutputStream();
@@ -182,15 +182,15 @@ public class POIUtil{
         ole1.setAutoLoad(true);
     }
     public static void output(XSSFWorkbook workbook) throws Exception {
-        OutputStream outputStream = new FileOutputStream("C:\\Users\\000000\\Desktop\\"+Util.getUUID().substring(0,4)+".xlsx");
+        OutputStream outputStream = new FileOutputStream("C:\\Users\\000000\\Desktop\\"+ SysUtil.getUUID().substring(0,4)+".xlsx");
         workbook.write(outputStream);
         outputStream.close();
         workbook.close();
     }
 
     public static void removeSheet(XSSFWorkbook workbook, List<String> list){
-        list.forEach((s) -> {
-            int index = workbook.getSheetIndex(s);
+        list.forEach((sheetName) -> {
+            int index = workbook.getSheetIndex(sheetName);
             if(index != -1){
                 workbook.removeSheetAt(index);
             }
@@ -214,38 +214,38 @@ public class POIUtil{
      * @param y
      * @throws IOException
      */
-    public static void addPictureToSheet(XSSFSheet sheet1,byte[] bytes,String picName,int showWidgth,int x,int y) throws IOException {
-
-        XSSFWorkbook workbook = sheet1.getWorkbook();
-
-        XSSFCreationHelper creationHelper = workbook.getCreationHelper();
-        XSSFClientAnchor anchor = creationHelper.createClientAnchor();
-
-        XSSFDrawing drawing = sheet1.getDrawingPatriarch();
-        if(drawing == null){
-            drawing = sheet1.createDrawingPatriarch();
-        }
-        anchor.setRow1(y);
-        anchor.setCol1(x);
-
-        //获得图片
-        BufferedImage sourceImg = ImageIO.read(new ByteArrayInputStream(bytes));
-
-        float imgHeight = sourceImg.getHeight();  //图片高
-        float imgWidght = sourceImg.getWidth() ;  //图片宽
-
-        float widght = showWidgth * 60;           //显示宽-列数
-        float ratio = imgWidght/widght;     //比例
-        float height = imgHeight / ratio;  //显示宽
-
-        ByteArrayOutputStream byteArrayOutputStream = Util.zoomByScale((int)widght,(int)height,sourceImg);
-        //图片类型
-        int type = picName.substring(picName.lastIndexOf(".")).toLowerCase().equals("png") ? Workbook.PICTURE_TYPE_PNG : Workbook.PICTURE_TYPE_JPEG ;
-        int pictureIdx1 = workbook.addPicture(byteArrayOutputStream.toByteArray(),type);
-        byteArrayOutputStream.close();
-        XSSFPicture picture = drawing.createPicture(anchor,pictureIdx1);
-        picture.resize();
-    }
+//    public static void addPictureToSheet(XSSFSheet sheet1,byte[] bytes,String picName,int showWidgth,int x,int y) throws IOException {
+//
+//        XSSFWorkbook workbook = sheet1.getWorkbook();
+//
+//        XSSFCreationHelper creationHelper = workbook.getCreationHelper();
+//        XSSFClientAnchor anchor = creationHelper.createClientAnchor();
+//
+//        XSSFDrawing drawing = sheet1.getDrawingPatriarch();
+//        if(drawing == null){
+//            drawing = sheet1.createDrawingPatriarch();
+//        }
+//        anchor.setRow1(y);
+//        anchor.setCol1(x);
+//
+//        //获得图片
+//        BufferedImage sourceImg = ImageIO.read(new ByteArrayInputStream(bytes));
+//
+//        float imgHeight = sourceImg.getHeight();  //图片高
+//        float imgWidght = sourceImg.getWidth() ;  //图片宽
+//
+//        float widght = showWidgth * 60;           //显示宽-列数
+//        float ratio = imgWidght/widght;     //比例
+//        float height = imgHeight / ratio;  //显示宽
+//
+//        ByteArrayOutputStream byteArrayOutputStream = SysUtil.zoomByScale((int)widght,(int)height,sourceImg);
+//        //图片类型
+//        int type = picName.substring(picName.lastIndexOf(".")).toLowerCase().equals("png") ? Workbook.PICTURE_TYPE_PNG : Workbook.PICTURE_TYPE_JPEG ;
+//        int pictureIdx1 = workbook.addPicture(byteArrayOutputStream.toByteArray(),type);
+//        byteArrayOutputStream.close();
+//        XSSFPicture picture = drawing.createPicture(anchor,pictureIdx1);
+//        picture.resize();
+//    }
 
 
     /**
@@ -286,7 +286,7 @@ public class POIUtil{
      * @param height_pix
      */
     public static void setRowHeight(XSSFRow row,int height_pix){
-        row.setHeight((short)(height_pix * (POIUtil.DEFAULT_ROW_HEIGHT /POIUtil.DEFAULT_ROW_HEIGHT_PIX)) );
+        row.setHeight((short)(height_pix * (ExcelUtil.DEFAULT_ROW_HEIGHT / ExcelUtil.DEFAULT_ROW_HEIGHT_PIX)) );
     }
 
     /**
@@ -295,7 +295,7 @@ public class POIUtil{
      * @param height_pix
      */
     public static void setDy(XSSFClientAnchor anchor,int height_pix){
-        anchor.setDy1(height_pix * POIUtil.DEFAULT_OFFSET_PIX);
+        anchor.setDy1(height_pix * ExcelUtil.DEFAULT_OFFSET_PIX);
     }
 
     /**
@@ -304,7 +304,7 @@ public class POIUtil{
      * @param widght_pix
      */
     public static void setDx(XSSFClientAnchor anchor,int widght_pix){
-        anchor.setDx1(widght_pix * POIUtil.DEFAULT_OFFSET_PIX);
+        anchor.setDx1(widght_pix * ExcelUtil.DEFAULT_OFFSET_PIX);
     }
 
     /**
@@ -335,34 +335,34 @@ public class POIUtil{
      * @return
      * @throws IOException
      */
-    public static int addPictureToCell(XSSFSheet sheet1,XSSFClientAnchor anchor,byte[] bytes,int showHeight,int showWight) throws IOException {
-
-        XSSFWorkbook workbook = sheet1.getWorkbook();
-
-        XSSFDrawing drawing = sheet1.getDrawingPatriarch();
-        if(drawing == null){
-            drawing = sheet1.createDrawingPatriarch();
-        }
-        //获得图片
-        BufferedImage sourceImg = ImageIO.read(new ByteArrayInputStream(bytes));
-
-        float imgHeight = sourceImg.getHeight();  //图片高
-        float imgWidght = sourceImg.getWidth() ;  //图片宽
-
-        if(showHeight == 0){
-            showHeight = (int)(imgHeight / (imgWidght / showWight) );
-        }else{
-            showWight = (int)(imgWidght / (imgHeight / showHeight) );
-        }
-
-        ByteArrayOutputStream byteArrayOutputStream = Util.zoomByScale(showWight,showHeight,sourceImg);
-        int pictureIdx1 = workbook.addPicture(byteArrayOutputStream.toByteArray(),Workbook.PICTURE_TYPE_PNG);
-        byteArrayOutputStream.close();
-
-        XSSFPicture picture = drawing.createPicture(anchor,pictureIdx1);
-        picture.resize();
-        return showHeight;
-    }
+//    public static int addPictureToCell(XSSFSheet sheet1,XSSFClientAnchor anchor,byte[] bytes,int showHeight,int showWight) throws IOException {
+//
+//        XSSFWorkbook workbook = sheet1.getWorkbook();
+//
+//        XSSFDrawing drawing = sheet1.getDrawingPatriarch();
+//        if(drawing == null){
+//            drawing = sheet1.createDrawingPatriarch();
+//        }
+//        //获得图片
+//        BufferedImage sourceImg = ImageIO.read(new ByteArrayInputStream(bytes));
+//
+//        float imgHeight = sourceImg.getHeight();  //图片高
+//        float imgWidght = sourceImg.getWidth() ;  //图片宽
+//
+//        if(showHeight == 0){
+//            showHeight = (int)(imgHeight / (imgWidght / showWight) );
+//        }else{
+//            showWight = (int)(imgWidght / (imgHeight / showHeight) );
+//        }
+//
+//        ByteArrayOutputStream byteArrayOutputStream = SysUtil.zoomByScale(showWight,showHeight,sourceImg);
+//        int pictureIdx1 = workbook.addPicture(byteArrayOutputStream.toByteArray(),Workbook.PICTURE_TYPE_PNG);
+//        byteArrayOutputStream.close();
+//
+//        XSSFPicture picture = drawing.createPicture(anchor,pictureIdx1);
+//        picture.resize();
+//        return showHeight;
+//    }
 
     /**
      * 默认样式

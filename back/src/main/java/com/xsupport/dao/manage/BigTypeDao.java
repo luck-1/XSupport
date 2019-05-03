@@ -2,9 +2,7 @@ package com.xsupport.dao.manage;
 
 import org.apache.ibatis.annotations.*;
 import com.xsupport.dao.MyMapper;
-import com.xsupport.model.base.BigType;
-
-import java.util.List;
+import com.xsupport.model.manage.BigType;
 
 /**
  * @author lxc

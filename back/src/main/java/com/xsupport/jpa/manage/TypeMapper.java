@@ -1,8 +1,7 @@
 package com.xsupport.jpa.manage;
 
 import com.xsupport.jpa.MyBaseJpaDao;
-import com.xsupport.model.base.Type;
-
+import com.xsupport.model.manage.Type;
 import java.util.List;
 
 /**

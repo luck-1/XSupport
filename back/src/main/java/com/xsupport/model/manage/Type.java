@@ -1,4 +1,4 @@
-package com.xsupport.model.base;
+package com.xsupport.model.manage;
 
 import java.util.Date;
 import java.io.Serializable;

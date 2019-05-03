@@ -2,11 +2,8 @@ package com.xsupport.dao.measure;
 
 import org.apache.ibatis.annotations.Mapper;
 import com.xsupport.dao.MyMapper;
-import com.xsupport.model.base.Gas;
+import com.xsupport.model.measure.Gas;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-
-import java.util.List;
 
 /**
  * @author lxc

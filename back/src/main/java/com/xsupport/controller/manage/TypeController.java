@@ -2,6 +2,8 @@ package com.xsupport.controller.manage;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+
+import com.xsupport.model.manage.Type;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import com.xsupport.model.base.Type;
 import com.xsupport.service.manage.TypeService;
 import com.xsupport.system.returncode.ReturnCode;
 

@@ -14,7 +14,7 @@ import com.xsupport.system.returncode.ReturnCode;
 import org.springframework.stereotype.Service;
 import com.xsupport.service.manage.UserService;
 import com.xsupport.service.AbstractService;
-import com.xsupport.model.base.User;
+import com.xsupport.model.manage.User;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;

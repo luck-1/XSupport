@@ -2,6 +2,8 @@ package com.xsupport.controller.manage;
 
 import java.util.List;
 import javax.annotation.Resource;
+
+import com.xsupport.model.manage.BigType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +16,6 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import com.xsupport.model.base.BigType;
 import com.xsupport.service.manage.BigTypeService;
 import com.xsupport.system.returncode.ReturnCode;
 

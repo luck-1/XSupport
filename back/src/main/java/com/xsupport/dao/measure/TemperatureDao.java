@@ -2,7 +2,7 @@ package com.xsupport.dao.measure;
 
 import org.apache.ibatis.annotations.Mapper;
 import com.xsupport.dao.MyMapper;
-import com.xsupport.model.base.Temperature;
+import com.xsupport.model.measure.Temperature;
 
 import java.util.List;
 

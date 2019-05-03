@@ -1,4 +1,4 @@
-package com.xsupport.model.base;
+package com.xsupport.model.manage;
 
 import java.io.Serializable;
 import lombok.Data;

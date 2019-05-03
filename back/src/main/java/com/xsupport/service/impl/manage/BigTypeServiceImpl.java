@@ -6,7 +6,7 @@ import com.xsupport.service.AbstractService;
 import com.xsupport.service.manage.BigTypeService;
 import com.xsupport.dao.manage.BigTypeDao;
 import com.xsupport.jpa.manage.BigTypeMapper;
-import com.xsupport.model.base.BigType;
+import com.xsupport.model.manage.BigType;
 
 /**
  * @author lxc

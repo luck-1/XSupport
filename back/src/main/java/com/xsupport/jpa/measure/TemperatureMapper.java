@@ -1,7 +1,7 @@
 package com.xsupport.jpa.measure;
 
 import com.xsupport.jpa.MyBaseJpaDao;
-import com.xsupport.model.base.Temperature;
+import com.xsupport.model.measure.Temperature;
 
 /**
  * @author lxc

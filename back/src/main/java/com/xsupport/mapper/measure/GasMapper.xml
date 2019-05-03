@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xsupport.dao.measure.GasDao">
 
-    <resultMap id="BaseResult" type="com.xsupport.model.base.Gas" >
+    <resultMap id="BaseResult" type="com.xsupport.model.measure.Gas" >
         <id column="id" property="id" />
         <result column="createTime" property="createTime" />
         <result column="type" property="type" />
@@ -14,7 +14,7 @@
         <result column="remark" property="remark" />
     </resultMap>
 
-    <select id="findNewestData" resultType="com.xsupport.model.base.Gas">
+    <select id="findNewestData" resultType="com.xsupport.model.measure.Gas">
         SELECT g.* FROM gas AS g
         WHERE g.bigType = #{bigType} AND g.subIndex = #{subIndex}
         ORDER BY g.createTime DESC
