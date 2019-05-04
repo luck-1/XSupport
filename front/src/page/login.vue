@@ -81,8 +81,8 @@
             this.$Notice.info(this.notice.successWelcome)
             this.$Notice.info(this.notice.successInfo)
           } else {
-            this.password = null
             this.loading = false
+            this.password = null
           }
         })
       },
@@ -92,12 +92,6 @@
         localStorage.setItem('loginIsAdmin', user.isAdmin)
         localStorage.setItem("accessToken", user.token)
       },
-      saveToStore(user) {
-        this.setUserId(user.id)
-        this.setUsername(user.username)
-        this.setLoginIsAdmin(user.isAdmin)
-        this.setToken(user.token)
-      }
     }
   }
 </script>
