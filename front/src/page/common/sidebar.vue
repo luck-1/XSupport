@@ -46,10 +46,8 @@
       }
     },
     methods: {},
-    created() {
-      bus.$on("collapse", headerCollapse => {
-        this.collapse = headerCollapse;
-      })
+    mounted() {
+      bus.$on("collapse", headerCollapse => this.collapse = headerCollapse)
     }
   }
 </script>

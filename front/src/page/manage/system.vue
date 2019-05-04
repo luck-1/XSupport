@@ -91,10 +91,11 @@
       },
       pageChange(page) {
         this.searchForm.page = page
+        this.findAll()
       },
-      pageSizeChange(pageSize) {
-        this.searchForm.size = pageSize
-        this.findByCondition()
+      pageSizeChange(size) {
+        this.searchForm.size = size
+        this.findAll()
       }
     }
   }

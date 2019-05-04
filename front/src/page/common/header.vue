@@ -59,7 +59,7 @@
         }
       }
       return {
-        collapse: true,
+        collapse: false,
         username: localStorage.getItem('username'),
         dialogShow: false,
         passwordParam: {

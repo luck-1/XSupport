@@ -79,9 +79,9 @@
       </el-table>
     </Row>
     <Row type="flex" justify="center" class="page">
-      <Page :current="searchForm.pageNum"
+      <Page :current="searchForm.page"
             :total="pageTotal"
-            :page-size="searchForm.pageSize"
+            :page-size="searchForm.size"
             @on-change="pageChange"
             @on-page-size-change="pageSizeChange"
             :page-size-opts="[15,30,50]"
@@ -173,8 +173,8 @@
         searchForm: {
           name: null,
           phone: null,
-          pageNum: 1,
-          pageSize: 10
+          page: 1,
+          size: 15
         },
         userRules: {
           username: [{required: true, trigger: 'blur', message: '用户名不能为空'}],
@@ -237,12 +237,12 @@
       optionBtnIsDisabled(row) {
         return this.loginIsAdmin === '1' ? false : (row.id !== this.loginUserId)
       },
-      pageChange(num) {
-        this.searchForm.pageNum = num
+      pageChange(page) {
+        this.searchForm.pageNum = page
         this.findByCondition()
       },
-      pageSizeChange(pageSize) {
-        this.searchForm.pageSize = pageSize
+      pageSizeChange(size) {
+        this.searchForm.pageSize = size
         this.findByCondition()
       }
     }

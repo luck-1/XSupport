@@ -23,15 +23,13 @@
       }
     },
     watch: {
-      $route(to, from) {
-        this.setTags(to)
+      $route(newRoute) {
+        this.setTags(newRoute)
       }
     },
-    created() {
+    mounted() {
       this.setTags(this.$route)
-      bus.$on("collapse", getCollapse => {
-        this.collapse = getCollapse
-      })
+      bus.$on("collapse", getCollapse => this.collapse = getCollapse)
     },
     methods: {
       setTags(route) {
