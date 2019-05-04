@@ -14,11 +14,11 @@
           </el-tooltip>
         </el-col>
         <el-col :span="7" style="padding: 0">
-          <el-input class="limit-input" type="number" v-model="LIMIT_VALUE" size="mini"
+          <el-input class="limit-input" type="number" v-model="inputModel" size="mini"
                     :placeholder="'当前阈值：' + option.series[0].markLine.data[0].yAxis + ' ℃'">
           </el-input>
           <el-tooltip content="设置阈值" placement="bottom">
-            <el-button type="danger" :disabled="! LIMIT_VALUE" size="mini" @click="setLimitValue"
+            <el-button type="danger" :disabled="! inputModel" size="mini" @click="updateLimitValue"
                        icon="el-icon-edit"></el-button>
           </el-tooltip>
         </el-col>
@@ -67,16 +67,18 @@
   import websocketUtil from '../../utils/websocket'
   import {temperatureService, typeService} from '../../api/service'
   import {common} from '../../utils/common'
+  import {mapState} from 'vuex'
+  import store from '../../vuex/store'
 
   export default {
     name: "temperature",
+    store,
     data() {
       return {
         bigType: 0,
-        webSocket: new WebSocket(websocketUtil.webSocketUrl),
         leftChart: null,
         MAX_POINT_COUNT: 15,
-        LIMIT_VALUE: null,
+        inputModel: null,
         option: {
           title: {text: '坝体温度变化情况', x: 'center'},
           tooltip: {},
@@ -96,29 +98,22 @@
         disableSetLimitBtn: true
       }
     },
+    computed: mapState(['temperatureRecvData']),
+    watch: {
+      temperatureRecvData(newVal){
+        if (this.option.xAxis.data.length > this.searchForm.size) {
+          this.option.xAxis.data.splice(0, 1)
+          this.option.series[0].data.splice(0, 1)
+        }
+        this.option.xAxis.data.push(common.getTime(newVal.time))
+        this.option.series[0].data.push(newVal.value)
+        this.leftChart.setOption(this.option)
+      }
+    },
     mounted() {
-      this.init(this.webSocket)
       this.initChart()
     },
     methods: {
-      init(webSocket) {
-        webSocket.onopen = () => console.log("websocket连接成功");
-        webSocket.onclose = () => console.log("websocket关闭链接");
-        webSocket.onerror = (err) => console.log('err' + err);
-        webSocket.onmessage = this.onmessage
-      },
-      onmessage(res) {
-        res = JSON.parse(res.data)
-        if (res.type === this.bigType) {
-          if (this.option.xAxis.data.length > this.searchForm.size) {
-            this.option.xAxis.data.splice(0, 1)
-            this.option.series[0].data.splice(0, 1)
-          }
-          this.option.xAxis.data.push(common.getTime(res.time))
-          this.option.series[0].data.push(res.value)
-          this.leftChart.setOption(this.option)
-        }
-      },
       async initChart() {
         this.leftChart = this.$echarts.init(document.getElementById('left-chart'))
         this.leftChart.showLoading()
@@ -129,7 +124,7 @@
       async getDefaultData() {
         await this.getRightData()
         await this.getLeftData(this.rightData)
-        await this.getLimitValue()
+        await this.findByBigTypeAndSubIndex()
 
       },
       getRightData() {
@@ -146,17 +141,17 @@
           this.option.series[0].data.push(item.value)
         })
       },
-      getLimitValue() {
-        return typeService.getLimitValue({id: '0'}).then(res => {
+      findByBigTypeAndSubIndex() {
+        return typeService.findByBigTypeAndSubIndex({bigType: this.bigType,subIndex: 0}).then(res => {
           res.code === 0 ? this.setLimitData(res.obj.limitValue) : null
         })
       },
-      setLimitValue() {
-        typeService.setLimitValue({id: '0', limitValue: this.LIMIT_VALUE}).then(res => {
+      updateLimitValue() {
+        typeService.updateLimitValue({bigType: this.bigType,subIndex: 0, limitValue: this.inputModel}).then(res => {
           if (res.code === 0) {
-            this.setLimitData(Number(this.LIMIT_VALUE))
+            this.setLimitData(Number(this.inputModel))
             this.leftChart.setOption(this.option)
-            this.LIMIT_VALUE = null
+            this.inputModel = null
           }
         })
       },

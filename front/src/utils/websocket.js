@@ -2,16 +2,13 @@ const webSocketUrl = process.env.BASE_API.replace('http://', 'ws://') + 'websock
 
 //保存图片等操作
 const toolbox = {
-  feature: {
-    dataZoom: {yAxisIndex: 'none'},
-    restore: {},
-    saveAsImage: {}
-  }
+  feature: {dataZoom: {yAxisIndex: 'none'}, restore: {}, saveAsImage: {}}
 }
+
 const grid = {
   top: '10%', left: '8%', right: '8%', bottom: '0%', containLabel: true
 }
 
 export default {
-  webSocketUrl, toolbox,grid
+  webSocketUrl, toolbox, grid
 }

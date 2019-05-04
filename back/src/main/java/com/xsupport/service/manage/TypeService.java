@@ -16,5 +16,7 @@ public interface TypeService extends Service<Type> {
 
     void updateLimitValue(Type type);
 
+    Type findTypeByBigTypeAndSubIndex(Integer bigType,Integer subIndex);
+
     List<Type> findTypesByBigType(Integer bigType);
 }

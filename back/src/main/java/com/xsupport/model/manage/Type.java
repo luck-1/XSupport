@@ -4,6 +4,9 @@ import java.util.Date;
 import java.io.Serializable;
 import lombok.Data;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
@@ -37,11 +40,13 @@ public class Type implements Serializable {
     @Column(name = "updateTime")
     private Date updateTime;
 
-    @ApiModelProperty(value="类型")
+    @NotNull(message = "大类型不能为空")
+    @ApiModelProperty(value="大类型")
     @Column(name = "bigType")
     private Integer bigType;
 
-    @ApiModelProperty(value="子类型")
+    @NotNull(message = "子序号不能为空")
+    @ApiModelProperty(value="子序号")
     @Column(name = "subIndex")
     private Integer subIndex;
 

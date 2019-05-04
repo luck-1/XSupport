@@ -51,10 +51,16 @@ export const gasService = {
 
 export const typeService = {
 
-  setLimitValue: (param) => req.post('type/updateLimitValue', param),
+  updateLimitValue: (param) => req.post('type/updateLimitValue', param),
 
-  getLimitValue: (id) => req.get('type/findById', id),
+  findByBigTypeAndSubIndex: (param) => req.get('type/findByBigTypeAndSubIndex', param),
 
   findTypes: (bigType) => req.get('type/findTypes', bigType)
+
+}
+
+export const exportService = {
+
+  exportExcel: (bigType) => req.get('export/exportExcel', bigType),
 
 }

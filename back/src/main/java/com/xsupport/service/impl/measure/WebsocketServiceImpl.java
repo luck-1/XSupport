@@ -53,9 +53,10 @@ public class WebsocketServiceImpl {
 
     private static final Random random = new Random();
 
-    @Scheduled(fixedDelay = 1000L * 10)
+    @Scheduled(fixedDelay = 1000L * 15)
     public void sendData() {
 
+//        Integer bigType = 0;
         Integer bigType = random.nextInt(5);
         Integer subIndex = 0;
         Float value = 0f;

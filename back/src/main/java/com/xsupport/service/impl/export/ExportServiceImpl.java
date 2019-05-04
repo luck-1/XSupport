@@ -1,17 +1,13 @@
 package com.xsupport.service.impl.export;
 
-import com.xsupport.model.measure.Gas;
-import com.xsupport.model.measure.Humidity;
-import com.xsupport.model.measure.Soak;
 import com.xsupport.model.measure.Temperature;
 import com.xsupport.service.export.ExportService;
 import com.xsupport.util.ExcelUtil;
 import com.xsupport.util.MapUtil;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.stereotype.Service;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
 
@@ -20,6 +16,7 @@ import java.util.*;
  * @date 2019/5/3
  * @description
  */
+@Service
 public class ExportServiceImpl implements ExportService {
 
     private File getTemplate(){
@@ -74,10 +71,10 @@ public class ExportServiceImpl implements ExportService {
 
     @Override
     public void exportExcel(Integer bigType) throws Exception {
-        XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(getTemplate()));
-        Map map = getData(workbook, bigType);
-
-        ExcelUtil.output(workbook);
+//        XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(getTemplate()));
+//        Map map = getData(workbook, bigType);
+//
+//        ExcelUtil.output(workbook);
     }
 
 }

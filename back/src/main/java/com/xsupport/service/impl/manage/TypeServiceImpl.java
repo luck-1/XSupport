@@ -29,7 +29,7 @@ public class TypeServiceImpl extends AbstractService<Type> implements TypeServic
 
     @Override
     public void updateLimitValue(Type type){
-        Type findType = typeMapper.findTypeById(type.getId());
+        Type findType = typeMapper.findTypeByBigTypeAndSubIndex(type.getBigType(),type.getSubIndex());
         if(findType == null){
             throw new CustomException(new ReturnCode.Builder().failed().msg("该类型阈值不存在！").build());
         }
@@ -41,4 +41,12 @@ public class TypeServiceImpl extends AbstractService<Type> implements TypeServic
     public List<Type> findTypesByBigType(Integer bigType){
         return typeMapper.findTypesByBigType(bigType);
     }
+
+    @Override
+    public Type findTypeByBigTypeAndSubIndex(Integer bigType,Integer subIndex){
+        return typeMapper.findTypeByBigTypeAndSubIndex(bigType,subIndex);
+    }
+
+
+
 }

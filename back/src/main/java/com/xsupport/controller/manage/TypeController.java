@@ -2,7 +2,6 @@ package com.xsupport.controller.manage;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-
 import com.xsupport.model.manage.Type;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +14,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import com.xsupport.service.manage.TypeService;
 import com.xsupport.system.returncode.ReturnCode;
-
 import java.util.List;
 
 /**
@@ -41,20 +39,23 @@ public class  TypeController {
         return new ReturnCode.Builder().success().msg("保存成功").build();
     }
 
-    @GetMapping("findById")
-    @ApiOperation(value = "查询单个")
-    public ReturnCode findById(@RequestParam String id) {
-        if(id == null || "".equals(id)){
-            return new ReturnCode.Builder().failed().msg("输入为空").build();
+    @GetMapping("findByBigTypeAndSubIndex")
+    @ApiOperation(value = "查询")
+    public ReturnCode findByBigTypeAndSubIndex(@RequestParam Integer bigType,@RequestParam Integer subIndex) {
+        if(bigType == null){
+            return new ReturnCode.Builder().failed().msg("大类型不能为空").build();
         }
-        Type type = typeService.findById(id);
+        if(subIndex == null){
+            return new ReturnCode.Builder().failed().msg("子类型不能为空").build();
+        }
+        Type type = typeService.findTypeByBigTypeAndSubIndex(bigType,subIndex);
         return new ReturnCode.Builder().object(type).success().msg("查询成功").build();
     }
 
     @GetMapping("findTypes")
     @ApiOperation(value = "查询所有子类型")
     public ReturnCode findTypes(@RequestParam Integer bigType) {
-        if(bigType == null || "".equals(bigType)){
+        if(bigType == null){
             return new ReturnCode.Builder().failed().msg("输入为空").build();
         }
         List<Type> typeList = typeService.findTypesByBigType(bigType);

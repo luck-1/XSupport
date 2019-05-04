@@ -21,9 +21,6 @@ public class SendTextParam {
 
     private Float value;
 
-    public SendTextParam() {
-    }
-
     public SendTextParam(Integer bigType,Integer subIndex,Float value) {
 
         this.time = new Date();
