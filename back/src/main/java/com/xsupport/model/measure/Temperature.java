@@ -2,12 +2,9 @@ package com.xsupport.model.measure;
 
 import java.util.Date;
 import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-
 import javax.persistence.*;
-
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
@@ -38,21 +35,35 @@ public class Temperature implements Serializable {
     @Column(name = "createTime")
     private Date createTime;
 
-    @ApiModelProperty(value = "记录值")
+    @ApiModelProperty(value = "记录值(持久化)")
     @Column(name = "value")
     private Float value;
 
-    @ApiModelProperty(value = "状态")
+    @ApiModelProperty(value = "状态(持久化)")
     @Column(name = "state")
     private Integer state;
 
-    @ApiModelProperty(value = "阈值")
+    @ApiModelProperty(value = "阈值(持久化)")
     @Column(name = "limitValue")
     private Float limitValue;
 
     @ApiModelProperty(value = "备注")
     @Column(name = "remark")
     private String remark;
+
+
+
+    @Transient
+    @ApiModelProperty(value = "记录值")
+    private String exportValue;
+
+    @Transient
+    @ApiModelProperty(value = "状态")
+    private String exportState;
+
+    @Transient
+    @ApiModelProperty(value = "阈值")
+    private String exportLimitValue;
 
     public Temperature() {
     }

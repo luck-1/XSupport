@@ -5,7 +5,6 @@
     <resultMap id="BaseResult" type="com.xsupport.model.measure.Gas" >
         <id column="id" property="id" />
         <result column="createTime" property="createTime" />
-        <result column="type" property="type" />
         <result column="bigType" property="bigType" />
         <result column="subIndex" property="subIndex" />
         <result column="value" property="value" />
@@ -19,6 +18,20 @@
         WHERE g.bigType = #{bigType} AND g.subIndex = #{subIndex}
         ORDER BY g.createTime DESC
         limit 1
+    </select>
+
+    <select id="exportInfo" resultType="com.xsupport.model.measure.Gas">
+        SELECT
+            DATE_FORMAT(g.createTime,'%Y-%m-%d %H:%i:%s') AS createTime,
+            t.name AS typeName,
+            CONCAT(g.`value`,' ',bg.unit) AS exportValue,
+            CONCAT(g.limitValue,' ',bg.unit) AS exportLimitValue,
+            IF(g.state = 0,'正常','异常') AS exportState
+        FROM gas AS g
+        LEFT JOIN big_type bg ON bg.type = g.bigType
+        LEFT JOIN type t ON t.bigType = g.bigType AND t.subIndex = g.subIndex
+        WHERE g.bigType = #{bigType}
+        ORDER BY createTime DESC
     </select>
 
 </mapper>

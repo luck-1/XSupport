@@ -2,6 +2,7 @@ package com.xsupport.controller.export;
 
 import com.xsupport.service.export.ExportService;
 import com.xsupport.system.returncode.ReturnCode;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import javax.annotation.Resource;
  */
 @RestController
 @RequestMapping(value = "export")
+@Api(description = "导出")
 public class ExportController {
 
     @Resource

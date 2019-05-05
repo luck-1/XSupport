@@ -2,7 +2,6 @@ package com.xsupport.model.measure;
 
 import java.util.Date;
 import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import javax.persistence.*;
@@ -36,10 +35,6 @@ public class Gas implements Serializable {
     @Column(name = "createTime")
     private Date createTime;
 
-    @ApiModelProperty(value="记录类型")
-    @Column(name = "typeName")
-    private Integer typeName;
-
     @ApiModelProperty(value="大类型")
     @Column(name = "bigType")
     private Integer bigType;
@@ -63,6 +58,10 @@ public class Gas implements Serializable {
     @ApiModelProperty(value="备注")
     @Column(name = "remark")
     private String remark;
+
+    @Transient
+    @ApiModelProperty(value="记录类型")
+    private String typeName;
 
     public Gas() {
     }

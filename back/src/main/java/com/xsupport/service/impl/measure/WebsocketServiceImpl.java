@@ -53,7 +53,7 @@ public class WebsocketServiceImpl {
 
     private static final Random random = new Random();
 
-    @Scheduled(fixedDelay = 1000L * 15)
+//    @Scheduled(fixedDelay = 1000L * 15)
     public void sendData() {
 
 //        Integer bigType = 0;
@@ -61,7 +61,6 @@ public class WebsocketServiceImpl {
         Integer subIndex = 0;
         Float value = 0f;
         Float limit = 0f;
-        String description = "";
         Type type = null;
         switch (bigType) {
             case 0:
@@ -95,7 +94,7 @@ public class WebsocketServiceImpl {
         websocketUtil.sendMessageForAllClient(sendData);
         System.out.println(type.getName() + "：" + sendData);
         if (value >= limit) {
-            SysWarn sysWarn = new SysWarn(bigType,type.getName() + "过高",value,limit);
+            SysWarn sysWarn = new SysWarn(bigType,subIndex,value,limit);
             sysWarnMapper.save(sysWarn);
         }
     }

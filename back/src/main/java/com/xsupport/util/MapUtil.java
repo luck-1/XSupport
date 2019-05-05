@@ -66,7 +66,7 @@ public class MapUtil {
                     continue;
                 }
                 Object o = fields[i].get(object);
-                map.put(apiModelProperty.value(),o);
+                map.put(apiModelProperty.value(), o);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -74,7 +74,15 @@ public class MapUtil {
         return map;
     }
 
+    public static Map<String, String> getApiStringKeyAndValue(Object object) {
+        Map<String, Object> map = getApiKeyAndValue(object);
+        Map<String, String> stringValueMap = new HashMap<>();
+        map.forEach((key, value) -> stringValueMap.put(key, value == null ? null : value.toString()));
+        return stringValueMap;
+    }
+
+
     public static void main(String[] args) {
-        getApiKeyAndValue(new Temperature(12f,16f));
+        getApiKeyAndValue(new Temperature(12f, 16f));
     }
 }

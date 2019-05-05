@@ -15,4 +15,19 @@
         <result column="remark" property="remark" />
     </resultMap>
 
+    <select id="exportInfo" resultType="com.xsupport.model.manage.SysWarn">
+        SELECT
+            DATE_FORMAT(sw.createTime,'%Y-%m-%d %H:%i:%s') AS createTime,
+            DATE_FORMAT(sw.updateTime,'%Y-%m-%d %H:%i:%s') AS updateTime,
+            sw.optionUser,
+            t.name AS exceptionDescription,
+            IF(sw.exceptionState = 0,'正常','异常') AS exceptionState,
+            CONCAT(sw.exceptionValue,' ',bg.unit) AS exceptionValue,
+            CONCAT(sw.limitValue,' ',bg.unit) AS limitValue
+        FROM sys_warn AS sw
+        LEFT JOIN big_type bg ON bg.type = sw.exceptionLocation
+        LEFT JOIN type t ON t.bigType = sw.exceptionLocation AND t.subIndex = sw.exceptionDescription
+        ORDER BY createTime DESC
+    </select>
+
 </mapper>

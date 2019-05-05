@@ -12,4 +12,15 @@
         <result column="remark" property="remark" />
     </resultMap>
 
+    <select id="exportInfo" resultType="com.xsupport.model.measure.Soak">
+        SELECT
+            DATE_FORMAT(s.createTime,'%Y-%m-%d %H:%i:%s') AS createTime,
+            CONCAT(s.`value`,' ',bg.unit) AS exportValue,
+            CONCAT(s.limitValue,' ',bg.unit) AS exportLimitValue,
+            IF(s.state = 0,'正常','异常') AS exportState
+        FROM soak AS s
+        LEFT JOIN big_type bg ON bg.type = 2
+        ORDER BY createTime DESC
+    </select>
+
 </mapper>

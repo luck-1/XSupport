@@ -15,4 +15,6 @@ import java.util.List;
 public interface TemperatureDao extends MyMapper<Temperature> {
 
     List<Temperature> findAll();
+
+    List<Temperature> exportInfo();
 }

@@ -15,4 +15,6 @@ import java.util.List;
 public interface HumidityDao extends MyMapper<Humidity> {
 
     List<Humidity> findAll();
+
+    List<Humidity> exportInfo();
 }

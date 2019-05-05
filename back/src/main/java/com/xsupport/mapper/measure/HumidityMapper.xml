@@ -15,4 +15,14 @@
         SELECT * FROM humidity ORDER BY createTime DESC
     </select>
 
+    <select id="exportInfo" resultType="com.xsupport.model.measure.Humidity">
+    SELECT
+        DATE_FORMAT(h.createTime,'%Y-%m-%d %H:%i:%s') AS createTime,
+        CONCAT(h.`value`,' ',bg.unit) AS exportValue,
+        CONCAT(h.limitValue,' ',bg.unit) AS exportLimitValue,
+        IF(h.state = 0,'正常','异常') AS exportState
+    FROM humidity AS h
+    LEFT JOIN big_type bg ON bg.type = 1
+    ORDER BY createTime DESC
+    </select>
 </mapper>

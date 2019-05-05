@@ -18,5 +18,5 @@ public interface SoakDao extends MyMapper<Soak> {
     @Select("SELECT * FROM soak ORDER BY createTime DESC LIMIT 1")
     Soak findNewestData();
 
-
+    List<Soak> exportInfo();
 }
