@@ -61,6 +61,6 @@ export const typeService = {
 
 export const exportService = {
 
-  exportExcel: (bigType) => req.get('export/exportExcel', bigType),
+  exportExcel: (bigType) => req.get('export/exportExcel/'+ bigType),
 
 }

@@ -8,6 +8,6 @@ import java.io.IOException;
 @Component
 public interface ExportService {
 
-    void exportExcel(Integer bigType) throws Exception;
+    void exportExcel(Integer bigType);
 
 }

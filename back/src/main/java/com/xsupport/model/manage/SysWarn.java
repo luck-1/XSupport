@@ -35,12 +35,12 @@ public class SysWarn implements Serializable {
     private String id;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    @ApiModelProperty(value = "创建时间")
+    @ApiModelProperty(value = "记录时间")
     @Column(name = "createTime")
     private Date createTime;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    @ApiModelProperty(value = "修改时间")
+    @ApiModelProperty(value = "更改时间")
     @Column(name = "updateTime")
     private Date updateTime;
 
@@ -48,29 +48,49 @@ public class SysWarn implements Serializable {
     @Column(name = "optionUser")
     private String optionUser;
 
-    @ApiModelProperty(value = "异常类型（0：温度异常，1：湿度异常，2：浸润异常，3：金气异常，4：金属异常）")
+    @ApiModelProperty(value = "异常定位(持久化)")
     @Column(name = "exceptionLocation")
     private Integer exceptionLocation;
 
-    @ApiModelProperty(value = "异常描述")
+    @ApiModelProperty(value = "异常类型(持久化)")
     @Column(name = "exceptionDescription")
     private Integer exceptionDescription;
 
-    @ApiModelProperty(value = "异常状态（0：未处理，1：待处理，2：正在处理，3：已处理）")
+    @ApiModelProperty(value = "异常状态(持久化)：（0：未处理，1：待处理，2：正在处理，3：已处理）")
     @Column(name = "exceptionState")
     private Integer exceptionState;
 
-    @ApiModelProperty(value = "异常值")
+    @ApiModelProperty(value = "异常值(持久化)")
     @Column(name = "exceptionValue")
     private Float exceptionValue;
 
-    @ApiModelProperty(value = "阈值")
+    @ApiModelProperty(value = "阈值(持久化)")
     @Column(name = "limitValue")
     private Float limitValue;
 
     @ApiModelProperty(value = "备注")
     @Column(name = "remark")
     private String remark;
+
+    @Transient
+    @ApiModelProperty(value = "异常类型")
+    private String exportSubName;
+
+    @Transient
+    @ApiModelProperty(value = "异常值")
+    private String exportValue;
+
+    @Transient
+    @ApiModelProperty(value = "异常状态")
+    private String exportState;
+
+    @Transient
+    @ApiModelProperty(value = "阈值")
+    private String exportLimitValue;
+
+    @Transient
+    @ApiModelProperty(value = "异常定位")
+    private String exceptionLocationName;
 
     public SysWarn() {
     }

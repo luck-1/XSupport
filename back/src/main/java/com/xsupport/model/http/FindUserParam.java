@@ -12,11 +12,11 @@ import javax.validation.constraints.NotNull;
 @Data
 public class FindUserParam {
 
-    @NotNull(message = "pageNum不允许为空")
-    private Integer pageNum;
+    @NotNull(message = "page不允许为空")
+    private Integer page;
 
-    @NotNull(message = "pageSize不允许为空")
-    private Integer pageSize;
+    @NotNull(message = "size不允许为空")
+    private Integer size;
 
     private String name;
 

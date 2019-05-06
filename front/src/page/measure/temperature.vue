@@ -10,7 +10,7 @@
             <el-button type="primary" size="mini" @click="getRightData" icon="el-icon-refresh" circle></el-button>
           </el-tooltip>
           <el-tooltip content="导出" placement="bottom">
-            <el-button type="success" size="mini" @click="exportExcel" icon="el-icon-download" circle></el-button>
+            <el-button type="success" size="mini" @click="exportExcel(bigType)" icon="el-icon-download" circle></el-button>
           </el-tooltip>
         </el-col>
         <el-col :span="7" style="padding: 0">
@@ -65,7 +65,7 @@
 
 <script>
   import websocketUtil from '../../utils/websocket'
-  import {temperatureService, typeService} from '../../api/service'
+  import {temperatureService, typeService,exportService} from '../../api/service'
   import {common} from '../../utils/common'
   import {mapState} from 'vuex'
   import store from '../../vuex/store'
@@ -167,8 +167,8 @@
         this.searchForm.size = size
         this.getRightData()
       },
-      exportExcel() {
-
+      exportExcel(bigType) {
+        exportService.exportExcel(bigType)
       },
     }
   }

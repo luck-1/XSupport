@@ -36,6 +36,10 @@ public class BigType implements Serializable {
     @Column(name = "unit")
     private String unit;
 
+    @ApiModelProperty(value="异常定位显示")
+    @Column(name = "exceptionLocationName")
+    private String exceptionLocationName;
+
     @ApiModelProperty(value="备注")
     @Column(name = "remark")
     private String remark;

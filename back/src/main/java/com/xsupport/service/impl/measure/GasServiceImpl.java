@@ -38,7 +38,13 @@ public class GasServiceImpl extends AbstractService<Gas> implements GasService {
 
         List<Type> typeList = typeMapper.findTypesByBigType(bigType);
 
-        typeList.forEach(type -> gasList.add(gasDao.findNewestData(bigType, type.getSubIndex())));
+        typeList.forEach(type -> {
+            Gas gas = gasDao.findNewestData(bigType, type.getSubIndex());
+            if(gas == null){
+                gas = new Gas(bigType,type.getSubIndex(),0f,type.getLimitValue());
+            }
+            gasList.add(gas);
+        });
 
         return gasList;
     }

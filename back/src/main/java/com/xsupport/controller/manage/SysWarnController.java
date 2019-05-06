@@ -2,8 +2,11 @@ package com.xsupport.controller.manage;
 
 import java.util.List;
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 import com.xsupport.model.http.ExceptionStateParam;
+import com.xsupport.model.http.UpdateRemarkParam;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -59,6 +62,16 @@ public class  SysWarnController {
             return new ReturnCode.Builder().failed().msg("操作用户不能为空").build();
         }
         sysWarnService.changeState(id,state,userId);
+        return new ReturnCode.Builder().success().msg("查询成功").build();
+    }
+
+    @PutMapping("updateRemark")
+    @ApiOperation(value = "修改状态")
+    public ReturnCode updateRemark(@RequestBody @Valid UpdateRemarkParam updateRemarkParam, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ReturnCode.Builder().failed().msg(bindingResult.getFieldError().getDefaultMessage()).build();
+        }
+        sysWarnService.updateRemark(updateRemarkParam.getId(),updateRemarkParam.getRemark());
         return new ReturnCode.Builder().success().msg("查询成功").build();
     }
 

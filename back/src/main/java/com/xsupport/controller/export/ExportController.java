@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import javax.annotation.Resource;
 
 /**
@@ -26,14 +27,10 @@ public class ExportController {
     @GetMapping("exportExcel/{bigType}")
     @ApiOperation(value = "导出excel")
     public ReturnCode detail(@PathVariable(value = "bigType") Integer bigType) {
-        if(bigType == null){
+        if (bigType == null) {
             return new ReturnCode.Builder().failed().msg("导出类型不能为空").build();
         }
-        try {
-            exportService.exportExcel(bigType);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        exportService.exportExcel(bigType);
         return new ReturnCode.Builder().success().msg("导出成功").build();
     }
 

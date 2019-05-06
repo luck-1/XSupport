@@ -6,6 +6,7 @@
         <id column="id" property="id" />
         <result column="type" property="type" />
         <result column="unit" property="unit" />
+        <result column="exceptionLocationName" property="exceptionLocationName" />
         <result column="remark" property="remark" />
     </resultMap>
 

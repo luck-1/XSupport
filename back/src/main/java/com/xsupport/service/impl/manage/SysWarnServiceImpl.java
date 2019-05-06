@@ -49,5 +49,15 @@ public class SysWarnServiceImpl extends AbstractService<SysWarn> implements SysW
         systemWarning.setExceptionState(state);
         sysWarnMapper.save(systemWarning);
     }
+
+    @Override
+    public void updateRemark(String id,String remark){
+        SysWarn sysWarn = sysWarnMapper.getOne(id);
+        if(sysWarn == null){
+            throw new CustomException(new ReturnCode.Builder().failed().msg("该记录不存在！").build());
+        }
+        sysWarn.setRemark(remark);
+        sysWarnMapper.save(sysWarn);
+    }
 	
 }

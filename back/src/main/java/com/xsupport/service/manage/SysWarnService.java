@@ -13,4 +13,6 @@ import com.xsupport.model.manage.SysWarn;
 public interface SysWarnService extends Service<SysWarn> {
 
     void changeState(String id,Integer state,String userId);
+
+    void updateRemark(String id,String remark);
 }

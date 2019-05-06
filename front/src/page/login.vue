@@ -32,12 +32,12 @@
         notice: {
           loginWelcome: {
             title: '欢迎访问',
-            desc:'<b>尾矿库坝体安全性能检测平台</b>',
+            desc: '<b>尾矿库坝体安全性能检测平台</b>',
             duration: 3
           },
           loginInfo: {
             title: '体验账号与密码',
-            desc:'<pre>账号1：admin 密码：000000 角色：管理员 </pre><pre>账号2：test  密码：000000 角色：普通用户</pre>',
+            desc: '<pre>账号1：admin 密码：000000 角色：管理员 </pre><pre>账号2：test  密码：000000 角色：普通用户</pre>',
             duration: 5
           },
           successWelcome: {
@@ -47,7 +47,7 @@
           },
           successInfo: {
             title: '已成功登陆',
-            desc:'通过右上角的下拉按钮<br/>退出登录体验不同角色账号',
+            desc: '通过右上角的下拉按钮<br/>退出登录体验不同角色账号',
             duration: 5
           }
         },
@@ -73,16 +73,20 @@
     computed: mapMutations(['setToken', 'setUserId', 'setUsername', 'setLoginIsAdmin']),
     methods: {
       submitLogin() {
-        this.loading = true
-        userService.login(this.form).then(res => {
-          if (res.code === 0) {
-            this.saveTolocalStorage(res.obj)
-            this.$router.push('/')
-            this.$Notice.info(this.notice.successWelcome)
-            this.$Notice.info(this.notice.successInfo)
-          } else {
-            this.loading = false
-            this.password = null
+        this.$refs.formInfo.validate(valid => {
+          if (valid) {
+            this.loading = true
+            userService.login(this.form).then(res => {
+              if (res.code === 0) {
+                this.saveTolocalStorage(res.obj)
+                this.$router.push('/')
+                this.$Notice.info(this.notice.successWelcome)
+                this.$Notice.info(this.notice.successInfo)
+              } else {
+                this.loading = false
+                this.password = null
+              }
+            })
           }
         })
       },
@@ -99,7 +103,7 @@
 <style scoped>
   .login {
     background-image: url("../assets/background.svg");
-    background-color: rgba(255, 255, 255,.5);
+    background-color: rgba(255, 255, 255, .5);
     height: 100vh;
     width: 100vw;
   }

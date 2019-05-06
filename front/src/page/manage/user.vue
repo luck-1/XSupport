@@ -105,7 +105,7 @@
             </FormItem>
             <FormItem label="用户类型" prop="isAdmin">
               <Select v-model="userInfo.isAdmin" placeholder="请选择" clearable>
-                <Option :value="0"  selected>普通用户</Option>
+                <Option :value="0" selected>普通用户</Option>
                 <Option :value="1">管理员</Option>
               </Select>
             </FormItem>
@@ -149,6 +149,35 @@
   export default {
     name: "user",
     data() {
+      const validatePassword = (rule, value, callback) => {
+        if (!value) {
+          callback(new Error("密码不能为空！"))
+        } else if (value.length < 6) {
+          callback(new Error("密码长度不得小于 6 位！"))
+        } else {
+          callback()
+        }
+      }
+      const validateAgainPassword = (rule, value, callback) => {
+        if(! value){
+          callback(new Error("密码不能为空！"))
+        }else if(value !== this.userInfo.password) {
+          callback(new Error("两个输入密码不一致！"))
+        } else {
+          callback();
+        }
+      }
+      const validatePhone = (rule, value, callback) => {
+        let reg = /^[1][3,4,5,7,8][0-9]{9}$/;
+        if (value === "" || value === null || value === undefined) {
+          callback(new Error("手机号码不能为空"));
+        } else if (!reg.test(value)) {
+          callback(new Error("手机号码格式错误"));
+        } else {
+          callback();
+        }
+      }
+
       return {
         dialogShow: false,
         dialogTitle: null,
@@ -178,17 +207,14 @@
         },
         userRules: {
           username: [{required: true, trigger: 'blur', message: '用户名不能为空'}],
-          password: [
-            {required: true, trigger: 'blur', message: '密码不能为空'},
-            {trigger: 'blur', type: 'string', min: 4, message: '密码长度不能小于 4 位！'}
-          ],
-          againPassword: [{required: true, trigger: 'blur', message: '确认密码不能为空'}],
+          password: [{required: true, trigger: 'blur', validator: validatePassword}],
+          againPassword: [{required: true, trigger: 'blur', validator: validateAgainPassword}],
+          phone: [{ required: true, validator: validatePhone, trigger: "blur" }],
           isAdmin: [{required: true, trigger: 'blur', message: '用户类型不能为空'}],
           name: [{required: true, trigger: 'blur', message: '姓名不能为空'}],
           sex: [{required: true, trigger: 'blur', message: '性别不能为空'}],
           age: [{required: true, trigger: 'blur', message: '年龄不能为空'}],
-          address: [{required: true, trigger: 'blur', message: '地点不能为空'}],
-          phone: [{required: true, trigger: 'blur', message: '电话号码不能为空'}],
+          address: [{required: true, trigger: 'blur', message: '地点不能为空'}]
         }
       }
     },
@@ -217,10 +243,15 @@
         userService.changeForbiddenState({id: user.id}).then(() => this.findByCondition())
       },
       saveInfo() {
-        userService.saveInfo(this.userInfo).then(res => this.dialogShow = (res.code !== 0)).then(() => this.findByCondition())
+        this.$refs.userForm.validate(async valid => {
+          if (valid) {
+            await userService.saveInfo(this.userInfo).then(res => this.dialogShow = (res.code !== 0))
+            this.findByCondition()
+          }
+        })
       },
       deleteOne(user) {
-        userService.deleteOne({id:user.id}).then(() => this.findByCondition())
+        userService.deleteOne({id: user.id}).then(() => this.findByCondition())
       },
       deleteList() {
         if (this.selectList.length === 0) {

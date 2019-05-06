@@ -1,13 +1,21 @@
 <template>
   <Card>
     <Row>
+      <el-col :span="17">
+<!--        <el-tooltip content="刷新" placement="bottom">-->
+<!--          <el-button type="primary" size="mini" @click="getRightData" icon="el-icon-refresh" circle></el-button>-->
+<!--        </el-tooltip>-->
+        <el-tooltip content="导出" placement="bottom">
+          <el-button type="success" size="mini" @click="exportExcel(-1)" icon="el-icon-download" circle></el-button>
+        </el-tooltip>
+      </el-col>
       <el-table border size="small" :data="warnData" hit height="calc(100vh - 180px)">
         <el-table-column align="center" type="index" label="序号" width="55"></el-table-column>
         <el-table-column align="center" label="异常时间" sortable width="150" prop="createTime"></el-table-column>
         <el-table-column align="center" label="更改时间" sortable width="150" prop="updateTime"></el-table-column>
         <el-table-column align="center" label="操作人" sortable width="120" prop="optionUser"></el-table-column>
         <el-table-column align="center" label="异常类型" width="120" prop="exceptionLocation"
-                         :filters="[{text: '温度异常', value: 0 },{text: '湿度异常', value: 1 }, { text: '浸润异常', value: 2 },{text: '金气异常', value: 3 }]"
+                         :filters="[{text: '温度异常', value: 0 },{text: '湿度异常', value: 1 }, { text: '浸润异常', value: 2 },{text: '金气异常', value: 3}]"
                          :filter-method="(value,row) => row.exceptionLocation === value" filter-placement="bottom-start" :filter-multiple="true" >
           <template slot-scope="{row}">
             <el-tag type="info">
@@ -48,7 +56,7 @@
     </Row>
     <Row type="flex" justify="center" class="page">
       <Page :current="searchForm.page" :total="pageTotal" :page-size="searchForm.size"
-            @on-change="pageChange" @on-page-size-change="pageSizeChange" :page-size-opts="[10,20,50]"
+            @on-change="pageChange" @on-page-size-change="pageSizeChange" :page-size-opts="[15,30,50]"
             show-sizer show-total show-elevator size="small">
       </Page>
     </Row>
@@ -56,7 +64,7 @@
 </template>
 
 <script>
-  import {systemService} from '../../api/service'
+  import {systemService,exportService} from '../../api/service'
 
   export default {
     name: "system",
@@ -67,7 +75,7 @@
         userId: localStorage.getItem("userId"),
         searchForm: {
           page: 1,
-          size: 10
+          size: 15
         },
       }
     },
@@ -96,7 +104,10 @@
       pageSizeChange(size) {
         this.searchForm.size = size
         this.findAll()
-      }
+      },
+      exportExcel(bigType) {
+        exportService.exportExcel(bigType)
+      },
     }
   }
 </script>

@@ -99,8 +99,4 @@ public class WebsocketServiceImpl {
         }
     }
 
-    public void exportExcel(Integer bigType){
-
-    }
-
 }

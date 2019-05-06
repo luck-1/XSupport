@@ -43,21 +43,35 @@ public class Gas implements Serializable {
     @Column(name = "subIndex")
     private Integer subIndex;
 
-    @ApiModelProperty(value="记录值")
+    @ApiModelProperty(value = "记录值(持久化)")
     @Column(name = "value")
     private Float value;
 
-    @ApiModelProperty(value="阈值")
-    @Column(name = "limitValue")
-    private Float limitValue;
-
-    @ApiModelProperty(value="状态")
+    @ApiModelProperty(value = "状态(持久化)")
     @Column(name = "state")
     private Integer state;
 
-    @ApiModelProperty(value="备注")
+    @ApiModelProperty(value = "阈值(持久化)")
+    @Column(name = "limitValue")
+    private Float limitValue;
+
+    @ApiModelProperty(value = "备注")
     @Column(name = "remark")
     private String remark;
+
+
+
+    @Transient
+    @ApiModelProperty(value = "记录值")
+    private String exportValue;
+
+    @Transient
+    @ApiModelProperty(value = "状态")
+    private String exportState;
+
+    @Transient
+    @ApiModelProperty(value = "阈值")
+    private String exportLimitValue;
 
     @Transient
     @ApiModelProperty(value="记录类型")

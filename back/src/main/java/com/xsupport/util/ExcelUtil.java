@@ -181,11 +181,15 @@ public class ExcelUtil {
         cur1.dispose();
         ole1.setAutoLoad(true);
     }
-    public static void output(XSSFWorkbook workbook) throws Exception {
-        OutputStream outputStream = new FileOutputStream("C:\\Users\\joker\\Desktop\\"+ SysUtil.getUUID().substring(0,4)+".xlsx");
-        workbook.write(outputStream);
-        outputStream.close();
-        workbook.close();
+    public static void output(XSSFWorkbook workbook,String fileName) {
+        try {
+            OutputStream outputStream = new FileOutputStream("C:\\Users\\joker\\Desktop\\" + fileName + ".xlsx");
+            workbook.write(outputStream);
+            outputStream.close();
+            workbook.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void removeSheet(XSSFWorkbook workbook, List<String> list){

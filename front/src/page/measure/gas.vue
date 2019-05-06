@@ -55,7 +55,7 @@
 
 <script>
   import websocketUtil from '../../utils/websocket'
-  import {gasService, typeService} from '../../api/service'
+  import {gasService, typeService,exportService} from '../../api/service'
   import {mapState} from 'vuex'
   import store from '../../vuex/store'
 
@@ -175,8 +175,8 @@
           }
         })
       },
-      exportExcel() {
-
+      exportExcel(bigType) {
+        exportService.exportExcel(bigType)
       },
     }
   }

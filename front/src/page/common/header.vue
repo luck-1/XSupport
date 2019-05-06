@@ -5,7 +5,7 @@
     </div>
     <div class="header-title"><span>尾矿库坝体安全性能检测平台</span></div>
     <div class="header-right">
-      <el-dropdown class="header-right-user" size="small" @command="handleCommand">
+      <el-dropdown class="header-right-user" size="medium" placement="bottom-start" @command="handleCommand">
           <span class="header-right-user-link">
             {{username}}<i class="el-icon-caret-bottom"></i>
           </span>
@@ -45,8 +45,8 @@
       const validatePassword = (rule, value, callback) => {
         if (!value) {
           callback(new Error("密码不能为空！"))
-        } else if (value.length < 4) {
-          callback(new Error("密码长度不得小于4位！"))
+        } else if (value.length < 6) {
+          callback(new Error("密码长度不得小于 6 位！"))
         } else {
           callback()
         }
@@ -85,13 +85,17 @@
         localStorage.clear()
       },
       submitForm() {
-        userService.changePassword(this.passwordParam).then(res => {
-          if (res.code === 0) {
-            this.dialogShow = false
-            this.$router.push('/login')
-          } else {
-            this.passwordParam.newPassword = ''
-            this.passwordParam.againPassword = ''
+        this.$refs.userForm.validate(async valid => {
+          if(valid){
+            userService.changePassword(this.passwordParam).then(res => {
+              if (res.code === 0) {
+                this.dialogShow = false
+                this.$router.push('/login')
+              } else {
+                this.passwordParam.newPassword = ''
+                this.passwordParam.againPassword = ''
+              }
+            })
           }
         })
       },
@@ -138,6 +142,7 @@
   .header-right-user {
     color: #fff;
     cursor: pointer;
+    padding-bottom: 0;
   }
 </style>
 

@@ -4,7 +4,7 @@
       <el-row :gutter="20">
         <el-col :span="16">
           <el-tooltip content="导出" placement="bottom">
-            <el-button type="success" size="mini" @click="exportExcel" icon="el-icon-download" circle></el-button>
+            <el-button type="success" size="mini" @click="exportExcel(bigType)" icon="el-icon-download" circle></el-button>
           </el-tooltip>
         </el-col>
         <el-col :span="8">
@@ -27,7 +27,7 @@
 
 <script>
   import websocketUtil from '../../utils/websocket'
-  import {soakService, typeService} from '../../api/service'
+  import {soakService, typeService,exportService} from '../../api/service'
   import {mapState} from 'vuex'
   import store from '../../vuex/store'
 
@@ -139,9 +139,9 @@
           }
         })
       },
-      exportExcel(){
-
-      }
+      exportExcel(bigType) {
+        exportService.exportExcel(bigType)
+      },
     }
   }
 </script>
