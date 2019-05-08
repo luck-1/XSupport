@@ -1,6 +1,7 @@
 <template>
-  <Row type="flex" aligin="middle" justify="center" @keydown.enter.native="submitLogin()" class="login">
-    <Col :xs="{span:22}" class="login-content">
+  <Row type="flex" aligin="middle" justify="center" @keydown.enter.native="submitLogin" class="all">
+    <div class="login-pic"></div>
+    <el-col :xs="{span:22}" class="login-content">
       <Form ref="formInfo" :model="form" :rules="rules" :label-width="65">
         <p class="login-title">尾矿库坝体安全性能检测平台</p>
         <FormItem prop="user" label="账 号:">
@@ -16,13 +17,12 @@
         <span v-if="!loading">登录</span>
         <span v-else>登录中...</span>
       </Button>
-    </Col>
+    </el-col>
   </Row>
 </template>
 
 <script>
   import {userService} from '../api/service'
-  import {mapMutations} from 'vuex'
 
   export default {
     name: "login",
@@ -33,22 +33,22 @@
           loginWelcome: {
             title: '欢迎访问',
             desc: '<b>尾矿库坝体安全性能检测平台</b>',
-            duration: 3
+            duration: 4
           },
           loginInfo: {
             title: '体验账号与密码',
             desc: '<pre>账号1：admin 密码：000000 角色：管理员 </pre><pre>账号2：test  密码：000000 角色：普通用户</pre>',
-            duration: 5
+            duration: 7
           },
           successWelcome: {
             title: '欢迎使用尾矿库坝体安全性能检测平台',
             desc: '尾矿库坝体安全性能检测平台<br/><i>（Spring Boot + Vue 的前后端分离平台）</i>',
-            duration: 3
+            duration: 4
           },
           successInfo: {
             title: '已成功登陆',
             desc: '通过右上角的下拉按钮<br/>退出登录体验不同角色账号',
-            duration: 5
+            duration: 7
           }
         },
         form: {
@@ -70,7 +70,6 @@
       this.$Notice.info(this.notice.loginWelcome)
       this.$Notice.info(this.notice.loginInfo)
     },
-    computed: mapMutations(['setToken', 'setUserId', 'setUsername', 'setLoginIsAdmin']),
     methods: {
       submitLogin() {
         this.$refs.formInfo.validate(valid => {
@@ -78,7 +77,7 @@
             this.loading = true
             userService.login(this.form).then(res => {
               if (res.code === 0) {
-                this.saveTolocalStorage(res.obj)
+                this.localStorage.setItem('user', JSON.stringify(res.obj))
                 this.$router.push('/')
                 this.$Notice.info(this.notice.successWelcome)
                 this.$Notice.info(this.notice.successInfo)
@@ -90,26 +89,23 @@
           }
         })
       },
-      saveTolocalStorage(user) {
-        localStorage.setItem('username', user.username)
-        localStorage.setItem('userId', user.id)
-        localStorage.setItem('loginIsAdmin', user.isAdmin)
-        localStorage.setItem("accessToken", user.token)
-      },
     }
   }
 </script>
 
 <style scoped>
-  .login {
-    background-image: url("../assets/background.svg");
-    background-color: rgba(255, 255, 255, .5);
-    height: 100vh;
-    width: 100vw;
-  }
-
   .input-box {
     width: 165px;
+  }
+
+  .login-pic {
+    background-image: url("../assets/login.jpg");
+    background-color: rgba(100, 100, 100, .6);
+    width: 40%;
+    position: absolute;
+    top: 25%;
+    left: 15%;
+    bottom: 25%;
   }
 
   .login-title {
@@ -122,7 +118,7 @@
   .login-content {
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 80%;
     padding: 30px 20px;
     width: 300px;
     border-radius: .4em;

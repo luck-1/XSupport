@@ -1,7 +1,7 @@
 package com.xsupport.service;
 
 import com.xsupport.dao.MyMapper;
-import com.xsupport.system.returncode.ReturnCode;
+import com.xsupport.system.result.ReturnCode;
 import org.apache.ibatis.exceptions.TooManyResultsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

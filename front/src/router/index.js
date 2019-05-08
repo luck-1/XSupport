@@ -66,6 +66,7 @@ const router = new Router({
       ]
     },
     {path: '/login', name: 'login', component: () => import('../page/login')},
+    {path: '/swagger-ui.html', name: 'swagger', component: () => import('../page/manage/swagger')},
     {path: '/404', component: () => import('../page/404')},
     {path: '*', redirect: '/404'}
   ]

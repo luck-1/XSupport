@@ -184,8 +184,8 @@
         selectList: [],
         pageTotal: 0,
         userList: [],
-        loginIsAdmin: localStorage.getItem('loginIsAdmin'),
-        loginUserId: localStorage.getItem('userId'),
+        loginIsAdmin: JSON.parse(localStorage.getItem('user')).isAdmin,
+        loginUserId: JSON.parse(localStorage.getItem('user')).id,
         userInfo: {
           id: null,
           username: null,

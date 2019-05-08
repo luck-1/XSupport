@@ -10,7 +10,7 @@ import com.xsupport.model.http.FindUserParam;
 import com.xsupport.model.http.PasswordParam;
 import com.xsupport.model.http.LoginParam;
 import com.xsupport.system.exception.CustomException;
-import com.xsupport.system.returncode.ReturnCode;
+import com.xsupport.system.result.ReturnCode;
 import org.springframework.stereotype.Service;
 import com.xsupport.service.manage.UserService;
 import com.xsupport.service.AbstractService;

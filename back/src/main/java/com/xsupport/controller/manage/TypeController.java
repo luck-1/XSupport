@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import com.xsupport.service.manage.TypeService;
-import com.xsupport.system.returncode.ReturnCode;
+import com.xsupport.system.result.ReturnCode;
 import java.util.List;
 
 /**

@@ -6,7 +6,7 @@ import com.xsupport.model.http.FindUserParam;
 import com.xsupport.model.http.PasswordParam;
 import com.xsupport.model.http.LoginParam;
 import com.xsupport.model.manage.User;
-import com.xsupport.system.returncode.ReturnCode;
+import com.xsupport.system.result.ReturnCode;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.Api;

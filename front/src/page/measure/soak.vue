@@ -30,6 +30,7 @@
   import {soakService, typeService,exportService} from '../../api/service'
   import {mapState} from 'vuex'
   import store from '../../vuex/store'
+  import {common} from '../../utils/common'
 
   export default {
     name: "soak",
@@ -46,7 +47,7 @@
           tooltip: {formatter: "{a} <br/>{b} : {c}%"},
           toolbox: websocketUtil.toolbox,
           grid: websocketUtil.grid,
-          series: [{name: '水位', type: 'gauge', detail: {formatter: '{value}%'}, data: [{value: 0, name: '水位'}]}]
+          series: [{name: '水位', type: 'gauge', detail: {formatter: '{value}%'}, data: [{value: null, name: '水位'}]}]
         },
         rightOption: {
           title: {text: '雨量流量关系图', subtext: '数据来自西安兰特水电测控技术有限公司', x: 'center'},
@@ -117,10 +118,11 @@
         this.rightOption.series[0].data = this.flowData
         this.rightOption.series[1].data = this.rainfallData
       },
-      getLeftData() {
-        soakService.findNewestData({id: this.bigType}).then(res => {
+      async getLeftData() {
+        await soakService.findNewestData().then(res => {
           if (res.code === 0) {
             this.leftOption.series[0].data[0].value = res.obj.value
+            this.leftOption.series[0].data[0].name = common.getTime(res.obj.createTime)
           }
         })
       },

@@ -5,7 +5,7 @@ import javax.annotation.Resource;
 import com.xsupport.jpa.manage.UserMapper;
 import com.xsupport.model.manage.User;
 import com.xsupport.system.exception.CustomException;
-import com.xsupport.system.returncode.ReturnCode;
+import com.xsupport.system.result.ReturnCode;
 import org.springframework.stereotype.Service;
 import com.xsupport.service.AbstractService;
 import com.xsupport.service.manage.SysWarnService;

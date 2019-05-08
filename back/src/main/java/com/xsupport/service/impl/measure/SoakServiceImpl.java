@@ -22,10 +22,13 @@ public class SoakServiceImpl extends AbstractService<Soak> implements SoakServic
     @Resource
     private SoakMapper soakMapper;
 
-
     @Override
     public Soak findNewestData(){
-        return soakDao.findNewestData();
+        Soak soak = soakDao.findNewestData();
+        if(soak == null){
+            soak = new Soak(0f,0f);
+        }
+        return soak;
     }
 	
 }

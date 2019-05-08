@@ -10,7 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import com.xsupport.model.measure.Gas;;
 import com.xsupport.service.measure.GasService;
-import com.xsupport.system.returncode.ReturnCode;
+import com.xsupport.system.result.ReturnCode;
 
 /**
  * @author lxc

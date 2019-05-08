@@ -1,4 +1,4 @@
-package com.xsupport.system.returncode;
+package com.xsupport.system.result;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

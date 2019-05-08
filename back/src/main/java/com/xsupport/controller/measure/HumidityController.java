@@ -12,7 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import com.xsupport.model.measure.Humidity;
 import com.xsupport.service.measure.HumidityService;
-import com.xsupport.system.returncode.ReturnCode;
+import com.xsupport.system.result.ReturnCode;
 
 /**
  * @author lxc

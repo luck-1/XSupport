@@ -3,7 +3,7 @@ package com.xsupport.service.impl.manage;
 import javax.annotation.Resource;
 
 import com.xsupport.system.exception.CustomException;
-import com.xsupport.system.returncode.ReturnCode;
+import com.xsupport.system.result.ReturnCode;
 import org.springframework.stereotype.Service;
 import com.xsupport.service.AbstractService;
 import com.xsupport.service.manage.TypeService;

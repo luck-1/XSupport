@@ -78,4 +78,10 @@ public class User implements Serializable {
     @ApiModelProperty(value="备注")
     @Column(name = "remark")
     private String remark;
+
+    @Transient
+    @ApiModelProperty(value="token")
+    private String token;
+
+
 }

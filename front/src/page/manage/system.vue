@@ -2,11 +2,8 @@
   <Card>
     <Row>
       <el-col :span="17">
-<!--        <el-tooltip content="刷新" placement="bottom">-->
-<!--          <el-button type="primary" size="mini" @click="getRightData" icon="el-icon-refresh" circle></el-button>-->
-<!--        </el-tooltip>-->
         <el-tooltip content="导出" placement="bottom">
-          <el-button type="success" size="mini" @click="exportExcel(-1)" icon="el-icon-download" circle></el-button>
+          <el-button type="success" size="" @click="exportExcel(-1)" icon="el-icon-download" circle></el-button>
         </el-tooltip>
       </el-col>
       <el-table border size="small" :data="warnData" hit height="calc(100vh - 180px)">
@@ -16,7 +13,8 @@
         <el-table-column align="center" label="操作人" sortable width="120" prop="optionUser"></el-table-column>
         <el-table-column align="center" label="异常类型" width="120" prop="exceptionLocation"
                          :filters="[{text: '温度异常', value: 0 },{text: '湿度异常', value: 1 }, { text: '浸润异常', value: 2 },{text: '金气异常', value: 3}]"
-                         :filter-method="(value,row) => row.exceptionLocation === value" filter-placement="bottom-start" :filter-multiple="true" >
+                         :filter-method="(value,row) => row.exceptionLocation === value" filter-placement="bottom-start"
+                         :filter-multiple="true">
           <template slot-scope="{row}">
             <el-tag type="info">
               <span v-if="row.exceptionLocation === 0">温度异常</span>
@@ -31,7 +29,8 @@
         <el-table-column align="center" label="阈值" width="120" prop="limitValue"></el-table-column>
         <el-table-column align="center" label="异常状态" width="120" prop="exceptionState"
                          :filters="[{text: '未处理', value: 0 },{text: '正在处理', value: 1 }, { text: '已处理', value: 2 }]"
-                         :filter-method="(value,row) => row.exceptionState === value" filter-placement="bottom-start" :filter-multiple="true">
+                         :filter-method="(value,row) => row.exceptionState === value" filter-placement="bottom-start"
+                         :filter-multiple="true">
           <template slot-scope="{row}">
             <el-tag v-if="row.exceptionState === 0" type="danger" class="tag-min"><span>未处理</span></el-tag>
             <el-tag v-else-if="row.exceptionState === 1" type="warning" class="tag-min"><span>正在处理</span></el-tag>
@@ -42,13 +41,16 @@
         <el-table-column align="center" label="修改状态" fixed="right" width="150">
           <template slot-scope="{row}">
             <el-tooltip content="未处理" placement="top">
-              <Button @click="changeState(row,0)" icon="md-create" type="error" size="small" :disabled="isDisable(row,0)"></Button>
+              <Button @click="changeState(row,0)" icon="md-create" type="error" size="small"
+                      :disabled="isDisable(row,0)"></Button>
             </el-tooltip>
             <el-tooltip content="正在处理" placement="top">
-              <Button @click="changeState(row,1)" icon="md-create" type="warning" size="small" :disabled="isDisable(row,1)"></Button>
+              <Button @click="changeState(row,1)" icon="md-create" type="warning" size="small"
+                      :disabled="isDisable(row,1)"></Button>
             </el-tooltip>
             <el-tooltip content="已处理" placement="top">
-              <Button @click="changeState(row,2)" icon="md-create" type="success" size="small" :disabled="isDisable(row,2)"></Button>
+              <Button @click="changeState(row,2)" icon="md-create" type="success" size="small"
+                      :disabled="isDisable(row,2)"></Button>
             </el-tooltip>
           </template>
         </el-table-column>
@@ -64,7 +66,7 @@
 </template>
 
 <script>
-  import {systemService,exportService} from '../../api/service'
+  import {systemService, exportService} from '../../api/service'
 
   export default {
     name: "system",
@@ -94,7 +96,7 @@
       changeState(row, state) {
         systemService.changeState({id: row.id, state: state, userId: this.userId}).then(() => this.findAll())
       },
-      isDisable(row,value){
+      isDisable(row, value) {
         return row.exceptionState === value
       },
       pageChange(page) {

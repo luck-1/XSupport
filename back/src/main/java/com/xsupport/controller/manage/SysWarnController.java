@@ -7,7 +7,6 @@ import javax.validation.Valid;
 import com.xsupport.model.http.ExceptionStateParam;
 import com.xsupport.model.http.UpdateRemarkParam;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -21,7 +20,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import com.xsupport.model.manage.SysWarn;
 import com.xsupport.service.manage.SysWarnService;
-import com.xsupport.system.returncode.ReturnCode;
+import com.xsupport.system.result.ReturnCode;
 
 /**
  * @author lxc

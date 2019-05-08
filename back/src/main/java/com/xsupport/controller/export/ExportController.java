@@ -1,7 +1,7 @@
 package com.xsupport.controller.export;
 
 import com.xsupport.service.export.ExportService;
-import com.xsupport.system.returncode.ReturnCode;
+import com.xsupport.system.result.ReturnCode;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;

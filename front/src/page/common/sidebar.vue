@@ -41,7 +41,8 @@
               {title: "金气测量", icon: "iconfont icon-youduqiti", path: "/measure/gas"}
             ]
           },
-          {title: "系统管理", icon: "iconfont icon-yichang", path: "/system", subs: null}
+          {title: "系统管理", icon: "iconfont icon-yichang", path: "/system", subs: null},
+          {title: "接口调试", icon: "iconfont icon-yichang", path: "/swagger-ui.html", subs: null}
         ]
       }
     },

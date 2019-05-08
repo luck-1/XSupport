@@ -50,14 +50,14 @@ public class ExportServiceImpl implements ExportService {
 
     @Override
     public void exportExcel(Integer bigType) {
-        XSSFRow row;
+
         XSSFWorkbook workbook = getWorkbook();
         XSSFSheet sheet = getSheet(workbook, bigType);
         XSSFCellStyle style = getStyle(workbook);
         List<Map<String, String>> dataList = getData(bigType);
 
         List<String> headerList = new ArrayList<>();
-        row = sheet.getRow(HEADER_ROW);
+        XSSFRow row = sheet.getRow(HEADER_ROW);
         for (int i = 0; i < row.getLastCellNum(); i++) {
             headerList.add(row.getCell(i).getStringCellValue());
         }
@@ -74,8 +74,7 @@ public class ExportServiceImpl implements ExportService {
                 String key = headerList.get(j);
                 if (map.containsKey(key)) {
 
-                    String value = map.get(key);
-                    cell.setCellValue(value);
+                    cell.setCellValue(map.get(key));
                 } else {
                     if (j == 0) {
                         cell.setCellValue(i + 1);

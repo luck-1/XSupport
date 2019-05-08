@@ -9,7 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import com.xsupport.model.measure.Soak;
 import com.xsupport.service.measure.SoakService;
-import com.xsupport.system.returncode.ReturnCode;
+import com.xsupport.system.result.ReturnCode;
 
 /**
  * @author lxc
@@ -25,7 +25,7 @@ public class  SoakController {
     private SoakService soakService;
 
     @GetMapping("findNewestData")
-    @ApiOperation(value = "查询所有")
+    @ApiOperation(value = "最新数据")
     public ReturnCode findNewestData() {
         Soak soak= soakService.findNewestData();
         return new ReturnCode.Builder().object(soak).success().msg("查询成功").build();
