@@ -1,5 +1,5 @@
 <template>
-  <div class="video-page">
+  <div class="all">
     <video id="video-box" autoplay ></video>
     <el-button class="change-btn" @click="changeState" size="mini" type="warning">
       <span v-if="stop">打开摄像</span>
@@ -42,9 +42,14 @@
 </script>
 
 <style scoped>
-  .video-page, #video-box {
-    height: 100%;
-    width: 100%;
+  #video-box {
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    top: 10%;
+    bottom: 10px;
+    height: 75%;
+    width: 75%;
   }
 
   .change-btn {

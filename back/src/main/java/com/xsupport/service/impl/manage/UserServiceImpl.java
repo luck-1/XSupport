@@ -11,6 +11,7 @@ import com.xsupport.model.http.PasswordParam;
 import com.xsupport.model.http.LoginParam;
 import com.xsupport.system.exception.CustomException;
 import com.xsupport.system.result.ReturnCode;
+import com.xsupport.system.token.TokenUtil;
 import org.springframework.stereotype.Service;
 import com.xsupport.service.manage.UserService;
 import com.xsupport.service.AbstractService;
@@ -45,6 +46,9 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
         if (user.getIsForbidden() == null ? false : user.getIsForbidden()) {
             throw new CustomException(new ReturnCode.Builder().failed().msg("该用户已被禁用！").build());
         }
+//        String token = TokenUtil.createToken(user);
+        String token = "xsupport";
+        user.setToken(token);
         return user;
     }
 
@@ -75,21 +79,21 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void deleteUsersById(List<String> idList){
+    public void deleteUsersById(List<String> idList) {
         userMapper.deleteUsersByIdIn(idList);
     }
 
     @Override
-    public PageInfo findByCondition(FindUserParam findUserParam){
-        PageHelper.startPage(findUserParam.getPage(),findUserParam.getSize());
-        List<User> userList = userDao.findByConditions(findUserParam.getName(),findUserParam.getPhone());
+    public PageInfo findByCondition(FindUserParam findUserParam) {
+        PageHelper.startPage(findUserParam.getPage(), findUserParam.getSize());
+        List<User> userList = userDao.findByConditions(findUserParam.getName(), findUserParam.getPhone());
         PageInfo pageInfo = new PageInfo(userList);
         return pageInfo;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public String changeForbiddenState(String id){
+    public String changeForbiddenState(String id) {
         User user = userMapper.getOne(id);
         if (user == null) {
             throw new CustomException(new ReturnCode.Builder().failed().msg("用户不存在！").build());
@@ -97,7 +101,7 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
         Boolean isForbidden = user.getIsForbidden();
         user.setIsForbidden(isForbidden != null && !isForbidden);
         userMapper.save(user);
-        return user.getIsForbidden() ? "禁用成功" : "启用成功" ;
+        return user.getIsForbidden() ? "禁用成功" : "启用成功";
     }
 
 }

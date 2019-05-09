@@ -125,7 +125,6 @@
         await this.getRightData()
         await this.getLeftData(this.rightData)
         await this.findByBigTypeAndSubIndex()
-
       },
       getRightData() {
         return temperatureService.findAll(this.searchForm).then(res => {
@@ -136,7 +135,13 @@
         })
       },
       getLeftData(list) {
-        list.forEach(item => {
+        let newList = list
+        if(newList.length < this.MAX_POINT_COUNT){
+          for (let i = newList.length;i < this.MAX_POINT_COUNT;i++) {
+            newList.push({createTime:new Date(),value: 0})
+          }
+        }
+        newList.forEach(item => {
           this.option.xAxis.data.push(common.getTime(item.createTime))
           this.option.series[0].data.push(item.value)
         })

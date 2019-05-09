@@ -77,14 +77,15 @@
             this.loading = true
             userService.login(this.form).then(res => {
               if (res.code === 0) {
-                this.localStorage.setItem('user', JSON.stringify(res.obj))
+                localStorage.setItem('user', JSON.stringify(res.obj))
+                localStorage.setItem('token', res.obj.token)
                 this.$router.push('/')
                 this.$Notice.info(this.notice.successWelcome)
                 this.$Notice.info(this.notice.successInfo)
               } else {
-                this.loading = false
-                this.password = null
+                this.form.password = null
               }
+              this.loading = false
             })
           }
         })

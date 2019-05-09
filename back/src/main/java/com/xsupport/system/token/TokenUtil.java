@@ -24,6 +24,9 @@ import java.util.Properties;
  */
 public class TokenUtil {
     private static Logger log = LoggerFactory.getLogger(TokenUtil.class);
+
+    private static final String KEY = "xsupport";
+
     private static Token webToken = new Token();
 
     static {
@@ -39,13 +42,7 @@ public class TokenUtil {
         }
     }
 
-    /**
-     * @param key
-     * @param obj
-     * @return
-     * @desc 生成一个token值
-     */
-    public static String getWebToken(String key, Object obj) {
+    public static String createToken(Object obj) {
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
         // 生成签名密钥
@@ -53,7 +50,7 @@ public class TokenUtil {
         Key signingKey = new SecretKeySpec(apiKeySecretBytes, SignatureAlgorithm.HS256.getJcaName());
         // 添加构成JWT的参数
 
-        JwtBuilder builder = Jwts.builder().setHeaderParam("typ", "JWT").claim(key, obj).setIssuer(webToken.getName())
+        JwtBuilder builder = Jwts.builder().setHeaderParam("typ", "JWT").claim(KEY, obj).setIssuer(webToken.getName())
                 .signWith(SignatureAlgorithm.HS256, signingKey);
         // 添加Token过期时间
         long TTLMillis = (long)webToken.getExpiresSecond() * 24 * 60 * 60 * 1000;
