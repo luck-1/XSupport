@@ -1,6 +1,6 @@
 <template>
   <div class="home-header">
-    <div class="header-btn" @click="collapseChage()">
+    <div class="header-btn" @click="collapseChange">
       <i class="el-icon-menu"></i>
     </div>
     <div class="header-title"><span>尾矿库坝体安全性能检测平台</span></div>
@@ -60,10 +60,9 @@
       }
       return {
         collapse: false,
-        username: localStorage.getItem('username'),
+        username: JSON.parse(localStorage.getItem('user')).name,
         dialogShow: false,
         passwordParam: {
-          id: localStorage.getItem('userId'),
           oldPassword: '',
           newPassword: '',
           againPassword: '',
@@ -76,7 +75,7 @@
       }
     },
     methods: {
-      collapseChage() {
+      collapseChange() {
         this.collapse = !this.collapse
         bus.$emit("collapse", this.collapse)
       },

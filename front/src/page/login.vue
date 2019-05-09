@@ -95,6 +95,9 @@
 </script>
 
 <style scoped>
+  .all{
+    background-color: #666;
+  }
   .input-box {
     width: 165px;
   }

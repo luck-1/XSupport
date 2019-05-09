@@ -38,11 +38,12 @@
               {title: "温度测量", icon: "iconfont icon-wendu", path: "/measure/temperature"},
               {title: "湿度测量", icon: "iconfont icon-shidu", path: "/measure/humidity"},
               {title: "浸润测量", icon: "iconfont icon-jinrunxian", path: "/measure/soak"},
-              {title: "金气测量", icon: "iconfont icon-youduqiti", path: "/measure/gas"}
+              {title: "金气测量", icon: "iconfont icon-youduqiti", path: "/measure/gas"},
+              {title: "位移测量", icon: "iconfont icon-youduqiti", path: "/measure/displacement"}
             ]
           },
           {title: "系统管理", icon: "iconfont icon-yichang", path: "/system", subs: null},
-          // {title: "接口调试", icon: "iconfont icon-yichang", path: "/swagger-ui.html", subs: null}
+          {title: "接口调试", icon: "iconfont icon-yichang", path: "/swagger-ui.html", subs: null}
         ]
       }
     },

@@ -17,7 +17,7 @@
             </el-select>
           </el-input>
           <el-tooltip content="设置阈值" placement="bottom">
-            <el-button type="danger" :disabled="! leftInputModel" size="mini" @click="updateLimitValue(leftBigType,leftSubIndex,leftInputModel)"
+            <el-button type="danger" :disabled="disableUpdateLimitBtm(leftInputModel)" size="mini" @click="updateLimitValue(leftBigType,leftSubIndex,leftInputModel)"
                        icon="el-icon-edit"></el-button>
           </el-tooltip>
         </el-col>
@@ -41,7 +41,7 @@
             </el-select>
           </el-input>
           <el-tooltip content="设置阈值" placement="bottom">
-            <el-button type="danger" :disabled="! rightInputModel" size="mini" @click="updateLimitValue(rightBigType,rightSubIndex,rightInputModel)"
+            <el-button type="danger" :disabled="disableUpdateLimitBtm(rightInputModel)" size="mini" @click="updateLimitValue(rightBigType,rightSubIndex,rightInputModel)"
                        icon="el-icon-edit"></el-button>
           </el-tooltip>
         </el-col>
@@ -64,6 +64,7 @@
     store,
     data() {
       return {
+        loginIsAdmin: JSON.parse(localStorage.getItem('user')).isAdmin,
         leftInputModel: null,
         rightInputModel: null,
         LIMIT_VALUE_LEFT_COLUMN: 0,
@@ -178,6 +179,9 @@
       exportExcel(bigType) {
         exportService.exportExcel(bigType)
       },
+      disableUpdateLimitBtm(inputModel){
+        return this.loginIsAdmin === 0 ? true : ! inputModel
+      }
     }
   }
 </script>

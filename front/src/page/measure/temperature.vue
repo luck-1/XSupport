@@ -18,7 +18,7 @@
                     :placeholder="'当前阈值：' + option.series[0].markLine.data[0].yAxis + ' ℃'">
           </el-input>
           <el-tooltip content="设置阈值" placement="bottom">
-            <el-button type="danger" :disabled="! inputModel" size="mini" @click="updateLimitValue"
+            <el-button type="danger" :disabled="disableUpdateLimitBtm(inputModel)" size="mini" @click="updateLimitValue"
                        icon="el-icon-edit"></el-button>
           </el-tooltip>
         </el-col>
@@ -75,6 +75,7 @@
     store,
     data() {
       return {
+        loginIsAdmin: JSON.parse(localStorage.getItem('user')).isAdmin,
         bigType: 0,
         leftChart: null,
         MAX_POINT_COUNT: 15,
@@ -141,10 +142,10 @@
             newList.push({createTime:new Date(),value: 0})
           }
         }
-        newList.forEach(item => {
-          this.option.xAxis.data.push(common.getTime(item.createTime))
-          this.option.series[0].data.push(item.value)
-        })
+        for (let i = newList.length - 1; i >= 0; i--) {
+          this.option.xAxis.data.push(common.getTime(newList[i].createTime))
+          this.option.series[0].data.push(newList[i].value)
+        }
       },
       findByBigTypeAndSubIndex() {
         return typeService.findByBigTypeAndSubIndex({bigType: this.bigType,subIndex: 0}).then(res => {
@@ -175,6 +176,9 @@
       exportExcel(bigType) {
         exportService.exportExcel(bigType)
       },
+      disableUpdateLimitBtm(inputModel){
+        return this.loginIsAdmin === 0 ? true : ! inputModel
+      }
     }
   }
 </script>

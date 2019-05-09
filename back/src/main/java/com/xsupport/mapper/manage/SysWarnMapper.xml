@@ -31,4 +31,7 @@
         ORDER BY createTime DESC
     </select>
 
+    <select id="findAll" resultType="com.xsupport.model.manage.SysWarn">
+        SELECT * FROM sys_warn ORDER BY createTime DESC
+    </select>
 </mapper>

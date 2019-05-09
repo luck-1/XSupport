@@ -2,11 +2,14 @@
   <Card>
     <Row>
       <el-col :span="17">
+        <el-tooltip content="刷新" placement="bottom">
+          <el-button type="primary" size="mini" @click="findAll" icon="el-icon-refresh" circle></el-button>
+        </el-tooltip>
         <el-tooltip content="导出" placement="bottom">
           <el-button type="success" size="" @click="exportExcel(-1)" icon="el-icon-download" circle></el-button>
         </el-tooltip>
       </el-col>
-      <el-table border size="small" :data="warnData" hit height="calc(100vh - 180px)">
+      <el-table border size="small" :data="warnData" hit height="calc(100vh - 220px)">
         <el-table-column align="center" type="index" label="序号" width="55"></el-table-column>
         <el-table-column align="center" label="异常时间" sortable width="150" prop="createTime"></el-table-column>
         <el-table-column align="center" label="更改时间" sortable width="150" prop="updateTime"></el-table-column>
@@ -21,6 +24,7 @@
               <span v-else-if="row.exceptionLocation === 1">湿度异常</span>
               <span v-else-if="row.exceptionLocation === 2">浸润异常</span>
               <span v-else-if="row.exceptionLocation === 3">金气异常</span>
+              <span v-else-if="row.exceptionLocation === 4">金气异常</span>
             </el-tag>
           </template>
         </el-table-column>
@@ -74,7 +78,7 @@
       return {
         warnData: [],
         pageTotal: null,
-        userId: localStorage.getItem("userId"),
+        loginUserId: JSON.parse(localStorage.getItem("user")).id,
         searchForm: {
           page: 1,
           size: 15
@@ -94,7 +98,8 @@
         })
       },
       changeState(row, state) {
-        systemService.changeState({id: row.id, state: state, userId: this.userId}).then(() => this.findAll())
+        debugger
+        systemService.changeState({id: row.id, state: state, userId: this.loginUserId}).then(() => this.findAll())
       },
       isDisable(row, value) {
         return row.exceptionState === value

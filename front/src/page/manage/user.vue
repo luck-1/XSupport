@@ -14,8 +14,8 @@
       </FormItem>
     </Form>
 
-    <Button @click="showDialog(true)" type="primary" icon="md-add" :disabled="loginIsAdmin === '0'">添加用户</Button>
-    <Button @click="deleteList" type="error" icon="md-trash" :disabled="loginIsAdmin ==='0'">批量删除</Button>
+    <Button @click="showDialog(true)" type="primary" icon="md-add" :disabled="loginIsAdmin === 0">添加用户</Button>
+    <Button @click="deleteList" type="error" icon="md-trash" :disabled="loginIsAdmin ===0">批量删除</Button>
 
     <Row>
       <el-table border size="small" :data="userList" height="calc(100vh - 265px)" loading
@@ -266,7 +266,7 @@
         this.selectList = selectList
       },
       optionBtnIsDisabled(row) {
-        return this.loginIsAdmin === '1' ? false : (row.id !== this.loginUserId)
+        return this.loginIsAdmin === 1 ? false : (row.id !== this.loginUserId)
       },
       pageChange(page) {
         this.searchForm.pageNum = page

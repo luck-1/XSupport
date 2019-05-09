@@ -53,14 +53,13 @@ public class WebsocketServiceImpl {
 
     private static final Random random = new Random();
 
-//    @Scheduled(fixedDelay = 1000L * 15)
+//    @Scheduled(fixedDelay = 1000L * 5)
     public void sendData() {
 
-//        Integer bigType = 0;
+//        Integer bigType = 2;
         Integer bigType = random.nextInt(5);
         Integer subIndex = 0;
         Float value = 0f;
-        Float limit = 0f;
         Type type = null;
         switch (bigType) {
             case 0:
@@ -93,8 +92,8 @@ public class WebsocketServiceImpl {
         String sendData = JSON.toJSONString(new SendTextParam(bigType, subIndex, value));
         websocketUtil.sendMessageForAllClient(sendData);
         System.out.println(type.getName() + "：" + sendData);
-        if (value >= limit) {
-            SysWarn sysWarn = new SysWarn(bigType,subIndex,value,limit);
+        if (value >= type.getLimitValue()) {
+            SysWarn sysWarn = new SysWarn(bigType,subIndex,value,type.getLimitValue());
             sysWarnMapper.save(sysWarn);
         }
     }

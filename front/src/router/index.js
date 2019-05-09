@@ -28,7 +28,7 @@ const router = new Router({
           path: 'video',
           name: 'video',
           component: () => import('../page/manage/video'),
-          meta: {title: "视频监控", keepAlive: keepAlive, requireAuth: requireAuth}
+          meta: {title: "视频监控", keepAlive: noKeepAlive, requireAuth: requireAuth}
         },
         {
           path: 'map',
@@ -65,13 +65,35 @@ const router = new Router({
           name: 'gas',
           component: () => import('../page/measure/gas'),
           meta: {title: "金气测量", keepAlive: keepAlive, requireAuth: requireAuth}
+        },
+        {
+          path: 'measure/displacement',
+          name: 'displacement',
+          component: () => import('../page/measure/displacement'),
+          meta: {title: "位移测量", keepAlive: keepAlive, requireAuth: requireAuth}
         }
       ]
     },
-    {path: '/login', name: 'login', component: () => import('../page/login'), meta: {title: "登录", keepAlive: noKeepAlive, requireAuth: noRequireAuth}},
-    {path: '/swagger-ui.html', name: 'swagger', component: () => import('../page/manage/swagger')},
-    {path: '/404', component: () => import('../page/404')},
-    {path: '*', redirect: '/404'}
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('../page/login'),
+      meta: {title: "登录", keepAlive: noKeepAlive, requireAuth: noRequireAuth}
+    },
+    {
+      path: '/swagger',
+      name: 'swagger',
+      component: () => import('../page/manage/swagger'),
+      redirect: 'http://localhost:8082/swagger-ui.html',
+      meta: {title: "接口调试", keepAlive: noKeepAlive, requireAuth: noRequireAuth}
+    },
+    {
+      path: '/404',
+      component: () => import('../page/404')
+    },
+    {
+      path: '*', redirect: '/404'
+    }
   ]
 })
 
@@ -82,4 +104,5 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
+
 export default router

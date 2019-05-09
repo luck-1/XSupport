@@ -28,6 +28,11 @@ import java.util.*;
 @Service
 public class ExportServiceImpl implements ExportService {
 
+
+    private static final Integer START_ROW = 1;
+
+    private static final Integer HEADER_ROW = 0;
+
     @Resource
     private TemperatureDao temperatureDao;
 
@@ -42,11 +47,6 @@ public class ExportServiceImpl implements ExportService {
 
     @Resource
     private SysWarnDao sysWarnDao;
-
-    private static final Integer START_ROW = 1;
-
-    private static final Integer HEADER_ROW = 0;
-
 
     @Override
     public void exportExcel(Integer bigType) {

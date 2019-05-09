@@ -14,6 +14,8 @@ import com.xsupport.jpa.manage.SysWarnMapper;
 import com.xsupport.model.manage.SysWarn;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * @author lxc
  * @date 2019/5/1
@@ -58,6 +60,10 @@ public class SysWarnServiceImpl extends AbstractService<SysWarn> implements SysW
         }
         sysWarn.setRemark(remark);
         sysWarnMapper.save(sysWarn);
+    }
+
+    public List<SysWarn> findAll(){
+        return sysWarnDao.findAll();
     }
 	
 }
