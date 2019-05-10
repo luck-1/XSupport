@@ -3,6 +3,7 @@ package com.xsupport.dao.measure;
 import org.apache.ibatis.annotations.Mapper;
 import com.xsupport.dao.MyMapper;
 import com.xsupport.model.measure.DisplacementGroup;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * @author lxc
@@ -12,5 +13,5 @@ import com.xsupport.model.measure.DisplacementGroup;
 @Mapper
 public interface DisplacementGroupDao extends MyMapper<DisplacementGroup> {
 
-  
+    DisplacementGroup findNewestData();
 }

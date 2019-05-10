@@ -2,7 +2,7 @@ package com.xsupport.service.impl.measure;
 
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
-import com.xsupport.service.AbstractService;
+import com.xsupport.service.impl.AbstractService;
 import com.xsupport.service.measure.TemperatureService;
 import com.xsupport.dao.measure.TemperatureDao;
 import com.xsupport.jpa.measure.TemperatureMapper;

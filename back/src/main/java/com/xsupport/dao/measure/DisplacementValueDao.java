@@ -12,5 +12,5 @@ import com.xsupport.model.measure.DisplacementValue;
 @Mapper
 public interface DisplacementValueDao extends MyMapper<DisplacementValue> {
 
-  
+    DisplacementValue findById();
 }

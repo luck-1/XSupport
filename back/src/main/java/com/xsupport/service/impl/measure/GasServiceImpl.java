@@ -5,7 +5,7 @@ import javax.annotation.Resource;
 import com.xsupport.jpa.manage.TypeMapper;
 import com.xsupport.model.manage.Type;
 import org.springframework.stereotype.Service;
-import com.xsupport.service.AbstractService;
+import com.xsupport.service.impl.AbstractService;
 import com.xsupport.service.measure.GasService;
 import com.xsupport.dao.measure.GasDao;
 import com.xsupport.jpa.measure.GasMapper;

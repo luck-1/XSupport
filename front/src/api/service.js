@@ -59,6 +59,12 @@ export const typeService = {
 
 }
 
+export const displacementService ={
+
+  findNewestData: () => req.get('displacement/findNewestData'),
+
+}
+
 export const exportService = {
 
   exportExcel: (bigType) => req.get('export/exportExcel/'+ bigType),

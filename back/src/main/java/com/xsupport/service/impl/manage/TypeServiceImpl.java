@@ -5,7 +5,7 @@ import javax.annotation.Resource;
 import com.xsupport.system.exception.CustomException;
 import com.xsupport.system.result.ReturnCode;
 import org.springframework.stereotype.Service;
-import com.xsupport.service.AbstractService;
+import com.xsupport.service.impl.AbstractService;
 import com.xsupport.service.manage.TypeService;
 import com.xsupport.dao.manage.TypeDao;
 import com.xsupport.jpa.manage.TypeMapper;

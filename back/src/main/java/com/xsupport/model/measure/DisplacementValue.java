@@ -39,4 +39,14 @@ public class DisplacementValue implements Serializable {
     @ApiModelProperty(value="z值")
     @Column(name = "z")
     private Float z;
+
+    public DisplacementValue(){
+    }
+
+    public DisplacementValue(String id,Float x,Float y,Float z){
+        this.id = id;
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
 }

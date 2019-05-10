@@ -2,6 +2,7 @@ package com.xsupport.jpa.measure;
 
 import com.xsupport.jpa.MyBaseJpaDao;
 import com.xsupport.model.measure.DisplacementGroup;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  * @author lxc
@@ -10,6 +11,5 @@ import com.xsupport.model.measure.DisplacementGroup;
  */
 public interface DisplacementGroupMapper extends MyBaseJpaDao<DisplacementGroup,String> {
 
-
-
+    DisplacementGroup findNewestData();
 }

@@ -10,6 +10,5 @@ import com.xsupport.model.measure.DisplacementEvery;
  */
 public interface DisplacementEveryMapper extends MyBaseJpaDao<DisplacementEvery,String> {
 
-
-
+    DisplacementEvery findDisplacementEveryByGroupIdAndLineAndPoint(String groupId,Integer line,Integer point);
 }

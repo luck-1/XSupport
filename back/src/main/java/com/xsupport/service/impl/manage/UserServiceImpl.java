@@ -11,10 +11,9 @@ import com.xsupport.model.http.PasswordParam;
 import com.xsupport.model.http.LoginParam;
 import com.xsupport.system.exception.CustomException;
 import com.xsupport.system.result.ReturnCode;
-import com.xsupport.system.token.TokenUtil;
 import org.springframework.stereotype.Service;
 import com.xsupport.service.manage.UserService;
-import com.xsupport.service.AbstractService;
+import com.xsupport.service.impl.AbstractService;
 import com.xsupport.model.manage.User;
 import org.springframework.transaction.annotation.Transactional;
 

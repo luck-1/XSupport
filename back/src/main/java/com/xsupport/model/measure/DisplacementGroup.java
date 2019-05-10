@@ -2,8 +2,12 @@ package com.xsupport.model.measure;
 
 import java.util.Date;
 import java.io.Serializable;
+import java.util.List;
+
 import lombok.Data;
+
 import javax.persistence.*;
+
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
@@ -18,22 +22,32 @@ import io.swagger.annotations.ApiModelProperty;
 @Entity
 @DynamicUpdate
 @DynamicInsert
-@Table(name="displacement_group")
+@Table(name = "displacement_group")
 public class DisplacementGroup implements Serializable {
     private static final long serialVersionUID = 42L;
 
     @Id
     @GeneratedValue(generator = "JDBC")
     @GenericGenerator(name = "JDBC", strategy = "uuid")
-    @ApiModelProperty(value="id")
+    @ApiModelProperty(value = "id")
     @Column(name = "id")
     private String id;
 
-    @ApiModelProperty(value="采集时间")
+    @ApiModelProperty(value = "采集时间")
     @Column(name = "createTime")
     private Date createTime;
 
-    @ApiModelProperty(value="备注")
+    @ApiModelProperty(value = "备注")
     @Column(name = "remark")
     private String remark;
+
+    @Transient
+    private List<DisplacementEvery> every;
+
+    public DisplacementGroup() {
+    }
+
+    public DisplacementGroup(String id) {
+        this.id = id;
+    }
 }

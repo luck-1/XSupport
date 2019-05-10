@@ -2,7 +2,7 @@ package com.xsupport.service.impl.measure;
 
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
-import com.xsupport.service.AbstractService;
+import com.xsupport.service.impl.AbstractService;
 import com.xsupport.service.measure.DisplacementValueService;
 import com.xsupport.dao.measure.DisplacementValueDao;
 import com.xsupport.jpa.measure.DisplacementValueMapper;

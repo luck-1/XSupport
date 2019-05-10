@@ -4,6 +4,8 @@ import org.apache.ibatis.annotations.Mapper;
 import com.xsupport.dao.MyMapper;
 import com.xsupport.model.measure.DisplacementEvery;
 
+import java.util.List;
+
 /**
  * @author lxc
  * @date 2019/5/9
@@ -12,5 +14,5 @@ import com.xsupport.model.measure.DisplacementEvery;
 @Mapper
 public interface DisplacementEveryDao extends MyMapper<DisplacementEvery> {
 
-  
+    List<DisplacementEvery> findByGroupId();
 }

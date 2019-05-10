@@ -7,7 +7,7 @@ import com.xsupport.model.manage.User;
 import com.xsupport.system.exception.CustomException;
 import com.xsupport.system.result.ReturnCode;
 import org.springframework.stereotype.Service;
-import com.xsupport.service.AbstractService;
+import com.xsupport.service.impl.AbstractService;
 import com.xsupport.service.manage.SysWarnService;
 import com.xsupport.dao.manage.SysWarnDao;
 import com.xsupport.jpa.manage.SysWarnMapper;

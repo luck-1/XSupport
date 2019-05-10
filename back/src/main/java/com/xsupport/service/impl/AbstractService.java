@@ -1,4 +1,4 @@
-package com.xsupport.service;
+package com.xsupport.service.impl;
 
 import com.xsupport.dao.MyMapper;
 import com.xsupport.system.result.ReturnCode;

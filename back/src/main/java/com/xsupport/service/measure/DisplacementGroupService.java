@@ -12,6 +12,7 @@ import com.xsupport.model.measure.DisplacementGroup;
 @Component
 public interface DisplacementGroupService extends Service<DisplacementGroup> {
 
+    DisplacementGroup findNewestData();
 
 
 }

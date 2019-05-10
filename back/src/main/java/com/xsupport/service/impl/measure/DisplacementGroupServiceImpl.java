@@ -2,7 +2,7 @@ package com.xsupport.service.impl.measure;
 
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
-import com.xsupport.service.AbstractService;
+import com.xsupport.service.impl.AbstractService;
 import com.xsupport.service.measure.DisplacementGroupService;
 import com.xsupport.dao.measure.DisplacementGroupDao;
 import com.xsupport.jpa.measure.DisplacementGroupMapper;
@@ -22,6 +22,13 @@ public class DisplacementGroupServiceImpl extends AbstractService<DisplacementGr
     @Resource
     private DisplacementGroupMapper displacementGroupMapper;
 
-
+    @Override
+    public DisplacementGroup findNewestData(){
+        DisplacementGroup displacementGroup = displacementGroupDao.findNewestData();
+        if(displacementGroup == null){
+            displacementGroup = new DisplacementGroup();
+        }
+        return displacementGroup;
+    }
 	
 }
