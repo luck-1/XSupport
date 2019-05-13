@@ -1,12 +1,12 @@
 <template>
   <div class="all">
     <div class="left">
-      <div id="displacement-left-top"></div>
-      <div id="displacement-left-bottom"></div>
+      <div class="displacement-pic"></div>
+      <div class="displacement" id="displacement-left-bottom"></div>
     </div>
     <div class="right">
-      <div id="displacement-right-top"></div>
-      <div id="displacement-right-bottom"></div>
+      <div class="displacement" id="displacement-right-top"></div>
+      <div class="displacement" id="displacement-right-bottom"></div>
     </div>
   </div>
 </template>
@@ -25,126 +25,72 @@
         xChart: null,
         yChart: null,
         zChart: null,
-        data: [],
-        xOption: {
-          title: {text: '坝体位移x变化情况', x: 'left'},
-          legend: {},
-          tooltip: {},
-          toolbox: websocketUtil.toolbox,
-          grid: websocketUtil.grid,
-          dataset: {
-            source: [
-              // ['displacement', '本次测量', '上次测量',],
-              // ['0', 1, 2],
-              // ['1', 2, 1],
-              // ['2', 86.4, 65.2],
-              // ['3', 72.4, 53.9],
-              // ['4', 43.3, 85.8],
-              // ['5', 83.1, 73.4],
-              // ['6', 86.4, 65.2],
-              // ['7', 72.4, 53.9],
-              // ['8', 72.4, 53.9],
-            ]
-          },
-          xAxis: {type: 'category'},
-          yAxis: {},
-          series: [
-            {type: 'bar'},
-            {type: 'bar'},
-          ]
-        },
-        yOption: {
-          title: {text: '坝体位移y变化情况', x: 'left'},
-          legend: {},
-          tooltip: {},
-          toolbox: websocketUtil.toolbox,
-          grid: websocketUtil.grid,
-          dataset: {
-            source: [
-              // ['displacement', '本次测量', '上次测量',],
-              // ['0', 1, 2],
-              // ['1', 2, 1],
-              // ['2', 86.4, 65.2],
-              // ['3', 72.4, 53.9],
-              // ['4', 43.3, 85.8],
-              // ['5', 83.1, 73.4],
-              // ['6', 86.4, 65.2],
-              // ['7', 72.4, 53.9],
-              // ['8', 72.4, 53.9],
-            ]
-          },
-          xAxis: {type: 'category'},
-          yAxis: {},
-          series: [
-            {type: 'bar'},
-            {type: 'bar'},
-          ]
-        },
-        zOption: {
-          title: {text: '坝体位移z变化情况', x: 'left'},
-          legend: {},
-          tooltip: {},
-          toolbox: websocketUtil.toolbox,
-          grid: websocketUtil.grid,
-          dataset: {
-            source: [
-              // ['displacement', '本次测量', '上次测量',],
-              // ['0', 1, 2],
-              // ['1', 2, 1],
-              // ['2', 86.4, 65.2],
-              // ['3', 72.4, 53.9],
-              // ['4', 43.3, 85.8],
-              // ['5', 83.1, 73.4],
-              // ['6', 86.4, 65.2],
-              // ['7', 72.4, 53.9],
-              // ['8', 72.4, 53.9],
-            ]
-          },
-          xAxis: {type: 'category'},
-          yAxis: {},
-          series: [
-            {type: 'bar'},
-            {type: 'bar'},
-          ]
-        },
+        xOption: null,
+        yOption: null,
+        zOption: null,
+        chartData: [],
+      }
+    },
+    computed: mapState(['displacementRecvData']),
+    watch: {
+      displacementRecvData(newValue) {
+        debugger
+        this.chartData = []
+        newValue.displacement.every.forEach(item => this.chartData.push(this.getDataItem(item.point, item.pointName, item.thisValueData, item.beforeValueData)))
+        this.init()
       }
     },
     mounted() {
-      this.getAllData()
+      this.findNewestData().then(() => this.init())
     },
     methods: {
-      async initChart(chart, option, element) {
-        chart = this.$echarts.init(document.getElementById(element))
-        chart.showLoading()
-        chart.hideLoading()
-        chart.setOption(option)
-      },
-      getAllData(){
-        this.getAxisData('x')
-        this.getAxisData('y')
-        this.getAxisData('z')
+      async init() {
+        debugger
+        this.xOption = this.getOption('x')
+        this.yOption = this.getOption('y')
+        this.zOption = this.getOption('z')
+        this.chartData.forEach(item => {
+          this.xOption.dataset.source.push([item.name, item.x, item.x0])
+          this.yOption.dataset.source.push([item.name, item.y, item.y0])
+          this.zOption.dataset.source.push([item.name, item.z, item.z0])
+        })
         this.initChart(this.xChart, this.xOption, 'displacement-right-top')
         this.initChart(this.yChart, this.yOption, 'displacement-left-bottom')
-        this.initChart(this.zChart, this.zOption, 'displacement-right-bottom')
+        this.initChart(this.xChart, this.zOption, 'displacement-right-bottom')
       },
-      async getAxisData(axis) {
-        let option = null
-        switch (axis) {
-          case 'x':
-            option = this.xOption;
-            break
-          case 'y':
-            option = this.yOption;
-            break
-          case 'z':
-            option = this.zOption;
-        }
+      async findNewestData() {
         let res = await displacementService.findNewestData()
         if (res.code === 0) {
-          option.dataset.source.push([axis, '本次测量', '上次测量'])
-          res.obj.forEach(item => {
-            option.dataset.source.push([item.name, item.thisValue[axis], item.beforeValue[axis]])
-          })
+          res.obj.every.forEach(item => this.chartData.push(this.getDataItem(item.point, item.pointName, item.thisValueData, item.beforeValueData)))
+        }
+      },
+      initChart(chart, option, element) {
+        chart = chart === null ? this.$echarts.init(document.getElementById(element)) : chart
+        chart.setOption(option)
+      },
+      getDataItem(index, name, thisValueData, beforeValueData) {
+        return {
+          index: index,
+          name: name,
+          x: thisValueData.x,
+          y: thisValueData.y,
+          z: thisValueData.z,
+          x0: beforeValueData.x,
+          y0: beforeValueData.y,
+          z0: beforeValueData.z
+        }
+      },
+      getOption(axisType) {
+        return {
+          title: {text: '坝体位移' + axisType + '变化情况', x: 'left'},
+          legend: {},
+          tooltip: {},
+          toolbox: websocketUtil.toolbox,
+          grid: websocketUtil.grid,
+          dataset: {source: [['displacement', '本次测量', '上次测量']]},
+          xAxis: {type: 'category'},
+          yAxis: {},
+          series: [{type: 'bar'}, {type: 'bar'}]
         }
       }
     }
@@ -152,23 +98,14 @@
 </script>
 
 <style scoped>
-  #displacement-left-top {
+  .displacement-pic {
+    background-image: url("../../assets/位移.jpg");
+    height: 45vh;
+    width: 100%;
+  }
+  .displacement {
     height: 45vh;
     width: 100%;
   }
 
-  #displacement-right-top {
-    height: 45vh;
-    width: 100%;
-  }
-
-  #displacement-left-bottom {
-    height: 45vh;
-    width: 100%;
-  }
-
-  #displacement-right-bottom {
-    height: 45vh;
-    width: 100%;
-  }
 </style>

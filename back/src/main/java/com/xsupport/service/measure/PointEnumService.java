@@ -1,8 +1,8 @@
 package com.xsupport.service.measure;
 
+import com.xsupport.model.measure.PointEnum;
 import org.springframework.stereotype.Component;
 import com.xsupport.service.Service;
-import com.xsupport.model.measure.DisplacementPointEnum;
 
 /**
  * @author lxc
@@ -10,7 +10,7 @@ import com.xsupport.model.measure.DisplacementPointEnum;
  * @description 位移测量点
  */
 @Component
-public interface DisplacementPointEnumService extends Service<DisplacementPointEnum> {
+public interface PointEnumService extends Service<PointEnum> {
 
 
 

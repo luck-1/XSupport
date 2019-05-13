@@ -3,6 +3,7 @@ package com.xsupport.dao.measure;
 import org.apache.ibatis.annotations.Mapper;
 import com.xsupport.dao.MyMapper;
 import com.xsupport.model.measure.DisplacementEvery;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -15,4 +16,7 @@ import java.util.List;
 public interface DisplacementEveryDao extends MyMapper<DisplacementEvery> {
 
     List<DisplacementEvery> findByGroupId();
+
+    DisplacementEvery findByGroupIdAndPoint(@Param(value = "groupId") String groupId,@Param(value = "point") Integer point);
+
 }

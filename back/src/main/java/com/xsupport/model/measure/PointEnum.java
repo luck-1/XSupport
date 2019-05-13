@@ -17,8 +17,8 @@ import io.swagger.annotations.ApiModelProperty;
 @Entity
 @DynamicUpdate
 @DynamicInsert
-@Table(name="displacement_point_enum")
-public class DisplacementPointEnum implements Serializable {
+@Table(name="point_enum")
+public class PointEnum implements Serializable {
     private static final long serialVersionUID = 42L;
 
     @Id
@@ -27,6 +27,10 @@ public class DisplacementPointEnum implements Serializable {
     @ApiModelProperty(value="id")
     @Column(name = "id")
     private String id;
+
+    @ApiModelProperty(value="code")
+    @Column(name = "code")
+    private Integer code;
 
     @ApiModelProperty(value="测量线")
     @Column(name = "line")

@@ -1,14 +1,13 @@
 package com.xsupport.controller.measure;
 
 import javax.annotation.Resource;
+import com.xsupport.model.measure.Displacement;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import com.xsupport.model.measure.DisplacementGroup;
-import com.xsupport.service.measure.DisplacementGroupService;
+import com.xsupport.service.measure.DisplacementService;
 import com.xsupport.system.result.ReturnCode;
 
 /**
@@ -17,20 +16,20 @@ import com.xsupport.system.result.ReturnCode;
  * @description 位移采集汇总记录
  */
 @RestController
-@RequestMapping("displacementGroup")
+@RequestMapping("displacement")
 @Api(description = "位移采集汇总记录")
-public class  DisplacementGroupController {
+public class DisplacementController {
 
     @Resource
-    private DisplacementGroupService displacementGroupService;
+    private DisplacementService displacementService;
 
     @GetMapping("findNewestData")
     @ApiOperation(value = "获得最新数据")
-	public ReturnCode detail() {
+	public ReturnCode findNewestData() {
 
-	    DisplacementGroup displacementGroup = displacementGroupService.findNewestData();
+	    Displacement displacement = displacementService.findNewestData();
 
-	    return new ReturnCode.Builder().object(displacementGroup).success().msg("查询成功").build();
+	    return new ReturnCode.Builder().object(displacement).success().msg("查询成功").build();
 	}
 
 }

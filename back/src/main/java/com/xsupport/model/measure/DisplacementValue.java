@@ -43,8 +43,7 @@ public class DisplacementValue implements Serializable {
     public DisplacementValue(){
     }
 
-    public DisplacementValue(String id,Float x,Float y,Float z){
-        this.id = id;
+    public DisplacementValue(Float x,Float y,Float z){
         this.x = x;
         this.y = y;
         this.z = z;

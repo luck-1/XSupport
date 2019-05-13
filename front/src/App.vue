@@ -19,7 +19,7 @@
       this.initWebSocket(this.webSocket)
     },
     methods: {
-      ...mapMutations(['setTemperatureRecvData','setHumidityRecvData','setSoakRecvData','setGasRecvData','setMetalRecvData','add']),
+      ...mapMutations(['setTemperatureRecvData','setHumidityRecvData','setSoakRecvData','setGasRecvData','setMetalRecvData','setDisplacementRecvData']),
       initWebSocket(webSocket) {
         webSocket.onopen = () => console.log("websocket连接成功 APP");
         webSocket.onclose = () => console.log("websocket关闭链接");
@@ -33,7 +33,8 @@
           case 1: this.setHumidityRecvData(res);break
           case 2: this.setSoakRecvData(res);break
           case 3: this.setGasRecvData(res);break
-          case 4: this.setMetalRecvData(res)
+          case 4: this.setMetalRecvData(res);break
+          case 5: this.setDisplacementRecvData(res)
         }
       }
     }

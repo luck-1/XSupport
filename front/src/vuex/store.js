@@ -11,7 +11,8 @@ let state = {
   humidityRecvData: null,
   soakRecvData: null,
   gasRecvData: null,
-  metalRecvData: null
+  metalRecvData: null,
+  displacementRecvData: null
 }
 
 const mutations = {
@@ -31,6 +32,7 @@ const mutations = {
   setSoakRecvData: (state, recvData) => state.soakRecvData = recvData,
   setGasRecvData: (state, recvData) => state.gasRecvData = recvData,
   setMetalRecvData: (state, recvData) => state.metalRecvData = recvData,
+  setDisplacementRecvData: (state, recvData) => state.displacementRecvData = recvData,
 
 }
 

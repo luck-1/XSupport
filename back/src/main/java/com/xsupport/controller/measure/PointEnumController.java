@@ -14,8 +14,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import com.xsupport.model.measure.DisplacementPointEnum;
-import com.xsupport.service.measure.DisplacementPointEnumService;
+import com.xsupport.model.measure.PointEnum;
+import com.xsupport.service.measure.PointEnumService;
 import com.xsupport.system.result.ReturnCode;
 
 /**
@@ -26,18 +26,18 @@ import com.xsupport.system.result.ReturnCode;
 @RestController
 @RequestMapping("displacementPointEnum")
 @Api(description = "位移测量点")
-public class  DisplacementPointEnumController {
+public class PointEnumController {
 
     @Resource
-    private DisplacementPointEnumService displacementPointEnumService;
+    private PointEnumService pointEnumService;
 
     @PostMapping("add")
     @ApiOperation(value = "添加")
-    public ReturnCode add(@RequestBody DisplacementPointEnum displacementPointEnum) {
+    public ReturnCode add(@RequestBody PointEnum displacementPointEnum) {
         if(displacementPointEnum == null){
             return new ReturnCode.Builder().failed().msg("输入为空").build();
         }
-        displacementPointEnumService.save(displacementPointEnum);
+        pointEnumService.save(displacementPointEnum);
         return new ReturnCode.Builder().success().msg("添加成功").build();
     }
 
@@ -47,7 +47,7 @@ public class  DisplacementPointEnumController {
         if(id == null || "".equals(id)){
             return new ReturnCode.Builder().failed().msg("输入为空").build();
         }
-	    displacementPointEnumService.deleteById(id);
+	    pointEnumService.deleteById(id);
 	  	return new ReturnCode.Builder().success().msg("删除成功").build();
     }
 
@@ -65,11 +65,11 @@ public class  DisplacementPointEnumController {
 
  	@PutMapping("update")
  	@ApiOperation(value = "更新")
-    public ReturnCode update(@RequestBody DisplacementPointEnum displacementPointEnum) {
+    public ReturnCode update(@RequestBody PointEnum displacementPointEnum) {
         if(displacementPointEnum == null){
             return new ReturnCode.Builder().failed().msg("输入为空").build();
         }
-	    displacementPointEnumService.update(displacementPointEnum);
+	    pointEnumService.update(displacementPointEnum);
 	 	return new ReturnCode.Builder().success().msg("更新成功").build();
     }
 
@@ -79,7 +79,7 @@ public class  DisplacementPointEnumController {
         if(id == null || "".equals(id)){
             return new ReturnCode.Builder().failed().msg("输入为空").build();
         }
-	    DisplacementPointEnum displacementPointEnum = displacementPointEnumService.findById(id);
+	    PointEnum displacementPointEnum = pointEnumService.findById(id);
 	    return new ReturnCode.Builder().object(displacementPointEnum).success().msg("查询成功").build();
 	}
 
@@ -88,7 +88,7 @@ public class  DisplacementPointEnumController {
     public ReturnCode list(@RequestParam(defaultValue = "0") Integer page,
                            @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);
-        List<DisplacementPointEnum> list = displacementPointEnumService.findAll();
+        List<PointEnum> list = pointEnumService.findAll();
         PageInfo pageInfo = new PageInfo(list);
         return new ReturnCode.Builder().object(pageInfo).success().msg("查询成功").build();
     }

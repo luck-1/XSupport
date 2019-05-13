@@ -2,7 +2,7 @@ package com.xsupport.dao.measure;
 
 import org.apache.ibatis.annotations.Mapper;
 import com.xsupport.dao.MyMapper;
-import com.xsupport.model.measure.DisplacementPointEnum;
+import com.xsupport.model.measure.PointEnum;
 
 /**
  * @author lxc
@@ -10,7 +10,7 @@ import com.xsupport.model.measure.DisplacementPointEnum;
  * @description 位移测量点
  */
 @Mapper
-public interface DisplacementPointEnumDao extends MyMapper<DisplacementPointEnum> {
+public interface PointEnumDao extends MyMapper<PointEnum> {
 
   
 }

@@ -5,7 +5,6 @@
     <resultMap id="BaseResult" type="com.xsupport.model.measure.DisplacementEvery">
         <id column="id" property="id"/>
         <result column="groupId" property="groupId"/>
-        <result column="line" property="line"/>
         <result column="point" property="point"/>
         <result column="thisValue" property="thisValue"/>
         <result column="beforeValue" property="beforeValue"/>
@@ -23,7 +22,14 @@
     </resultMap>
 
     <select id="findByGroupId" parameterType="string" resultMap="BaseResult">
-        SELECT * FROM displacement_every WHERE groupId = #{groupId}
+        SELECT de.*, pe.name AS pointName
+        FROM displacement_every AS de
+        LEFT JOIN point_enum pe ON pe.code = de.point
+        WHERE groupId = #{groupId}
     </select>
 
+    <select id="findByGroupIdAndPoint" resultMap="BaseResult">
+        SELECT * FROM displacement_every
+        WHERE groupId = #{groupId} AND point = #{point}
+    </select>
 </mapper>

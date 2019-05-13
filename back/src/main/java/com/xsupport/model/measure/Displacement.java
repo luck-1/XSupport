@@ -22,8 +22,8 @@ import io.swagger.annotations.ApiModelProperty;
 @Entity
 @DynamicUpdate
 @DynamicInsert
-@Table(name = "displacement_group")
-public class DisplacementGroup implements Serializable {
+@Table(name = "displacement")
+public class Displacement implements Serializable {
     private static final long serialVersionUID = 42L;
 
     @Id
@@ -44,10 +44,10 @@ public class DisplacementGroup implements Serializable {
     @Transient
     private List<DisplacementEvery> every;
 
-    public DisplacementGroup() {
+    public Displacement() {
     }
 
-    public DisplacementGroup(String id) {
+    public Displacement(String id) {
         this.id = id;
     }
 }

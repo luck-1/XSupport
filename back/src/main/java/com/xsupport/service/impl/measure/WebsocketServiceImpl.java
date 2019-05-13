@@ -1,7 +1,8 @@
 package com.xsupport.service.impl.measure;
 
 import com.alibaba.fastjson.JSON;
-import com.xsupport.dao.measure.DisplacementGroupDao;
+import com.xsupport.dao.measure.DisplacementEveryDao;
+import com.xsupport.dao.measure.DisplacementDao;
 import com.xsupport.jpa.manage.SysWarnMapper;
 import com.xsupport.jpa.manage.TypeMapper;
 import com.xsupport.jpa.measure.*;
@@ -10,11 +11,13 @@ import com.xsupport.model.http.SendTextParam;
 import com.xsupport.model.manage.SysWarn;
 import com.xsupport.model.manage.Type;
 import com.xsupport.system.websocket.WebsocketUtil;
-import com.xsupport.util.SysUtil;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.annotation.Resource;
+import java.sql.*;
 import java.util.Random;
 
 /**
@@ -48,27 +51,37 @@ public class WebsocketServiceImpl {
     private SysWarnMapper sysWarnMapper;
 
     @Resource
-    private DisplacementPointEnumMapper displacementPointEnumMapper;
+    private PointEnumMapper pointEnumMapper;
 
     @Resource
     private DisplacementEveryMapper displacementEveryMapper;
 
     @Resource
-    private DisplacementGroupMapper displacementGroupMapper;
+    private DisplacementEveryDao displacementEveryDao;
 
     @Resource
-    private DisplacementGroupDao displacementGroupDao;
+    private DisplacementMapper displacementMapper;
+
+    @Resource
+    private DisplacementDao displacementDao;
 
     @Resource
     private DisplacementValueMapper displacementValueMapper;
 
     private static final Random random = new Random();
 
-    @Scheduled(fixedDelay = 1000L * 5)
+    private static final Float DEFAULT_X = 3690902.2478F;
+
+    private static final Float DEFAULT_Y = 474656.5247F;
+
+    private static final Float DEFAULT_Z = 690.421F;
+
+//    @Scheduled(fixedDelay = 1000L * 15)
+    @Transactional(rollbackFor = Exception.class)
     public void sendData() {
 
-        Integer bigType = 5;
-//        Integer bigType = random.nextInt(5);
+//        Integer bigType = 5;
+        Integer bigType = random.nextInt(5);
         Integer subIndex = 0;
         Float value = 0f;
         Type type = null;
@@ -99,68 +112,61 @@ public class WebsocketServiceImpl {
                 value = random.nextFloat();
                 type = typeMapper.findTypeByBigTypeAndSubIndex(bigType, subIndex);
                 gasMapper.save(new Gas(bigType, subIndex, value, type.getLimitValue()));
-                break;
-            case 5:
-                getInstance();
-                return;
         }
-        String sendData = JSON.toJSONString(new SendTextParam(bigType, subIndex, value));
+
+        String sendData = JSON.toJSONString(new SendTextParam(bigType, subIndex,value));
         websocketUtil.sendMessageForAllClient(sendData);
+
         System.out.println(type.getName() + "：" + sendData);
         if (value >= type.getLimitValue()) {
-            SysWarn sysWarn = new SysWarn(bigType,subIndex,value,type.getLimitValue());
+
+            SysWarn sysWarn = new SysWarn(bigType, subIndex, value, type.getLimitValue());
             sysWarnMapper.save(sysWarn);
         }
     }
 
+    @Scheduled(fixedDelay = 1000L * 15)
+    @Transactional(rollbackFor = Exception.class)
+    public void sendDisplacementData(){
 
-    private void getInstance(){
+        String groupId = createNewDisplacement();
 
-        DisplacementGroup beforeDisplacementGroup = displacementGroupDao.findNewestData();
+        Displacement displacement = displacementDao.findNewestData();
 
-        String beforeGroupId = beforeDisplacementGroup == null ? createDefaultValue() : beforeDisplacementGroup.getId();
+        String sendData = JSON.toJSONString(new SendTextParam(5,displacement ));
 
-        String groupId = SysUtil.getUUID();
-        DisplacementGroup displacementGroup = new DisplacementGroup(groupId);
-        displacementGroupMapper.save(displacementGroup);
+        websocketUtil.sendMessageForAllClient(sendData);
 
-        displacementPointEnumMapper.findAll().forEach(pointEnum -> {
-
-            Integer line = pointEnum.getLine();
-            Integer point = pointEnum.getPoint();
-
-            DisplacementEvery beforeEvery = displacementEveryMapper.findDisplacementEveryByGroupIdAndLineAndPoint(beforeGroupId,line,point);
-
-            String thisValueId = SysUtil.getUUID();
-
-            DisplacementEvery displacementEvery = new DisplacementEvery(groupId,line,point,thisValueId,beforeEvery.getBeforeValue());
-            displacementEveryMapper.save(displacementEvery);
-
-            Float x = beforeEvery.getBeforeValueData().getX() + getDifference();
-            Float y = beforeEvery.getBeforeValueData().getY() + getDifference();
-            Float z = beforeEvery.getBeforeValueData().getZ() + getDifference();
-
-            DisplacementValue displacementValue = new DisplacementValue(thisValueId,x,y,z);
-            displacementValueMapper.save(displacementValue);
-        });
+        System.out.println("位移：" + sendData);
     }
 
-    private Float getDifference(){
-        return random.nextFloat() * 0.01f;
-    }
+    private String createNewDisplacement() {
 
-    private String createDefaultValue(){
-        String groupId = SysUtil.getUUID();
-        displacementGroupMapper.save(new DisplacementGroup(groupId));
+        Displacement beforeDisplacement = displacementDao.findNewestData();
 
-        displacementPointEnumMapper.findAll().forEach(pointEnum -> {
+        String beforeGroupId = beforeDisplacement == null ? "" : beforeDisplacement.getId();
 
-            String thisValueId = SysUtil.getUUID();
+        String groupId = displacementMapper.save(new Displacement()).getId();
 
-            displacementEveryMapper.save(new DisplacementEvery(groupId,pointEnum.getLine(),pointEnum.getPoint(),thisValueId,"0"));
-            displacementValueMapper.save(new DisplacementValue(thisValueId,0f,0f,0f));
+        pointEnumMapper.findAll().forEach(pointEnum -> {
 
+            DisplacementEvery beforeEvery = displacementEveryDao.findByGroupIdAndPoint(beforeGroupId,pointEnum.getCode());
+
+            if (beforeEvery == null) {
+                beforeEvery = new DisplacementEvery(new DisplacementValue(DEFAULT_X, DEFAULT_Y, DEFAULT_Z));
+            }
+
+            Float x = getDifference(beforeEvery.getThisValueData().getX());
+            Float y = getDifference(beforeEvery.getThisValueData().getY());
+            Float z = getDifference(beforeEvery.getThisValueData().getZ());
+
+            String thisValueId = displacementValueMapper.save(new DisplacementValue(x, y, z)).getId();
+            displacementEveryMapper.save(new DisplacementEvery(groupId,pointEnum.getCode(), thisValueId, beforeEvery.getThisValue()));
         });
         return groupId;
+    }
+
+    private Float getDifference(Float beforeValue) {
+        return beforeValue + (random.nextFloat() - 0.5f) * 0.2f;
     }
 }

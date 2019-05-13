@@ -2,7 +2,7 @@ package com.xsupport.service.measure;
 
 import org.springframework.stereotype.Component;
 import com.xsupport.service.Service;
-import com.xsupport.model.measure.DisplacementGroup;
+import com.xsupport.model.measure.Displacement;
 
 /**
  * @author lxc
@@ -10,9 +10,9 @@ import com.xsupport.model.measure.DisplacementGroup;
  * @description 位移采集汇总记录
  */
 @Component
-public interface DisplacementGroupService extends Service<DisplacementGroup> {
+public interface DisplacementService extends Service<Displacement> {
 
-    DisplacementGroup findNewestData();
+    Displacement findNewestData();
 
 
 }

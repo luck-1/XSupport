@@ -35,10 +35,6 @@ public class DisplacementEvery implements Serializable {
     @Column(name = "groupId")
     private String groupId;
 
-    @ApiModelProperty(value = "测量线")
-    @Column(name = "line")
-    private Integer line;
-
     @ApiModelProperty(value = "测量点")
     @Column(name = "point")
     private Integer point;
@@ -52,6 +48,9 @@ public class DisplacementEvery implements Serializable {
     private String beforeValue;
 
     @Transient
+    private String pointName;
+
+    @Transient
     private DisplacementValue thisValueData;
 
     @Transient
@@ -60,9 +59,13 @@ public class DisplacementEvery implements Serializable {
     public DisplacementEvery() {
     }
 
-    public DisplacementEvery(String groupId, Integer line, Integer point, String thisValue, String beforeValue) {
+    public DisplacementEvery(DisplacementValue beforeValueData) {
+        this.thisValue = "0";
+        this.thisValueData = beforeValueData;
+    }
+
+    public DisplacementEvery(String groupId, Integer point, String thisValue, String beforeValue) {
         this.groupId = groupId;
-        this.line = line;
         this.point = point;
         this.thisValue = thisValue;
         this.beforeValue = beforeValue;
