@@ -25,7 +25,7 @@ public class User implements Serializable {
     @GeneratedValue(generator = "JDBC")
     @GenericGenerator(name = "JDBC", strategy = "uuid")
     @ApiModelProperty(value="id")
-    @Column(name = "id")
+    @Column(name = "id",length = 32)
     private String id;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")

@@ -25,19 +25,19 @@ public class BigType implements Serializable {
     @GeneratedValue(generator = "JDBC")
     @GenericGenerator(name = "JDBC", strategy = "uuid")
     @ApiModelProperty(value="id")
-    @Column(name = "id")
+    @Column(name = "id",length = 32)
     private String id;
 
     @ApiModelProperty(value="类型")
-    @Column(name = "type")
+    @Column(name = "type",length = 2)
     private Integer type;
 
     @ApiModelProperty(value="单位")
-    @Column(name = "unit")
+    @Column(name = "unit",length = 10)
     private String unit;
 
     @ApiModelProperty(value="异常定位显示")
-    @Column(name = "exceptionLocationName")
+    @Column(name = "exceptionLocationName",length = 20)
     private String exceptionLocationName;
 
     @ApiModelProperty(value="备注")
