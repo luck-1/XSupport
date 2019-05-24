@@ -82,7 +82,7 @@ public class ExportServiceImpl implements ExportService {
                 }
             }
         }
-        ExcelUtil.output(workbook,sheet.getSheetName());
+        ExcelUtil.output(workbook, sheet.getSheetName());
     }
 
     private XSSFWorkbook getWorkbook() {
@@ -122,6 +122,8 @@ public class ExportServiceImpl implements ExportService {
             case -1:
                 sheetIndex = 2;
                 sheetName = "测量异常记录";
+                break;
+            default:
         }
         workbook.setSheetName(sheetIndex, sheetName);
         XSSFSheet sheet = workbook.getSheetAt(sheetIndex);
@@ -164,6 +166,8 @@ public class ExportServiceImpl implements ExportService {
                 if (dataList != null && dataList.size() > 0) {
                     dataList.forEach(sysWarn -> list.add(MapUtil.getApiStringKeyAndValue(sysWarn)));
                 }
+                break;
+            default:
         }
         return list;
     }
