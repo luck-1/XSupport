@@ -20,19 +20,6 @@
         let map = new BMap.Map("map-box");
         let point = new BMap.Point(116.331398, 39.897445);
         map.centerAndZoom(point, this.zoom);
-        // navigator.geolocation.getCurrentPosition(position => {
-        //   //经度
-        //   let longitude = position.coords.longitude;
-        //   //纬度
-        //   let latitude = position.coords.latitude;
-        //   BMap.convgps(longitude, latitude, 1, 5, convRst => {
-        //     let point = new BMap.Point(convRst.x, convRst.y);
-        //     map.panTo(point)
-        //     //当前位置标注
-        //     map.addOverlay(new BMap.Marker(point));
-        //   })
-        // });
-
         let geolocation = new BMap.Geolocation()
         // 开启SDK辅助定位
         geolocation.enableSDKLocation();
@@ -58,12 +45,6 @@
         // 地图类型
         map.addControl(new BMap.MapTypeControl());
       }
-    },
-    onSuccess(position) {
-      //经度
-      let longitude = position.coords.longitude;
-      //纬度
-      let latitude = position.coords.latitude;
     }
   }
 </script>
