@@ -39,7 +39,6 @@
       },
       closeTag(index) {
         let curItem = this.tagList.filter(item => item.path === this.$route.fullPath)[0]
-        debugger
         if (this.tagList.length >= 2) {
           if (this.tagList[index].path === curItem.path) {
             let tag = this.tagList[index - 1] ? this.tagList[index - 1] : this.tagList[index + 1]

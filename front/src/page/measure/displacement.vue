@@ -34,7 +34,6 @@
     computed: mapState(['displacementRecvData']),
     watch: {
       displacementRecvData(newValue) {
-        debugger
         this.chartData = []
         newValue.displacement.every.forEach(item => this.chartData.push(this.getDataItem(item.point, item.pointName, item.thisValueData, item.beforeValueData)))
         this.init()
@@ -45,7 +44,6 @@
     },
     methods: {
       async init() {
-        debugger
         this.xOption = this.getOption('x')
         this.yOption = this.getOption('y')
         this.zOption = this.getOption('z')

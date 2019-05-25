@@ -98,7 +98,6 @@
         })
       },
       changeState(row, state) {
-        debugger
         systemService.changeState({id: row.id, state: state, userId: this.loginUserId}).then(() => this.findAll())
       },
       isDisable(row, value) {
