@@ -76,7 +76,7 @@ public class WebsocketServiceImpl {
 
     private static final Float DEFAULT_Z = 0F;
 
-    @Scheduled(fixedDelay = 1000L * 15)
+    @Scheduled(fixedDelay = 1000L * 5)
     @Transactional(rollbackFor = Exception.class)
     public void sendData() {
 

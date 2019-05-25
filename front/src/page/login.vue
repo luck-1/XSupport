@@ -18,6 +18,16 @@
         <span v-else>登录中...</span>
       </Button>
     </el-col>
+    <div class="login-footer">
+      <p>
+        <a href="login.vue"><i>关于我们</i></a>
+        <a href="login.vue"><i>法律声明</i></a>
+        <a href="login.vue"><i>服务条款</i></a>
+        <a href="login.vue"><i>联系方式</i></a>
+      </p>
+      <p><i>地址：陕西省商洛市商洛学院 邮编：726000 Copyright © 2015-2019 版权所有</i></p>
+      <p><i>建议使用 IE8 及以上浏览器 陕 ICP 备：012345678号 phone：15191406523 E-mail：1986906062@qq.com</i></p>
+    </div>
   </Row>
 </template>
 
@@ -95,9 +105,6 @@
 </script>
 
 <style scoped>
-  .all{
-    background-color: #666;
-  }
   .input-box {
     width: 165px;
   }
@@ -107,9 +114,9 @@
     background-color: rgba(100, 100, 100, .6);
     width: 40%;
     position: absolute;
-    top: 25%;
+    top: 10%;
     left: 15%;
-    bottom: 25%;
+    bottom: 35%;
   }
 
   .login-title {
@@ -121,7 +128,7 @@
 
   .login-content {
     position: absolute;
-    top: 50%;
+    top: 35%;
     left: 80%;
     padding: 30px 20px;
     width: 300px;
@@ -131,4 +138,17 @@
     transform: translate(-50%, -50%);
     background-color: rgba(200, 200, 200, .6);
   }
+
+  .login-footer {
+    height: 200px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background-color: #e9eaec;
+    text-align: center;
+    font-size: 16px;
+    line-height: 40px;
+    padding: 30px;
+  }
+
 </style>
