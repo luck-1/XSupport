@@ -76,11 +76,10 @@ public class WebsocketServiceImpl {
 
     private static final Float DEFAULT_Z = 690.421F;
 
-//    @Scheduled(fixedDelay = 1000L * 15)
+    @Scheduled(fixedDelay = 1000L * 15)
     @Transactional(rollbackFor = Exception.class)
     public void sendData() {
 
-//        Integer bigType = 5;
         Integer bigType = random.nextInt(5);
         Integer subIndex = 0;
         Float value = 0f;
@@ -112,9 +111,11 @@ public class WebsocketServiceImpl {
                 value = random.nextFloat();
                 type = typeMapper.findTypeByBigTypeAndSubIndex(bigType, subIndex);
                 gasMapper.save(new Gas(bigType, subIndex, value, type.getLimitValue()));
+                break;
+            default:
         }
 
-        String sendData = JSON.toJSONString(new SendTextParam(bigType, subIndex,value));
+        String sendData = JSON.toJSONString(new SendTextParam(bigType, subIndex, value));
         websocketUtil.sendMessageForAllClient(sendData);
 
         System.out.println(type.getName() + "：" + sendData);
@@ -127,13 +128,13 @@ public class WebsocketServiceImpl {
 
     @Scheduled(fixedDelay = 1000L * 15)
     @Transactional(rollbackFor = Exception.class)
-    public void sendDisplacementData(){
+    public void sendDisplacementData() {
 
         String groupId = createNewDisplacement();
 
         Displacement displacement = displacementDao.findNewestData();
 
-        String sendData = JSON.toJSONString(new SendTextParam(5,displacement ));
+        String sendData = JSON.toJSONString(new SendTextParam(5, displacement));
 
         websocketUtil.sendMessageForAllClient(sendData);
 
@@ -150,7 +151,7 @@ public class WebsocketServiceImpl {
 
         pointEnumMapper.findAll().forEach(pointEnum -> {
 
-            DisplacementEvery beforeEvery = displacementEveryDao.findByGroupIdAndPoint(beforeGroupId,pointEnum.getCode());
+            DisplacementEvery beforeEvery = displacementEveryDao.findByGroupIdAndPoint(beforeGroupId, pointEnum.getCode());
 
             if (beforeEvery == null) {
                 beforeEvery = new DisplacementEvery(new DisplacementValue(DEFAULT_X, DEFAULT_Y, DEFAULT_Z));
@@ -161,7 +162,7 @@ public class WebsocketServiceImpl {
             Float z = getDifference(beforeEvery.getThisValueData().getZ());
 
             String thisValueId = displacementValueMapper.save(new DisplacementValue(x, y, z)).getId();
-            displacementEveryMapper.save(new DisplacementEvery(groupId,pointEnum.getCode(), thisValueId, beforeEvery.getThisValue()));
+            displacementEveryMapper.save(new DisplacementEvery(groupId, pointEnum.getCode(), thisValueId, beforeEvery.getThisValue()));
         });
         return groupId;
     }

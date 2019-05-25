@@ -11,7 +11,7 @@
  Target Server Version : 80016
  File Encoding         : 65001
 
- Date: 25/05/2019 01:15:07
+ Date: 25/05/2019 10:52:21
 */
 
 SET NAMES utf8mb4;
@@ -34,11 +34,11 @@ CREATE TABLE `big_type`  (
 -- Records of big_type
 -- ----------------------------
 INSERT INTO `big_type` VALUES ('0', 0, '℃', '温度异常', '温度');
-INSERT INTO `big_type` VALUES ('1', 1, '℃', '湿度异常', '湿度');
-INSERT INTO `big_type` VALUES ('2', 2, '℃', '浸润异常', '浸润');
-INSERT INTO `big_type` VALUES ('3', 3, '℃', '金气异常', '有毒气体');
-INSERT INTO `big_type` VALUES ('4', 4, '℃', '金气异常', '重金属');
-INSERT INTO `big_type` VALUES ('5', 5, '℃', '位移异常', '位移');
+INSERT INTO `big_type` VALUES ('1', 1, '%RH', '湿度异常', '湿度');
+INSERT INTO `big_type` VALUES ('2', 2, '%', '浸润异常', '浸润');
+INSERT INTO `big_type` VALUES ('3', 3, '(mg/L)', '金气异常', '有毒气体');
+INSERT INTO `big_type` VALUES ('4', 4, '(mg/L)', '金气异常', '重金属');
+INSERT INTO `big_type` VALUES ('5', 5, '(m)', '位移异常', '位移');
 
 -- ----------------------------
 -- Table structure for displacement
@@ -50,15 +50,6 @@ CREATE TABLE `displacement`  (
   `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '位移测量单次汇总记录' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of displacement
--- ----------------------------
-INSERT INTO `displacement` VALUES ('2c9ac4cd6aea9322016aea9347f10000', NULL, NULL);
-INSERT INTO `displacement` VALUES ('2c9ac4cd6aea9322016aea9384e20001', NULL, NULL);
-INSERT INTO `displacement` VALUES ('2c9ac4cd6aea9322016aea93bfee0002', NULL, NULL);
-INSERT INTO `displacement` VALUES ('2c9ac4cd6aea9322016aea93fafd0003', NULL, NULL);
-INSERT INTO `displacement` VALUES ('2c9ac4cd6aea9322016aea94362b0004', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for displacement_every
@@ -206,23 +197,22 @@ CREATE TABLE `type`  (
 -- ----------------------------
 -- Records of type
 -- ----------------------------
-INSERT INTO `type` VALUES ('0', '2019-05-25 00:53:31', '2019-05-25 00:56:07', 0, 0, 60.00, '温度', NULL);
-INSERT INTO `type` VALUES ('1', '2019-05-25 00:53:31', '2019-05-25 00:56:10', 1, 0, 60.00, '湿度', NULL);
-INSERT INTO `type` VALUES ('2', '2019-05-25 00:53:31', '2019-05-25 00:56:17', 2, 0, 30.00, '浸润', NULL);
-INSERT INTO `type` VALUES ('3', '2019-05-25 00:53:31', '2019-05-25 00:56:35', 3, 0, 0.70, NULL, NULL);
-INSERT INTO `type` VALUES ('4', '2019-05-25 00:53:31', '2019-05-25 00:57:53', 3, 1, 0.70, NULL, NULL);
-INSERT INTO `type` VALUES ('5', '2019-05-25 00:53:31', '2019-05-25 00:57:53', 3, 2, 0.70, NULL, NULL);
-INSERT INTO `type` VALUES ('6', '2019-05-25 00:53:31', '2019-05-25 00:57:53', 3, 3, 0.70, NULL, NULL);
-INSERT INTO `type` VALUES ('7', '2019-05-25 00:53:31', '2019-05-25 00:57:53', 3, 4, 0.70, NULL, NULL);
-INSERT INTO `type` VALUES ('8', '2019-05-25 00:53:31', '2019-05-25 00:57:53', 3, 5, 0.70, NULL, NULL);
-INSERT INTO `type` VALUES ('9', '2019-05-25 00:53:31', '2019-05-25 00:58:14', 4, 0, 0.70, NULL, NULL);
-INSERT INTO `type` VALUES ('10', '2019-05-25 00:53:31', '2019-05-25 00:58:14', 4, 1, 0.70, NULL, NULL);
-INSERT INTO `type` VALUES ('11', '2019-05-25 00:53:31', '2019-05-25 00:58:14', 4, 2, 0.70, NULL, NULL);
-INSERT INTO `type` VALUES ('12', '2019-05-25 00:53:31', '2019-05-25 00:58:14', 4, 3, 0.70, NULL, NULL);
-INSERT INTO `type` VALUES ('13', '2019-05-25 00:53:31', '2019-05-25 00:58:14', 4, 4, 0.70, NULL, NULL);
-INSERT INTO `type` VALUES ('14', '2019-05-25 00:53:31', '2019-05-25 00:58:14', 4, 5, 0.70, NULL, NULL);
-INSERT INTO `type` VALUES ('15', '2019-05-25 00:53:31', '2019-05-25 00:58:14', 4, 6, 0.70, NULL, NULL);
-INSERT INTO `type` VALUES ('16', '2019-05-25 00:53:31', '2019-05-25 00:58:14', 4, 7, 0.70, NULL, NULL);
+INSERT INTO `type` VALUES ('0', '2019-05-25 00:53:31', '2019-05-25 10:40:29', 0, 0, 60.00, '/', NULL);
+INSERT INTO `type` VALUES ('1', '2019-05-25 00:53:31', '2019-05-25 10:40:31', 1, 0, 60.00, '/', NULL);
+INSERT INTO `type` VALUES ('2', '2019-05-25 00:53:31', '2019-05-25 10:40:33', 2, 0, 30.00, '/', NULL);
+INSERT INTO `type` VALUES ('3', '2019-05-25 00:53:31', '2019-05-25 10:36:35', 3, 0, 0.70, 'CO', NULL);
+INSERT INTO `type` VALUES ('4', '2019-05-25 00:53:31', '2019-05-25 10:37:26', 3, 1, 0.70, 'SO₂', NULL);
+INSERT INTO `type` VALUES ('5', '2019-05-25 00:53:31', '2019-05-25 10:37:33', 3, 2, 0.70, 'NOx', NULL);
+INSERT INTO `type` VALUES ('6', '2019-05-25 00:53:31', '2019-05-25 10:37:38', 3, 3, 0.70, 'HCl', NULL);
+INSERT INTO `type` VALUES ('7', '2019-05-25 00:53:31', '2019-05-25 10:37:56', 3, 4, 0.70, 'ClO₂', NULL);
+INSERT INTO `type` VALUES ('8', '2019-05-25 00:53:31', '2019-05-25 10:41:28', 4, 0, 0.70, '铜', NULL);
+INSERT INTO `type` VALUES ('9', '2019-05-25 00:53:31', '2019-05-25 10:41:39', 4, 1, 0.70, '锌', NULL);
+INSERT INTO `type` VALUES ('10', '2019-05-25 00:53:31', '2019-05-25 10:41:58', 4, 2, 0.70, '锡', NULL);
+INSERT INTO `type` VALUES ('11', '2019-05-25 00:53:31', '2019-05-25 10:42:17', 4, 3, 0.70, '镍', NULL);
+INSERT INTO `type` VALUES ('12', '2019-05-25 00:53:31', '2019-05-25 10:42:19', 4, 4, 0.70, '钴', NULL);
+INSERT INTO `type` VALUES ('13', '2019-05-25 00:53:31', '2019-05-25 10:42:36', 4, 5, 0.70, '锑', NULL);
+INSERT INTO `type` VALUES ('14', '2019-05-25 00:53:31', '2019-05-25 10:43:10', 4, 6, 0.70, '镉', NULL);
+INSERT INTO `type` VALUES ('15', '2019-05-25 00:53:31', '2019-05-25 10:43:21', 4, 7, 0.70, '铅', NULL);
 
 -- ----------------------------
 -- Table structure for user
@@ -248,6 +238,6 @@ CREATE TABLE `user`  (
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES ('0', '2019-05-25 00:42:49', 'admin', '000000', '李兴成', 1, 21, 0, '15191406523', '商洛学院', 0, '管理员');
-INSERT INTO `user` VALUES ('1', '2019-05-25 00:43:01', NULL, '000000', '李兴成', 0, 21, 0, '15191406523', '商洛学院', 0, '普通用户');
+INSERT INTO `user` VALUES ('1', '2019-05-25 00:43:01', 'test', '000000', '李兴成', 0, 21, 0, '15191406523', '商洛学院', 0, '普通用户');
 
 SET FOREIGN_KEY_CHECKS = 1;
