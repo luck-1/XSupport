@@ -81,19 +81,6 @@
         }
       },
       getOption(axisType) {
-        let minValue
-        switch (axisType) {
-          case 'x':
-            minValue = 3690902.2
-            break
-          case 'y':
-            minValue = 474656
-            break
-          case 'z':
-            minValue = 690
-            break
-          default:
-        }
         return {
           title: {text: '坝体位移' + axisType + '变化情况', x: 'left'},
           legend: {},
@@ -102,7 +89,7 @@
           grid: websocketUtil.grid,
           dataset: {source: [['displacement', '本次测量', '上次测量']]},
           xAxis: {type: 'category'},
-          yAxis: {type: 'value', min: minValue},
+          yAxis: {type: 'value'},
           series: [{type: 'bar'}, {type: 'bar'}]
         }
       }
@@ -112,7 +99,7 @@
 
 <style scoped>
   .displacement-pic {
-    background-image: url("../../assets/位移.jpg");
+    background-image: url("../../assets/displacement.jpg");
     height: 45vh;
     width: 100%;
   }

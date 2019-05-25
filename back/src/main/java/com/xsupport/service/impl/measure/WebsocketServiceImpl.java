@@ -68,13 +68,13 @@ public class WebsocketServiceImpl {
     @Resource
     private DisplacementValueMapper displacementValueMapper;
 
-    private static final Random random = new Random();
+    private static Random random = new Random();
 
-    private static final Float DEFAULT_X = 3690902.2478F;
+    private static final Float DEFAULT_X = 0F;
 
-    private static final Float DEFAULT_Y = 474656.5247F;
+    private static final Float DEFAULT_Y = 0F;
 
-    private static final Float DEFAULT_Z = 690.421F;
+    private static final Float DEFAULT_Z = 0F;
 
     @Scheduled(fixedDelay = 1000L * 15)
     @Transactional(rollbackFor = Exception.class)
