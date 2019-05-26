@@ -85,6 +85,7 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
     @Override
     public PageInfo findByCondition(FindUserParam findUserParam) {
         PageHelper.startPage(findUserParam.getPage(), findUserParam.getSize());
+
         List<User> userList = userDao.findByConditions(findUserParam.getName(), findUserParam.getPhone());
         PageInfo pageInfo = new PageInfo(userList);
         return pageInfo;

@@ -105,8 +105,8 @@
             </FormItem>
             <FormItem label="用户类型" prop="isAdmin">
               <Select v-model="userInfo.isAdmin" placeholder="请选择" clearable>
-                <Option :value="0" selected>普通用户</Option>
-                <Option :value="1">管理员</Option>
+                <Option value="0" selected>普通用户</Option>
+                <Option value="1">管理员</Option>
               </Select>
             </FormItem>
             <FormItem label="用户地址" prop="address">
@@ -122,8 +122,8 @@
             </FormItem>
             <FormItem label="性别" prop="sex">
               <RadioGroup v-model="userInfo.sex">
-                <Radio :label="0">男</Radio>
-                <Radio :label="1">女</Radio>
+                <Radio label="0">男</Radio>
+                <Radio label="1">女</Radio>
               </RadioGroup>
             </FormItem>
             <FormItem label="手机号码" prop="phone">
@@ -243,9 +243,10 @@
         userService.changeForbiddenState({id: user.id}).then(() => this.findByCondition())
       },
       saveInfo() {
-        this.$refs.userForm.validate(async valid => {
+        this.$refs.userForm.validate(valid => {
           if (valid) {
-            await userService.saveInfo(this.userInfo).then(res => this.dialogShow = (res.code !== 0))
+            debugger
+            userService.saveInfo(this.userInfo).then(res => this.dialogShow = (res.code !== 0))
             this.findByCondition()
           }
         })
