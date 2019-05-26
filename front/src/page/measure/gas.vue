@@ -4,7 +4,8 @@
       <el-row :gutter="20">
         <el-col :span="16">
           <el-tooltip content="导出" placement="bottom">
-            <el-button type="success" size="mini" @click="exportExcel(leftBigType)" icon="el-icon-download" circle></el-button>
+            <el-button type="success" size="mini" @click="exportExcel(leftBigType)" icon="el-icon-download"
+                       circle></el-button>
           </el-tooltip>
         </el-col>
         <el-col :span="8">
@@ -17,7 +18,8 @@
             </el-select>
           </el-input>
           <el-tooltip content="设置阈值" placement="bottom">
-            <el-button type="danger" :disabled="disableUpdateLimitBtm(leftInputModel)" size="mini" @click="updateLimitValue(leftBigType,leftSubIndex,leftInputModel)"
+            <el-button type="danger" :disabled="disableUpdateLimitBtm(leftInputModel)" size="mini"
+                       @click="updateLimitValue(leftBigType,leftSubIndex,leftInputModel)"
                        icon="el-icon-edit"></el-button>
           </el-tooltip>
         </el-col>
@@ -28,7 +30,8 @@
       <el-row :gutter="20">
         <el-col :span="16">
           <el-tooltip content="导出" placement="bottom">
-            <el-button type="success" size="mini" @click="exportExcel(rightBigType)" icon="el-icon-download" circle></el-button>
+            <el-button type="success" size="mini" @click="exportExcel(rightBigType)" icon="el-icon-download"
+                       circle></el-button>
           </el-tooltip>
         </el-col>
         <el-col :span="8">
@@ -41,7 +44,8 @@
             </el-select>
           </el-input>
           <el-tooltip content="设置阈值" placement="bottom">
-            <el-button type="danger" :disabled="disableUpdateLimitBtm(rightInputModel)" size="mini" @click="updateLimitValue(rightBigType,rightSubIndex,rightInputModel)"
+            <el-button type="danger" :disabled="disableUpdateLimitBtm(rightInputModel)" size="mini"
+                       @click="updateLimitValue(rightBigType,rightSubIndex,rightInputModel)"
                        icon="el-icon-edit"></el-button>
           </el-tooltip>
         </el-col>
@@ -55,7 +59,7 @@
 
 <script>
   import websocketUtil from '../../utils/websocket'
-  import {gasService, typeService,exportService} from '../../api/service'
+  import {gasService, typeService, exportService} from '../../api/service'
   import {mapState} from 'vuex'
   import store from '../../vuex/store'
 
@@ -81,12 +85,10 @@
           legend: {orient: 'vertical', left: 'left'},
           toolbox: websocketUtil.toolbox,
           grid: websocketUtil.grid,
-          series: [
-            {
-              name: '有毒气体',type: 'pie',radius: '55%',center: ['50%', '60%'],data: [],
-              itemStyle: {emphasis: {shadowBlur: 10, shadowOffsetX: 0, shadowColor: 'rgba(0, 0, 0, 0.5)'}}
-            }
-          ],
+          series: [{
+            name: '有毒气体', type: 'pie', radius: '55%', center: ['50%', '60%'], data: [],
+            itemStyle: {emphasis: {shadowBlur: 10, shadowOffsetX: 0, shadowColor: 'rgba(0, 0, 0, 0.5)'}}
+          }],
         },
         rightOption: {
           color: ['#3398DB'],
@@ -100,13 +102,13 @@
         }
       }
     },
-    computed: mapState(['gasRecvData','metalRecvData']),
+    computed: mapState(['gasRecvData', 'metalRecvData']),
     watch: {
-      gasRecvData(newVal){
+      gasRecvData(newVal) {
         this.leftOption.series[0].data[newVal.subIndex].value = newVal.value
         this.leftChart.setOption(this.leftOption)
       },
-      metalRecvData(newVal){
+      metalRecvData(newVal) {
         this.rightOption.series[0].data[newVal.subIndex] = newVal.value
         this.rightChart.setOption(this.rightOption)
       }
@@ -166,10 +168,10 @@
       async updateLimitValue(bigType, subIndex, limitValue) {
         await typeService.updateLimitValue({bigType: bigType, subIndex: subIndex, limitValue: limitValue}).then(res => {
           if (res.code === 0) {
-            if(bigType === this.leftBigType ){
+            if (bigType === this.leftBigType) {
               this.LIMIT_VALUE_LEFT_COLUMN = limitValue
               this.leftInputModel = null
-            }else {
+            } else {
               this.LIMIT_VALUE_RIGHT_COLUMN = limitValue
               this.rightInputModel = null
             }
@@ -179,8 +181,8 @@
       exportExcel(bigType) {
         exportService.exportExcel(bigType)
       },
-      disableUpdateLimitBtm(inputModel){
-        return this.loginIsAdmin === 0 ? true : ! inputModel
+      disableUpdateLimitBtm(inputModel) {
+        return this.loginIsAdmin === 0 ? true : !inputModel
       }
     }
   }

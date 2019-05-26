@@ -43,22 +43,22 @@
           loginWelcome: {
             title: '欢迎访问',
             desc: '<b>尾矿库坝体安全性能检测平台</b>',
-            duration: 4
+            duration: 5
           },
           loginInfo: {
             title: '体验账号与密码',
             desc: '<pre>账号1：admin 密码：000000 角色：管理员 </pre><pre>账号2：test  密码：000000 角色：普通用户</pre>',
-            duration: 7
+            duration: 10
           },
           successWelcome: {
             title: '欢迎使用尾矿库坝体安全性能检测平台',
             desc: '尾矿库坝体安全性能检测平台<br/><i>（Spring Boot + Vue 的前后端分离平台）</i>',
-            duration: 4
+            duration: 5
           },
           successInfo: {
             title: '已成功登陆',
             desc: '通过右上角的下拉按钮<br/>退出登录体验不同角色账号',
-            duration: 7
+            duration: 10
           }
         },
         form: {
@@ -77,8 +77,8 @@
       }
     },
     mounted() {
-      this.$Notice.info(this.notice.loginWelcome)
-      this.$Notice.info(this.notice.loginInfo)
+      this.$Notice.success(this.notice.loginWelcome)
+      this.$Notice.success(this.notice.loginInfo)
     },
     methods: {
       submitLogin() {
@@ -90,8 +90,8 @@
                 localStorage.setItem('user', JSON.stringify(res.obj))
                 localStorage.setItem('token', res.obj.token)
                 this.$router.push('/')
-                this.$Notice.info(this.notice.successWelcome)
-                this.$Notice.info(this.notice.successInfo)
+                this.$Notice.success(this.notice.successWelcome)
+                this.$Notice.success(this.notice.successInfo)
               } else {
                 this.form.password = null
               }

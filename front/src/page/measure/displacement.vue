@@ -87,7 +87,7 @@
           grid: websocketUtil.grid,
           dataset: {source: [['displacement', '本次测量', '上次测量']]},
           xAxis: {type: 'category'},
-          yAxis: {type: 'value'},
+          yAxis: {type: 'value', axisLabel: {formatter: '{value} (m)'}},
           series: [{type: 'bar'}, {type: 'bar'}]
         }
       }

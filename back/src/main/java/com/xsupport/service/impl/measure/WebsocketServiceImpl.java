@@ -126,7 +126,7 @@ public class WebsocketServiceImpl {
         }
     }
 
-    @Scheduled(fixedDelay = 1000L * 15)
+    @Scheduled(fixedDelay = 1000L * 20)
     @Transactional(rollbackFor = Exception.class)
     public void sendDisplacementData() {
 

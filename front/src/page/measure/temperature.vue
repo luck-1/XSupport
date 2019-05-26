@@ -86,7 +86,7 @@
           toolbox: websocketUtil.toolbox,
           grid: websocketUtil.grid,
           xAxis: {type: 'category', data: [], axisLabel: {interval: 0, rotate: 40}},
-          yAxis: {type: 'value', name: '温度（ ℃）'},
+          yAxis: {type: 'value', axisLabel: {formatter: '{value} (℃)'}},
           series: [{name: '温度', type: 'line', data: [], markLine: {data: [{name: '阈值线', yAxis: 0,}]}}],
           visualMap: {show: false, pieces: [{gt: 0, lte: 100, color: '#cc0033'}], outOfRange: {color: '#ffde33'}},
         },
