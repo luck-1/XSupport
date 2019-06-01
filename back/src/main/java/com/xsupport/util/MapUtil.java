@@ -54,18 +54,18 @@ public class MapUtil {
      * @param object
      * @return
      */
-    public static Map<String, Object> getApiKeyAndValue(Object object) {
+    private static Map<String, Object> getApiKeyAndValue(Object object) {
         Map<String, Object> map = new HashMap<>();
         Class objectClass = object.getClass();
         Field[] fields = objectClass.getDeclaredFields();
-        for (int i = 0; i < fields.length; i++) {
-            fields[i].setAccessible(true);
+        for (Field field : fields) {
+            field.setAccessible(true);
             try {
-                ApiModelProperty apiModelProperty = fields[i].getAnnotation(ApiModelProperty.class);
+                ApiModelProperty apiModelProperty = field.getAnnotation(ApiModelProperty.class);
                 if (apiModelProperty == null) {
                     continue;
                 }
-                Object o = fields[i].get(object);
+                Object o = field.get(object);
                 map.put(apiModelProperty.value(), o);
             } catch (Exception e) {
                 e.printStackTrace();
