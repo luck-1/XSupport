@@ -11,6 +11,7 @@ import com.xsupport.model.http.PasswordParam;
 import com.xsupport.model.http.LoginParam;
 import com.xsupport.system.exception.CustomException;
 import com.xsupport.system.result.ReturnCode;
+import com.xsupport.util.SysUtil;
 import org.springframework.stereotype.Service;
 import com.xsupport.service.manage.UserService;
 import com.xsupport.service.impl.AbstractService;
@@ -72,8 +73,12 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
         if (count > 0) {
             throw new CustomException(new ReturnCode.Builder().failed().msg("该用户名已存在！").build());
         }
-
-        userMapper.save(user);
+        if(user.getId() == null || "".equals(user.getId()) ){
+            user.setId(SysUtil.getUUID());
+            userDao.insert(user);
+        }else {
+            userDao.updateByPrimaryKey(user);
+        }
     }
 
     @Override
