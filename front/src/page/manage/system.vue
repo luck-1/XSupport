@@ -28,9 +28,9 @@
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column align="center" label="异常描述" width="200" prop="exceptionDescription"></el-table-column>
-        <el-table-column align="center" label="异常值" width="120" prop="exceptionValue"></el-table-column>
-        <el-table-column align="center" label="阈值" width="120" prop="limitValue"></el-table-column>
+        <el-table-column align="center" label="异常描述" width="200" prop="exportSubName"></el-table-column>
+        <el-table-column align="center" label="异常值" width="120" prop="exportValue"></el-table-column>
+        <el-table-column align="center" label="阈值" width="120" prop="exportLimitValue"></el-table-column>
         <el-table-column align="center" label="异常状态" width="120" prop="exceptionState"
                          :filters="[{text: '未处理', value: 0 },{text: '正在处理', value: 1 }, { text: '已处理', value: 2 }]"
                          :filter-method="(value,row) => row.exceptionState === value" filter-placement="bottom-start"
@@ -92,6 +92,7 @@
       findAll() {
         systemService.findAll(this.searchForm).then(res => {
           if (res.code === 0) {
+            debugger
             this.warnData = res.obj.list
             this.pageTotal = res.obj.total
           }

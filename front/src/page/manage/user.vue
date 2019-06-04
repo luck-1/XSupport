@@ -105,7 +105,7 @@
             </FormItem>
             <FormItem label="用户类型" prop="isAdmin">
               <Select v-model="userInfo.isAdmin" placeholder="请选择" clearable>
-                <Option value="0" selected>普通用户</Option>
+                <Option value="0">普通用户</Option>
                 <Option value="1">管理员</Option>
               </Select>
             </FormItem>
@@ -236,6 +236,9 @@
         } else {
           this.dialogTitle = '修改用户'
           this.userInfo = user
+          this.userInfo.againPassword = this.userInfo.password
+          this.userInfo.sex = this.userInfo.sex.toString()
+          this.userInfo.isAdmin = this.userInfo.isAdmin.toString()
         }
         this.dialogShow = true
       },
@@ -245,9 +248,10 @@
       saveInfo() {
         this.$refs.userForm.validate(valid => {
           if (valid) {
-            debugger
-            userService.saveInfo(this.userInfo).then(res => this.dialogShow = (res.code !== 0))
-            this.findByCondition()
+            userService.saveInfo(this.userInfo).then(res =>
+              this.dialogShow = (res.code !== 0)).then(() =>
+              this.findByCondition()
+            )
           }
         })
       },

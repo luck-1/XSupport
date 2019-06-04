@@ -73,12 +73,7 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
         if (count > 0) {
             throw new CustomException(new ReturnCode.Builder().failed().msg("该用户名已存在！").build());
         }
-        if(user.getId() == null || "".equals(user.getId()) ){
-            user.setId(SysUtil.getUUID());
-            userDao.insert(user);
-        }else {
-            userDao.updateByPrimaryKey(user);
-        }
+        userMapper.save(user);
     }
 
     @Override
@@ -90,7 +85,6 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
     @Override
     public PageInfo findByCondition(FindUserParam findUserParam) {
         PageHelper.startPage(findUserParam.getPage(), findUserParam.getSize());
-
         List<User> userList = userDao.findByConditions(findUserParam.getName(), findUserParam.getPhone());
         PageInfo pageInfo = new PageInfo(userList);
         return pageInfo;

@@ -38,8 +38,8 @@
               {title: "温度测量", icon: "iconfont icon-wendu", path: "/measure/temperature"},
               {title: "湿度测量", icon: "iconfont icon-shidu", path: "/measure/humidity"},
               {title: "浸润测量", icon: "iconfont icon-jinrunxian", path: "/measure/soak"},
-              {title: "金气测量", icon: "iconfont icon-youduqiti", path: "/measure/gas"},
-              {title: "位移测量", icon: "iconfont icon-youduqiti", path: "/measure/displacement"}
+              {title: "位移测量", icon: "iconfont icon-measure", path: "/measure/displacement"},
+              {title: "金气测量", icon: "iconfont icon-youduqiti", path: "/measure/gas"}
             ]
           },
           {title: "系统管理", icon: "iconfont icon-yichang", path: "/system", subs: null},

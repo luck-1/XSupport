@@ -17,12 +17,10 @@
 
     <select id="exportInfo" resultType="com.xsupport.model.manage.SysWarn">
         SELECT
-            DATE_FORMAT(sw.createTime,'%Y-%m-%d %H:%i:%s') AS createTime,
-            DATE_FORMAT(sw.updateTime,'%Y-%m-%d %H:%i:%s') AS updateTime,
-            sw.optionUser,
+            sw.*,
             t.name AS exportSubName,
             bg.exceptionLocationName AS exceptionLocationName,
-            IF(sw.exceptionState = 0,'正常','异常') AS exportState,
+            CASE sw.exceptionState WHEN 0 THEN '未处理' WHEN 1 THEN '待处理' WHEN 1 THEN '待处理' END AS exportState,
             CONCAT(sw.exceptionValue,' ',bg.unit) AS exportValue,
             CONCAT(sw.limitValue,' ',bg.unit) AS exportLimitValue
         FROM sys_warn AS sw
@@ -32,6 +30,14 @@
     </select>
 
     <select id="findAll" resultType="com.xsupport.model.manage.SysWarn">
-        SELECT * FROM sys_warn ORDER BY createTime DESC
+        SELECT
+            sw.*,
+            t.name AS exportSubName,
+            CONCAT(sw.exceptionValue,' ',bg.unit) AS exportValue,
+            CONCAT(sw.limitValue,' ',bg.unit) AS exportLimitValue
+        FROM sys_warn AS sw
+        LEFT JOIN big_type bg ON bg.type = sw.exceptionLocation
+        LEFT JOIN type t ON t.bigType = sw.exceptionLocation AND t.subIndex = sw.exceptionDescription
+        ORDER BY createTime DESC
     </select>
 </mapper>

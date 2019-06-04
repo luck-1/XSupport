@@ -65,7 +65,7 @@ public class  SysWarnController {
     }
 
     @PutMapping("updateRemark")
-    @ApiOperation(value = "修改状态")
+    @ApiOperation(value = "修改备注")
     public ReturnCode updateRemark(@RequestBody @Valid UpdateRemarkParam updateRemarkParam, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return new ReturnCode.Builder().failed().msg(bindingResult.getFieldError().getDefaultMessage()).build();

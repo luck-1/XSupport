@@ -62,6 +62,7 @@ public class SysWarnServiceImpl extends AbstractService<SysWarn> implements SysW
         sysWarnMapper.save(sysWarn);
     }
 
+    @Override
     public List<SysWarn> findAll(){
         return sysWarnDao.findAll();
     }
