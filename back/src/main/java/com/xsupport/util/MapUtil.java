@@ -54,7 +54,7 @@ public class MapUtil {
      * @param object
      * @return
      */
-    private static Map<String, Object> getApiKeyAndValue(Object object) {
+    public static Map<String, Object> getApiKeyAndValue(Object object) {
         Map<String, Object> map = new HashMap<>();
         Class objectClass = object.getClass();
         Field[] fields = objectClass.getDeclaredFields();

@@ -29,9 +29,6 @@
       return {
         collapse: false,
         menuList: [
-          {title: "用户管理", icon: "iconfont icon-yonghu", path: "/user", subs: null},
-          {title: "视频监控", icon: "icon iconfont icon-video", path: "/video", subs: null},
-          {title: "地图监测", icon: "iconfont icon-ditu", path: "/map", subs: null},
           {
             title: "测量中心", icon: "iconfont icon-measure",path: '',
             subs: [
@@ -43,7 +40,9 @@
             ]
           },
           {title: "系统管理", icon: "iconfont icon-yichang", path: "/system", subs: null},
-          // {title: "接口调试", icon: "iconfont icon-yichang", path: "/swagger-ui.html", subs: null}
+          {title: "视频监控", icon: "icon iconfont icon-video", path: "/video", subs: null},
+          {title: "地图监测", icon: "iconfont icon-ditu", path: "/map", subs: null},
+          {title: "用户管理", icon: "iconfont icon-yonghu", path: "/user", subs: null}
         ]
       }
     },
