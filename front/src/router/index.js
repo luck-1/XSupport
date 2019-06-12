@@ -14,7 +14,7 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      redirect: '/user',
+      redirect: '/system',
       name: 'home',
       component: () => import('../page/common/home'),
       children: [
@@ -79,13 +79,6 @@ const router = new Router({
       name: 'login',
       component: () => import('../page/login'),
       meta: {title: "登录", keepAlive: noKeepAlive, requireAuth: noRequireAuth}
-    },
-    {
-      path: '/swagger',
-      name: 'swagger',
-      component: () => import('../page/manage/swagger'),
-      redirect: 'http://localhost:8082/swagger-ui.html',
-      meta: {title: "接口调试", keepAlive: noKeepAlive, requireAuth: noRequireAuth}
     },
     {
       path: '/404',
