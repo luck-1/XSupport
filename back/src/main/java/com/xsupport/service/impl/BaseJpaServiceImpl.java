@@ -8,13 +8,20 @@ import java.io.Serializable;
 /**
  * @author joker
  * @date 2019/7/16 18:11
- * @description
+ * @description 实现BaseJpaService接口的方法，继承BaseJpaService的接口的实现类可直接继承这个类，获取JpaRepository实例。
  */
 public class BaseJpaServiceImpl<E,ID extends Serializable> implements BaseJpaService<E,ID> {
 
+    /**
+     * 这里必须使用@Autowired注入，使用@Resource会报错
+     */
     @Autowired
     private JpaRepository<E, ID> jpaRepository;
 
+    /**
+     * 实现的方法，获取JpaRepository实例
+     * @return 不同类型的JpaRepository实例
+     */
     @Override
     public JpaRepository<E, ID> getRepository() {
         return jpaRepository;
