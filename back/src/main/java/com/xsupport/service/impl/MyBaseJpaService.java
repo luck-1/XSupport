@@ -12,8 +12,8 @@
 //
 //    MyBaseJpaDao<E, ID> getRepository();
 //
-//    default E get(ID ids) {
-//        return getRepository().findOne(ids);
+//    default E get(ID id) {
+//        return getRepository().getOne(id);
 //    }
 //
 //    /**

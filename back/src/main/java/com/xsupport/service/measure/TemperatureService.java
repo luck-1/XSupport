@@ -1,5 +1,7 @@
 package com.xsupport.service.measure;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import com.xsupport.service.Service;
 import com.xsupport.model.measure.Temperature;
@@ -12,6 +14,6 @@ import com.xsupport.model.measure.Temperature;
 @Component
 public interface TemperatureService extends Service<Temperature> {
 
-
+    Page<Temperature> findAll(Pageable pageable);
 
 }

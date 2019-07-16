@@ -1,6 +1,7 @@
 package com.xsupport.service.manage;
 
 import com.xsupport.model.manage.BigType;
+import com.xsupport.service.BaseJpaService;
 import org.springframework.stereotype.Component;
 import com.xsupport.service.Service;
 
@@ -10,7 +11,7 @@ import com.xsupport.service.Service;
  * @description 类型
  */
 @Component
-public interface BigTypeService extends Service<BigType> {
+public interface BigTypeService extends BaseJpaService<BigType,String> {
 
 
 

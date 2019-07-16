@@ -1,6 +1,9 @@
 package com.xsupport.service.impl.manage;
 
 import javax.annotation.Resource;
+
+import com.xsupport.service.impl.BaseJpaServiceImpl;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import com.xsupport.service.impl.AbstractService;
 import com.xsupport.service.manage.BigTypeService;
@@ -14,7 +17,7 @@ import com.xsupport.model.manage.BigType;
  * @description 类型
  */
 @Service
-public class BigTypeServiceImpl extends AbstractService<BigType> implements BigTypeService  {
+public class BigTypeServiceImpl extends BaseJpaServiceImpl<BigType,String> implements BigTypeService  {
 
 	@Resource
 	private BigTypeDao bigTypeDao;
@@ -22,6 +25,4 @@ public class BigTypeServiceImpl extends AbstractService<BigType> implements BigT
     @Resource
     private BigTypeMapper bigTypeMapper;
 
-
-	
 }

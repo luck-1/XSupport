@@ -1,5 +1,6 @@
 package com.xsupport.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,13 +16,9 @@ import java.util.Optional;
  * @param <ID> 主键类型
  * @description JPA的常用接口方法封装（@FunctionalInterface：显示声明函数式接口，只能有一个抽象方法）
  */
-@FunctionalInterface
-public interface BaseJpaService<E, ID extends Serializable> {
+public interface JpaBaseService<E, ID extends Serializable> {
 
-    /**
-     * 接口方法，获得JpaRepository的实例
-     * @return
-     */
+
     JpaRepository<E, ID> getRepository();
 
     /**
@@ -53,10 +50,11 @@ public interface BaseJpaService<E, ID extends Serializable> {
     /**
      * 保存或修改（有ID修改，无ID保存）
      * @param entity 要保存的对象
+     * @return 保存成功返回的对象
      */
     @Transactional(rollbackFor = Exception.class)
-    default void saveInfo(E entity) {
-        getRepository().save(entity);
+    default E saveInfo(E entity) {
+        return getRepository().save(entity);
     }
 
     /**

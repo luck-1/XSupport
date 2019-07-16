@@ -1,6 +1,9 @@
 package com.xsupport.service.impl.measure;
 
 import javax.annotation.Resource;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.xsupport.service.impl.AbstractService;
 import com.xsupport.service.measure.TemperatureService;
@@ -28,6 +31,19 @@ public class TemperatureServiceImpl extends AbstractService<Temperature> impleme
     public List<Temperature> findAll(){
         return temperatureDao.findAll();
     }
+
+//    @Override
+    public void fi(){
+         temperatureMapper.save(new Temperature());
+         
+
+    }
+
+    @Override
+    public Page<Temperature> findAll(Pageable pageable){
+        return temperatureMapper.findAll(pageable);
+    }
+
 
 	
 }

@@ -2,10 +2,12 @@ package com.xsupport.controller.measure;
 
 import java.util.List;
 import javax.annotation.Resource;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.web.bind.annotation.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
@@ -35,6 +37,15 @@ public class  TemperatureController {
         List<Temperature> list = temperatureService.findAll();
         PageInfo pageInfo = new PageInfo(list);
         return new ReturnCode.Builder().object(pageInfo).success().msg("查询成功").build();
+    }
+
+    @GetMapping("findAll1")
+    @ApiOperation(value = "查询所有1")
+    public ReturnCode page(@RequestParam(defaultValue = "0") Integer page,
+                           @RequestParam(defaultValue = "0") Integer size) {
+        Pageable pageable = PageRequest.of(page,size);
+        Page page1 = temperatureService.findAll(pageable);
+        return new ReturnCode.Builder().object(page1).success().msg("查询成功").build();
     }
 
 }
