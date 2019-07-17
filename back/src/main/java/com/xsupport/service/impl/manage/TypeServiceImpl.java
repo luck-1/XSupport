@@ -2,6 +2,7 @@ package com.xsupport.service.impl.manage;
 
 import javax.annotation.Resource;
 
+import com.xsupport.service.impl.JpaBaseServiceImpl;
 import com.xsupport.system.exception.CustomException;
 import com.xsupport.system.result.ReturnCode;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ import java.util.List;
  * @description 各类型信息
  */
 @Service
-public class TypeServiceImpl extends AbstractService<Type> implements TypeService  {
+public class TypeServiceImpl extends JpaBaseServiceImpl<Type,String> implements TypeService  {
 
 	@Resource
 	private TypeDao typeDao;

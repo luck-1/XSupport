@@ -5,6 +5,7 @@ import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
@@ -23,7 +24,7 @@ import java.util.Properties;
  * @date 2019/4/12
  * @description
  */
-@Log4j
+@Slf4j
 public class TokenUtil {
 //    private static Logger log = LoggerFactory.getLogger(TokenUtil.class);
 

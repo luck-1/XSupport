@@ -1,7 +1,7 @@
 package com.xsupport.controller.manage;
 
 import com.xsupport.model.manage.BigType;
-import com.xsupport.service.manage.BigTypeService;
+import com.xsupport.service.manage.BigTypeBaseService;
 import com.xsupport.system.result.ReturnCode;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -19,12 +19,12 @@ import java.util.List;
  * @description 类型
  */
 @RestController
-@RequestMapping("bigType")
+@RequestMapping("bigType1111111111111111111111")
 @Api(description = "类型")
 public class  BigTypeController {
 
     @Resource
-    private BigTypeService bigTypeService;
+    private BigTypeBaseService bigTypeService;
 
     @PostMapping("saveInfo")
     @ApiOperation(value = "保存数据")
@@ -33,10 +33,10 @@ public class  BigTypeController {
             return new ReturnCode.Builder().failed().msg("输入为空").build();
         }
         bigTypeService.saveInfo(bigType);
-        return new ReturnCode.Builder().success().msg("添加成功").build();
+        return new ReturnCode.Builder().success().msg("保存成功").build();
     }
 
-    @DeleteMapping("deleteOne")
+    @DeleteMapping("deleteById")
     @ApiOperation(value = "单个删除")
     public ReturnCode deleteById(@RequestParam String id) {
         if(StringUtils.isEmpty(id)){
@@ -46,7 +46,7 @@ public class  BigTypeController {
 	  	return new ReturnCode.Builder().success().msg("删除成功").build();
     }
 
-    @PostMapping("deleteByIdList")
+    @PostMapping("deleteByIds")
     @ApiOperation(value = "批量删除")
     public ReturnCode deleteByIdList(@RequestBody List<String> idList) {
         if(idList == null || idList.size() == 0){
@@ -56,7 +56,7 @@ public class  BigTypeController {
 	  	return new ReturnCode.Builder().success().msg("删除成功").build();
     }
 
-    @GetMapping("findOne")
+    @GetMapping("findById")
     @ApiOperation(value = "查询单个")
 	public ReturnCode findById(@RequestParam String id) {
         if(StringUtils.isEmpty(id)){
@@ -69,7 +69,7 @@ public class  BigTypeController {
     @GetMapping("findAll")
     @ApiOperation(value = "查询所有")
     public ReturnCode findAll(@RequestParam(defaultValue = "0") Integer page,
-                           @RequestParam(defaultValue = "0") Integer size) {
+                              @RequestParam(defaultValue = "0") Integer size) {
         Pageable pageable = PageRequest.of(page - 1,size);
         Page pageInfo = bigTypeService.findAll(pageable);
         return new ReturnCode.Builder().object(pageInfo).success().msg("查询成功").build();

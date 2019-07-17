@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xsupport.dao.manage.UserDao">
+
+    <resultMap id="User" type="com.xsupport.model.manage.User">
+        <id column="id" property="id"/>
+        <result column="createTime" property="createTime"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="isAdmin" property="isAdmin"/>
+        <result column="isForbidden" property="isForbidden"/>
+        <result column="name" property="name"/>
+        <result column="sex" property="sex"/>
+        <result column="age" property="age"/>
+        <result column="address" property="address"/>
+        <result column="phone" property="phone"/>
+        <result column="remark" property="remark"/>
+    </resultMap>
+
+    <select id="findCountByUsernameAndId" resultType="integer">
+        SELECT COUNT(*) FROM user WHERE username = #{username} AND id != #{id}
+    </select>
+
+    <select id="findByConditions" resultType="com.xsupport.model.manage.User">
+        SELECT * FROM user WHERE 1 = 1
+        <if test="name != null and name != ''">
+            AND name LIKe concat('%',#{name},'%')
+        </if>
+        <if test="phone != null and phone != ''">
+            AND phone LIKe concat('%',#{phone},'%')
+        </if>
+    </select>
+
+</mapper>

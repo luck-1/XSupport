@@ -31,12 +31,12 @@ public class SwaggerConfig {
         tokenPar.name("token").description("令牌").modelRef(new ModelRef("string")).parameterType("header") .required(false).build();
         pars.add(tokenPar.build());
         // 选择那些路径和api会生成document
-        return new Docket(DocumentationType.SWAGGER_2).select()
-                // 对所有api进行监控
-                .apis(RequestHandlerSelectors.any())
-                // 对所有路径进行监控
-                .paths(PathSelectors.any()).build()
-                .globalOperationParameters(pars).apiInfo(apiInfo());
+        return new Docket(DocumentationType.SWAGGER_2).select().build();
+//                // 对所有api进行监控
+//                .apis(RequestHandlerSelectors.any())
+//                // 对所有路径进行监控
+//                .paths(PathSelectors.any())
+//                .globalOperationParameters(pars).apiInfo(apiInfo());
     }
 
     private ApiInfo apiInfo() {
