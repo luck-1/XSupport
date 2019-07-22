@@ -29,7 +29,7 @@ import com.xsupport.system.result.ReturnCode;
  */
 @RestController
 @RequestMapping("sysWarn")
-@Api(description = "系统异常")
+@Api(tags = {"系统异常"})
 public class  SysWarnController {
 
     @Resource
