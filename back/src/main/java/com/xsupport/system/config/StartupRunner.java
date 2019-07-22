@@ -24,8 +24,7 @@ public class StartupRunner implements CommandLineRunner, ApplicationListener<Web
 
     @Override
     public void run(String... args){
-        System.out.println("Your application is running here: http://localhost:" + serverPort);
-        System.out.println("Your druid page  is running here: http://localhost:" + serverPort + "/druid");
-        System.out.println("Your swagger-ui  is running here: http://localhost:" + serverPort + "/swagger-ui.html");
+        System.out.println("Your druid page is running here: http://localhost:" + serverPort + "/druid");
+        System.out.println("Your swagger-ui is running here: http://localhost:" + serverPort + "/swagger-ui.html");
     }
 }
