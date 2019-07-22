@@ -12,8 +12,6 @@ import tk.mybatis.spring.annotation.MapperScan;
  * @author lxc
  * @description 打war包必须继承 SpringBootServletInitializer 并重写 configure()
  */
-@EnableAsync
-@EnableSwagger2
 @SpringBootApplication
 @MapperScan("com.xsupport.dao.base")
 public class Application extends SpringBootServletInitializer {

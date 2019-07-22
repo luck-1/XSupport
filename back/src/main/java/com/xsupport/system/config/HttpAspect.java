@@ -1,5 +1,6 @@
 package com.xsupport.system.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
@@ -10,11 +11,15 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
+/**
+ * @author lxc
+ * @date 2019/4/20
+ * @description AOP切面类
+ */
+@Slf4j
 @Aspect
 @Component
 public class HttpAspect {
-
-    private static final Logger log = LoggerFactory.getLogger(HttpAspect.class);
 
     @Pointcut(value = "execution(* com.xsupport.controller.*.*.*(..))")
     private void controllerAspect() {

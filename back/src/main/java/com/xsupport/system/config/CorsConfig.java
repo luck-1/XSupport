@@ -2,14 +2,12 @@ package com.xsupport.system.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
  * @author lxc
  * @date 2019/4/20
- * @description 解决前后端跨域问题CORS
+ * @description 解决前后端跨域问题
  */
 @Configuration
 public class CorsConfig implements WebMvcConfigurer {
@@ -20,7 +18,5 @@ public class CorsConfig implements WebMvcConfigurer {
                 .allowedMethods("*")
                 .allowedOrigins("*")
                 .allowedHeaders("*");
-
-//        super.addCorsMappings(registry);
     }
 }

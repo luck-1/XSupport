@@ -46,7 +46,6 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
         if (user.getIsForbidden() == null ? false : user.getIsForbidden()) {
             throw new CustomException(new ReturnCode.Builder().failed().msg("该用户已被禁用！").build());
         }
-//        String token = TokenUtil.createToken(user);
         String token = "xsupport";
         user.setToken(token);
         return user;

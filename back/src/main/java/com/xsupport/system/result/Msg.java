@@ -1,69 +1,81 @@
 package com.xsupport.system.result;
 
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+/**
+ * @author joker
+ * @date 2019/7/22 14:48
+ * @description 前后端交互标准对象封装
+ */
 @Data
 public class Msg {
 
-    @ApiModelProperty(value = "返回状态码")
+    /**
+     * 返回状态码
+     */
     private int code;
 
-    @ApiModelProperty(value = "消息")
+    /**
+     * 返回状消息
+     */
     private String message;
 
-    @ApiModelProperty(value = "对象")
+    /**
+     * 返回对象
+     */
     private Object obj;
 
-    public static Msg seccess(){
-        Msg msg = new Msg();
+    private static Msg msg = new Msg();
+
+    private Msg() {
+    }
+
+    public static Msg success() {
         msg.setCode(0);
         msg.setMessage("成功");
         return msg;
     }
-    public static Msg seccess(String message){
-        Msg msg = new Msg();
+
+    public static Msg success(String message) {
         msg.setCode(0);
         msg.setMessage(message);
         return msg;
     }
-    public static Msg seccess(Object obj){
-        Msg msg = new Msg();
+
+    public static Msg success(Object obj) {
         msg.setCode(0);
         msg.setMessage("成功");
         msg.setObj(obj);
         return msg;
     }
-    public static Msg seccess(String message,Object obj){
-        Msg msg = new Msg();
+
+    public static Msg success(String message, Object obj) {
         msg.setCode(0);
         msg.setMessage(message);
         msg.setObj(obj);
         return msg;
     }
 
-    public static Msg fild(){
-        Msg msg = new Msg();
+    public static Msg failed() {
         msg.setCode(-1);
         msg.setMessage("失败");
         return msg;
     }
-    public static Msg fild(String message){
-        Msg msg = new Msg();
+
+    public static Msg failed(String message) {
         msg.setCode(-1);
         msg.setMessage(message);
         return msg;
     }
 
-    public static Msg fild(Object obj){
-        Msg msg = new Msg();
+    public static Msg failed(Object obj) {
         msg.setCode(-1);
         msg.setMessage("失败");
         msg.setObj(obj);
         return msg;
     }
-    public static Msg fild(String message,Object obj){
-        Msg msg = new Msg();
+
+    public static Msg failed(String message, Object obj) {
         msg.setCode(-1);
         msg.setMessage(message);
         msg.setObj(obj);

@@ -4,7 +4,9 @@ import com.xsupport.system.result.ReturnCode;
 import lombok.Data;
 
 /**
- * 自定义异常
+ * @author joker
+ * @date 2019/7/22 14:56
+ * @description 自定义异常
  */
 @Data
 public class CustomException extends RuntimeException {
