@@ -27,7 +27,7 @@ public class SysWarn implements Serializable {
     @GeneratedValue(generator = "JDBC")
     @GenericGenerator(name = "JDBC", strategy = "uuid")
     @ApiModelProperty(value = "id")
-    @Column(name = "id",length = 32)
+    @Column(name = "id")
     private String id;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
